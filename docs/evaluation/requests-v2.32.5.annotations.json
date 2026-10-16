@@ -1,0 +1,2577 @@
+{
+  "annotation_version": "requests-v2.32.5-m10-v1",
+  "repository": {
+    "name": "Requests",
+    "url": "https://github.com/psf/requests",
+    "release": "v2.32.5",
+    "commit_sha": "b25c87d7cb8d6a18a37fa12442b5f883f9e41741",
+    "selection_rationale": "Public conventional Python package; test suite is runnable; moderate source size; meaningful adapter, session, cookie, and request call/inheritance structure."
+  },
+  "evaluation_scope": {
+    "definition_paths": [
+      "src/requests/cookies.py"
+    ],
+    "import_paths": [
+      "src/requests/adapters.py",
+      "src/requests/auth.py",
+      "src/requests/models.py"
+    ]
+  },
+  "definitions": [
+    "src.requests.cookies.CookieConflictError",
+    "src.requests.cookies.MockRequest",
+    "src.requests.cookies.MockRequest.__init__",
+    "src.requests.cookies.MockRequest.add_header",
+    "src.requests.cookies.MockRequest.add_unredirected_header",
+    "src.requests.cookies.MockRequest.get_full_url",
+    "src.requests.cookies.MockRequest.get_header",
+    "src.requests.cookies.MockRequest.get_host",
+    "src.requests.cookies.MockRequest.get_new_headers",
+    "src.requests.cookies.MockRequest.get_origin_req_host",
+    "src.requests.cookies.MockRequest.get_type",
+    "src.requests.cookies.MockRequest.has_header",
+    "src.requests.cookies.MockRequest.host",
+    "src.requests.cookies.MockRequest.is_unverifiable",
+    "src.requests.cookies.MockRequest.origin_req_host",
+    "src.requests.cookies.MockRequest.unverifiable",
+    "src.requests.cookies.MockResponse",
+    "src.requests.cookies.MockResponse.__init__",
+    "src.requests.cookies.MockResponse.getheaders",
+    "src.requests.cookies.MockResponse.info",
+    "src.requests.cookies.RequestsCookieJar",
+    "src.requests.cookies.RequestsCookieJar.__contains__",
+    "src.requests.cookies.RequestsCookieJar.__delitem__",
+    "src.requests.cookies.RequestsCookieJar.__getitem__",
+    "src.requests.cookies.RequestsCookieJar.__getstate__",
+    "src.requests.cookies.RequestsCookieJar.__setitem__",
+    "src.requests.cookies.RequestsCookieJar.__setstate__",
+    "src.requests.cookies.RequestsCookieJar._find",
+    "src.requests.cookies.RequestsCookieJar._find_no_duplicates",
+    "src.requests.cookies.RequestsCookieJar.copy",
+    "src.requests.cookies.RequestsCookieJar.get",
+    "src.requests.cookies.RequestsCookieJar.get_dict",
+    "src.requests.cookies.RequestsCookieJar.get_policy",
+    "src.requests.cookies.RequestsCookieJar.items",
+    "src.requests.cookies.RequestsCookieJar.iteritems",
+    "src.requests.cookies.RequestsCookieJar.iterkeys",
+    "src.requests.cookies.RequestsCookieJar.itervalues",
+    "src.requests.cookies.RequestsCookieJar.keys",
+    "src.requests.cookies.RequestsCookieJar.list_domains",
+    "src.requests.cookies.RequestsCookieJar.list_paths",
+    "src.requests.cookies.RequestsCookieJar.multiple_domains",
+    "src.requests.cookies.RequestsCookieJar.set",
+    "src.requests.cookies.RequestsCookieJar.set_cookie",
+    "src.requests.cookies.RequestsCookieJar.update",
+    "src.requests.cookies.RequestsCookieJar.values",
+    "src.requests.cookies._copy_cookie_jar",
+    "src.requests.cookies.cookiejar_from_dict",
+    "src.requests.cookies.create_cookie",
+    "src.requests.cookies.extract_cookies_to_jar",
+    "src.requests.cookies.get_cookie_header",
+    "src.requests.cookies.merge_cookies",
+    "src.requests.cookies.morsel_to_cookie",
+    "src.requests.cookies.remove_cookie_by_name"
+  ],
+  "imports": [
+    {
+      "file_path": "src/requests/adapters.py",
+      "expression": "import os.path"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "expression": "import socket"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "expression": "import typing"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "expression": "import warnings"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "expression": "from urllib3.exceptions import ClosedPoolError, ConnectTimeoutError"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "expression": "from urllib3.exceptions import HTTPError as _HTTPError"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "expression": "from urllib3.exceptions import InvalidHeader as _InvalidHeader"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "expression": "from urllib3.exceptions import (\n    LocationValueError,\n    MaxRetryError,\n    NewConnectionError,\n    ProtocolError,\n)"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "expression": "from urllib3.exceptions import ProxyError as _ProxyError"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "expression": "from urllib3.exceptions import ReadTimeoutError, ResponseError"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "expression": "from urllib3.exceptions import SSLError as _SSLError"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "expression": "from urllib3.poolmanager import PoolManager, proxy_from_url"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "expression": "from urllib3.util import Timeout as TimeoutSauce"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "expression": "from urllib3.util import parse_url"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "expression": "from urllib3.util.retry import Retry"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "expression": "from .auth import _basic_auth_str"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "expression": "from .compat import basestring, urlparse"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "expression": "from .cookies import extract_cookies_to_jar"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "expression": "from .exceptions import (\n    ConnectionError,\n    ConnectTimeout,\n    InvalidHeader,\n    InvalidProxyURL,\n    InvalidSchema,\n    InvalidURL,\n    ProxyError,\n    ReadTimeout,\n    RetryError,\n    SSLError,\n)"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "expression": "from .models import Response"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "expression": "from .structures import CaseInsensitiveDict"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "expression": "from .utils import (\n    DEFAULT_CA_BUNDLE_PATH,\n    extract_zipped_paths,\n    get_auth_from_url,\n    get_encoding_from_headers,\n    prepend_scheme_if_needed,\n    select_proxy,\n    urldefragauth,\n)"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "expression": "from urllib3.contrib.socks import SOCKSProxyManager"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "expression": "from .models import PreparedRequest"
+    },
+    {
+      "file_path": "src/requests/auth.py",
+      "expression": "import hashlib"
+    },
+    {
+      "file_path": "src/requests/auth.py",
+      "expression": "import os"
+    },
+    {
+      "file_path": "src/requests/auth.py",
+      "expression": "import re"
+    },
+    {
+      "file_path": "src/requests/auth.py",
+      "expression": "import threading"
+    },
+    {
+      "file_path": "src/requests/auth.py",
+      "expression": "import time"
+    },
+    {
+      "file_path": "src/requests/auth.py",
+      "expression": "import warnings"
+    },
+    {
+      "file_path": "src/requests/auth.py",
+      "expression": "from base64 import b64encode"
+    },
+    {
+      "file_path": "src/requests/auth.py",
+      "expression": "from ._internal_utils import to_native_string"
+    },
+    {
+      "file_path": "src/requests/auth.py",
+      "expression": "from .compat import basestring, str, urlparse"
+    },
+    {
+      "file_path": "src/requests/auth.py",
+      "expression": "from .cookies import extract_cookies_to_jar"
+    },
+    {
+      "file_path": "src/requests/auth.py",
+      "expression": "from .utils import parse_dict_header"
+    },
+    {
+      "file_path": "src/requests/models.py",
+      "expression": "import datetime"
+    },
+    {
+      "file_path": "src/requests/models.py",
+      "expression": "import encodings.idna"
+    },
+    {
+      "file_path": "src/requests/models.py",
+      "expression": "from io import UnsupportedOperation"
+    },
+    {
+      "file_path": "src/requests/models.py",
+      "expression": "from urllib3.exceptions import (\n    DecodeError,\n    LocationParseError,\n    ProtocolError,\n    ReadTimeoutError,\n    SSLError,\n)"
+    },
+    {
+      "file_path": "src/requests/models.py",
+      "expression": "from urllib3.fields import RequestField"
+    },
+    {
+      "file_path": "src/requests/models.py",
+      "expression": "from urllib3.filepost import encode_multipart_formdata"
+    },
+    {
+      "file_path": "src/requests/models.py",
+      "expression": "from urllib3.util import parse_url"
+    },
+    {
+      "file_path": "src/requests/models.py",
+      "expression": "from ._internal_utils import to_native_string, unicode_is_ascii"
+    },
+    {
+      "file_path": "src/requests/models.py",
+      "expression": "from .auth import HTTPBasicAuth"
+    },
+    {
+      "file_path": "src/requests/models.py",
+      "expression": "from .compat import (\n    Callable,\n    JSONDecodeError,\n    Mapping,\n    basestring,\n    builtin_str,\n    chardet,\n    cookielib,\n)"
+    },
+    {
+      "file_path": "src/requests/models.py",
+      "expression": "from .compat import json as complexjson"
+    },
+    {
+      "file_path": "src/requests/models.py",
+      "expression": "from .compat import urlencode, urlsplit, urlunparse"
+    },
+    {
+      "file_path": "src/requests/models.py",
+      "expression": "from .cookies import _copy_cookie_jar, cookiejar_from_dict, get_cookie_header"
+    },
+    {
+      "file_path": "src/requests/models.py",
+      "expression": "from .exceptions import (\n    ChunkedEncodingError,\n    ConnectionError,\n    ContentDecodingError,\n    HTTPError,\n    InvalidJSONError,\n    InvalidURL,\n)"
+    },
+    {
+      "file_path": "src/requests/models.py",
+      "expression": "from .exceptions import JSONDecodeError as RequestsJSONDecodeError"
+    },
+    {
+      "file_path": "src/requests/models.py",
+      "expression": "from .exceptions import MissingSchema"
+    },
+    {
+      "file_path": "src/requests/models.py",
+      "expression": "from .exceptions import SSLError as RequestsSSLError"
+    },
+    {
+      "file_path": "src/requests/models.py",
+      "expression": "from .exceptions import StreamConsumedError"
+    },
+    {
+      "file_path": "src/requests/models.py",
+      "expression": "from .hooks import default_hooks"
+    },
+    {
+      "file_path": "src/requests/models.py",
+      "expression": "from .status_codes import codes"
+    },
+    {
+      "file_path": "src/requests/models.py",
+      "expression": "from .structures import CaseInsensitiveDict"
+    },
+    {
+      "file_path": "src/requests/models.py",
+      "expression": "from .utils import (\n    check_header_validity,\n    get_auth_from_url,\n    guess_filename,\n    guess_json_utf,\n    iter_slices,\n    parse_header_links,\n    requote_uri,\n    stream_decode_response_unicode,\n    super_len,\n    to_key_val_list,\n)"
+    },
+    {
+      "file_path": "src/requests/models.py",
+      "expression": "import idna"
+    }
+  ],
+  "exact_bindings": [
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 12670,
+      "target": "src.requests.cookies.extract_cookies_to_jar",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.build_response::extract_cookies_to_jar against the in-repository target definition.",
+      "expression": "extract_cookies_to_jar",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 12257,
+      "target": "src.requests.structures.CaseInsensitiveDict",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.build_response::CaseInsensitiveDict against the in-repository target definition.",
+      "expression": "CaseInsensitiveDict",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 25155,
+      "target": "src.requests.exceptions.ConnectTimeout",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.send::ConnectTimeout against the in-repository target definition.",
+      "expression": "ConnectTimeout",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 23520,
+      "target": "src.requests.adapters.HTTPAdapter.add_headers",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.send::self.add_headers against the in-repository target definition.",
+      "expression": "self.add_headers",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 16592,
+      "target": "src.requests.adapters.HTTPAdapter.build_connection_pool_key_attributes",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.get_connection_with_tls_context::self.build_connection_pool_key_attributes against the in-repository target definition.",
+      "expression": "self.build_connection_pool_key_attributes",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 25957,
+      "target": "src.requests.exceptions.SSLError",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.send::SSLError against the in-repository target definition.",
+      "expression": "SSLError",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 25265,
+      "target": "src.requests.exceptions.RetryError",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.send::RetryError against the in-repository target definition.",
+      "expression": "RetryError",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 8567,
+      "target": "src.requests.utils.get_auth_from_url",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.proxy_manager_for::get_auth_from_url against the in-repository target definition.",
+      "expression": "get_auth_from_url",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 18739,
+      "target": "src.requests.exceptions.InvalidProxyURL",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.get_connection::InvalidProxyURL against the in-repository target definition.",
+      "expression": "InvalidProxyURL",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 16505,
+      "target": "src.requests.utils.select_proxy",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.get_connection_with_tls_context::select_proxy against the in-repository target definition.",
+      "expression": "select_proxy",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 1619,
+      "target": "src.requests.exceptions.InvalidSchema",
+      "review_note": "Checked src.requests.adapters.SOCKSProxyManager::InvalidSchema against the in-repository target definition.",
+      "expression": "InvalidSchema",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 16839,
+      "target": "src.requests.utils.prepend_scheme_if_needed",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.get_connection_with_tls_context::prepend_scheme_if_needed against the in-repository target definition.",
+      "expression": "prepend_scheme_if_needed",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 6100,
+      "target": "src.requests.adapters.BaseAdapter.__init__",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.__init__::super().__init__ against the in-repository target definition.",
+      "expression": "super().__init__",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 25533,
+      "target": "src.requests.exceptions.SSLError",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.send::SSLError against the in-repository target definition.",
+      "expression": "SSLError",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 23477,
+      "target": "src.requests.adapters.HTTPAdapter.request_url",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.send::self.request_url against the in-repository target definition.",
+      "expression": "self.request_url",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 23413,
+      "target": "src.requests.adapters.HTTPAdapter.cert_verify",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.send::self.cert_verify against the in-repository target definition.",
+      "expression": "self.cert_verify",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 15437,
+      "target": "src.requests.adapters._urllib3_request_context",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.build_connection_pool_key_attributes::_urllib3_request_context against the in-repository target definition.",
+      "expression": "_urllib3_request_context",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 12040,
+      "target": "src.requests.models.Response",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.build_response::Response against the in-repository target definition.",
+      "expression": "Response",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 8976,
+      "target": "src.requests.adapters.HTTPAdapter.proxy_headers",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.proxy_manager_for::self.proxy_headers against the in-repository target definition.",
+      "expression": "self.proxy_headers",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 17156,
+      "target": "src.requests.adapters.HTTPAdapter.proxy_manager_for",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.get_connection_with_tls_context::self.proxy_manager_for against the in-repository target definition.",
+      "expression": "self.proxy_manager_for",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 6259,
+      "target": "src.requests.adapters.HTTPAdapter.init_poolmanager",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.__init__::self.init_poolmanager against the in-repository target definition.",
+      "expression": "self.init_poolmanager",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 22090,
+      "target": "src.requests.auth._basic_auth_str",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.proxy_headers::_basic_auth_str against the in-repository target definition.",
+      "expression": "_basic_auth_str",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 16770,
+      "target": "src.requests.exceptions.InvalidURL",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.get_connection_with_tls_context::InvalidURL against the in-repository target definition.",
+      "expression": "InvalidURL",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 12360,
+      "target": "src.requests.utils.get_encoding_from_headers",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.build_response::get_encoding_from_headers against the in-repository target definition.",
+      "expression": "get_encoding_from_headers",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 20178,
+      "target": "src.requests.utils.select_proxy",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.request_url::select_proxy against the in-repository target definition.",
+      "expression": "select_proxy",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 26250,
+      "target": "src.requests.adapters.HTTPAdapter.build_response",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.send::self.build_response against the in-repository target definition.",
+      "expression": "self.build_response",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 10245,
+      "target": "src.requests.utils.extract_zipped_paths",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.cert_verify::extract_zipped_paths against the in-repository target definition.",
+      "expression": "extract_zipped_paths",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 23203,
+      "target": "src.requests.adapters.HTTPAdapter.get_connection_with_tls_context",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.send::self.get_connection_with_tls_context against the in-repository target definition.",
+      "expression": "self.get_connection_with_tls_context",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 18601,
+      "target": "src.requests.utils.prepend_scheme_if_needed",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.get_connection::prepend_scheme_if_needed against the in-repository target definition.",
+      "expression": "prepend_scheme_if_needed",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 18918,
+      "target": "src.requests.adapters.HTTPAdapter.proxy_manager_for",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.get_connection::self.proxy_manager_for against the in-repository target definition.",
+      "expression": "self.proxy_manager_for",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 20708,
+      "target": "src.requests.utils.urldefragauth",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.request_url::urldefragauth against the in-repository target definition.",
+      "expression": "urldefragauth",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 21998,
+      "target": "src.requests.utils.get_auth_from_url",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.proxy_headers::get_auth_from_url against the in-repository target definition.",
+      "expression": "get_auth_from_url",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 16977,
+      "target": "src.requests.exceptions.InvalidProxyURL",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.get_connection_with_tls_context::InvalidProxyURL against the in-repository target definition.",
+      "expression": "InvalidProxyURL",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 25369,
+      "target": "src.requests.exceptions.ProxyError",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.send::ProxyError against the in-repository target definition.",
+      "expression": "ProxyError",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 26058,
+      "target": "src.requests.exceptions.ReadTimeout",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.send::ReadTimeout against the in-repository target definition.",
+      "expression": "ReadTimeout",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 26160,
+      "target": "src.requests.exceptions.InvalidHeader",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.send::InvalidHeader against the in-repository target definition.",
+      "expression": "InvalidHeader",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 25761,
+      "target": "src.requests.exceptions.ProxyError",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.send::ProxyError against the in-repository target definition.",
+      "expression": "ProxyError",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 4334,
+      "target": "src.requests.adapters.BaseAdapter",
+      "review_note": "Checked src.requests.adapters::BaseAdapter against the in-repository target definition.",
+      "expression": "BaseAdapter",
+      "kind": "BASE_CLASS_REFERENCE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 6770,
+      "target": "src.requests.adapters.HTTPAdapter.init_poolmanager",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.__setstate__::self.init_poolmanager against the in-repository target definition.",
+      "expression": "self.init_poolmanager",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 23373,
+      "target": "src.requests.exceptions.InvalidURL",
+      "review_note": "Checked src.requests.adapters.HTTPAdapter.send::InvalidURL against the in-repository target definition.",
+      "expression": "InvalidURL",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 2715,
+      "target": "src.requests.cookies.MockRequest.is_unverifiable",
+      "review_note": "Checked src.requests.cookies.MockRequest.unverifiable::self.is_unverifiable against the in-repository target definition.",
+      "expression": "self.is_unverifiable",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 10533,
+      "target": "src.requests.cookies.RequestsCookieJar._find_no_duplicates",
+      "review_note": "Checked src.requests.cookies.RequestsCookieJar.__getitem__::self._find_no_duplicates against the in-repository target definition.",
+      "expression": "self._find_no_duplicates",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 4363,
+      "target": "src.requests.cookies.MockRequest.get_new_headers",
+      "review_note": "Checked src.requests.cookies.get_cookie_header::r.get_new_headers against the in-repository target definition.",
+      "expression": "r.get_new_headers",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 2799,
+      "target": "src.requests.cookies.MockRequest.get_origin_req_host",
+      "review_note": "Checked src.requests.cookies.MockRequest.origin_req_host::self.get_origin_req_host against the in-repository target definition.",
+      "expression": "self.get_origin_req_host",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 13509,
+      "target": "src.requests.cookies.CookieConflictError",
+      "review_note": "Checked src.requests.cookies.RequestsCookieJar._find_no_duplicates::CookieConflictError against the in-repository target definition.",
+      "expression": "CookieConflictError",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 3955,
+      "target": "src.requests.cookies.MockRequest",
+      "review_note": "Checked src.requests.cookies.extract_cookies_to_jar::MockRequest against the in-repository target definition.",
+      "expression": "MockRequest",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 6321,
+      "target": "src.requests.cookies.RequestsCookieJar._find_no_duplicates",
+      "review_note": "Checked src.requests.cookies.RequestsCookieJar.get::self._find_no_duplicates against the in-repository target definition.",
+      "expression": "self._find_no_duplicates",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 6771,
+      "target": "src.requests.cookies.remove_cookie_by_name",
+      "review_note": "Checked src.requests.cookies.RequestsCookieJar.set::remove_cookie_by_name against the in-repository target definition.",
+      "expression": "remove_cookie_by_name",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 1584,
+      "target": "src.requests._internal_utils.to_native_string",
+      "review_note": "Checked src.requests.cookies.MockRequest.get_full_url::to_native_string against the in-repository target definition.",
+      "expression": "to_native_string",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 8589,
+      "target": "src.requests.cookies.RequestsCookieJar.iteritems",
+      "review_note": "Checked src.requests.cookies.RequestsCookieJar.items::self.iteritems against the in-repository target definition.",
+      "expression": "self.iteritems",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 2876,
+      "target": "src.requests.cookies.MockRequest.get_host",
+      "review_note": "Checked src.requests.cookies.MockRequest.host::self.get_host against the in-repository target definition.",
+      "expression": "self.get_host",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 14470,
+      "target": "src.requests.cookies.RequestsCookieJar",
+      "review_note": "Checked src.requests.cookies.RequestsCookieJar.copy::RequestsCookieJar against the in-repository target definition.",
+      "expression": "RequestsCookieJar",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 16650,
+      "target": "src.requests.cookies.create_cookie",
+      "review_note": "Checked src.requests.cookies.morsel_to_cookie::create_cookie against the in-repository target definition.",
+      "expression": "create_cookie",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 7062,
+      "target": "src.requests.cookies.RequestsCookieJar.set_cookie",
+      "review_note": "Checked src.requests.cookies.RequestsCookieJar.set::self.set_cookie against the in-repository target definition.",
+      "expression": "self.set_cookie",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 11031,
+      "target": "src.requests.cookies.remove_cookie_by_name",
+      "review_note": "Checked src.requests.cookies.RequestsCookieJar.__delitem__::remove_cookie_by_name against the in-repository target definition.",
+      "expression": "remove_cookie_by_name",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 1281,
+      "target": "src.requests.cookies.MockRequest.get_host",
+      "review_note": "Checked src.requests.cookies.MockRequest.get_origin_req_host::self.get_host against the in-repository target definition.",
+      "expression": "self.get_host",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 18274,
+      "target": "src.requests.cookies.cookiejar_from_dict",
+      "review_note": "Checked src.requests.cookies.merge_cookies::cookiejar_from_dict against the in-repository target definition.",
+      "expression": "cookiejar_from_dict",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 6963,
+      "target": "src.requests.cookies.morsel_to_cookie",
+      "review_note": "Checked src.requests.cookies.RequestsCookieJar.set::morsel_to_cookie against the in-repository target definition.",
+      "expression": "morsel_to_cookie",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 8000,
+      "target": "src.requests.cookies.RequestsCookieJar.itervalues",
+      "review_note": "Checked src.requests.cookies.RequestsCookieJar.values::self.itervalues against the in-repository target definition.",
+      "expression": "self.itervalues",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 11605,
+      "target": "src.requests.cookies.RequestsCookieJar.set_cookie",
+      "review_note": "Checked src.requests.cookies.RequestsCookieJar.update::self.set_cookie against the in-repository target definition.",
+      "expression": "self.set_cookie",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 17757,
+      "target": "src.requests.cookies.RequestsCookieJar.set_cookie",
+      "review_note": "Checked src.requests.cookies.cookiejar_from_dict::cookiejar.set_cookie against the in-repository target definition.",
+      "expression": "cookiejar.set_cookie",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 7537,
+      "target": "src.requests.cookies.RequestsCookieJar.iterkeys",
+      "review_note": "Checked src.requests.cookies.RequestsCookieJar.keys::self.iterkeys against the in-repository target definition.",
+      "expression": "self.iterkeys",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 4058,
+      "target": "src.requests.cookies.MockResponse",
+      "review_note": "Checked src.requests.cookies.extract_cookies_to_jar::MockResponse against the in-repository target definition.",
+      "expression": "MockResponse",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 14543,
+      "target": "src.requests.cookies.RequestsCookieJar.update",
+      "review_note": "Checked src.requests.cookies.RequestsCookieJar.copy::new_cj.update against the in-repository target definition.",
+      "expression": "new_cj.update",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 7017,
+      "target": "src.requests.cookies.create_cookie",
+      "review_note": "Checked src.requests.cookies.RequestsCookieJar.set::create_cookie against the in-repository target definition.",
+      "expression": "create_cookie",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 10839,
+      "target": "src.requests.cookies.RequestsCookieJar.set",
+      "review_note": "Checked src.requests.cookies.RequestsCookieJar.__setitem__::self.set against the in-repository target definition.",
+      "expression": "self.set",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 17534,
+      "target": "src.requests.cookies.RequestsCookieJar",
+      "review_note": "Checked src.requests.cookies.cookiejar_from_dict::RequestsCookieJar against the in-repository target definition.",
+      "expression": "RequestsCookieJar",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 17778,
+      "target": "src.requests.cookies.create_cookie",
+      "review_note": "Checked src.requests.cookies.cookiejar_from_dict::create_cookie against the in-repository target definition.",
+      "expression": "create_cookie",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 14516,
+      "target": "src.requests.cookies.RequestsCookieJar.get_policy",
+      "review_note": "Checked src.requests.cookies.RequestsCookieJar.copy::self.get_policy against the in-repository target definition.",
+      "expression": "self.get_policy",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 4302,
+      "target": "src.requests.cookies.MockRequest",
+      "review_note": "Checked src.requests.cookies.get_cookie_header::MockRequest against the in-repository target definition.",
+      "expression": "MockRequest",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 12315,
+      "target": "src.requests.auth._basic_auth_str",
+      "review_note": "Checked src.requests.sessions.SessionRedirectMixin.rebuild_proxies::_basic_auth_str against the in-repository target definition.",
+      "expression": "_basic_auth_str",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 18008,
+      "target": "src.requests.sessions.merge_setting",
+      "review_note": "Checked src.requests.sessions.Session.prepare_request::merge_setting against the in-repository target definition.",
+      "expression": "merge_setting",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 2139,
+      "target": "src.requests.utils.to_key_val_list",
+      "review_note": "Checked src.requests.sessions.merge_setting::to_key_val_list against the in-repository target definition.",
+      "expression": "to_key_val_list",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 28127,
+      "target": "src.requests.utils.get_environ_proxies",
+      "review_note": "Checked src.requests.sessions.Session.merge_environment_settings::get_environ_proxies against the in-repository target definition.",
+      "expression": "get_environ_proxies",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 17309,
+      "target": "src.requests.cookies.merge_cookies",
+      "review_note": "Checked src.requests.sessions.Session.prepare_request::merge_cookies against the in-repository target definition.",
+      "expression": "merge_cookies",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 7746,
+      "target": "src.requests.sessions.SessionRedirectMixin.rebuild_method",
+      "review_note": "Checked src.requests.sessions.SessionRedirectMixin.resolve_redirects::self.rebuild_method against the in-repository target definition.",
+      "expression": "self.rebuild_method",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 26718,
+      "target": "src.requests.cookies.extract_cookies_to_jar",
+      "review_note": "Checked src.requests.sessions.Session.send::extract_cookies_to_jar against the in-repository target definition.",
+      "expression": "extract_cookies_to_jar",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 6875,
+      "target": "src.requests._internal_utils.to_native_string",
+      "review_note": "Checked src.requests.sessions.SessionRedirectMixin.resolve_redirects::to_native_string against the in-repository target definition.",
+      "expression": "to_native_string",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 16452,
+      "target": "src.requests.sessions.Session.mount",
+      "review_note": "Checked src.requests.sessions.Session.__init__::self.mount against the in-repository target definition.",
+      "expression": "self.mount",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 28647,
+      "target": "src.requests.sessions.merge_setting",
+      "review_note": "Checked src.requests.sessions.Session.merge_environment_settings::merge_setting against the in-repository target definition.",
+      "expression": "merge_setting",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 17190,
+      "target": "src.requests.cookies.cookiejar_from_dict",
+      "review_note": "Checked src.requests.sessions.Session.prepare_request::cookiejar_from_dict against the in-repository target definition.",
+      "expression": "cookiejar_from_dict",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 11934,
+      "target": "src.requests.utils.get_auth_from_url",
+      "review_note": "Checked src.requests.sessions.SessionRedirectMixin.rebuild_proxies::get_auth_from_url against the in-repository target definition.",
+      "expression": "get_auth_from_url",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 2907,
+      "target": "src.requests.sessions.merge_setting",
+      "review_note": "Checked src.requests.sessions.merge_hooks::merge_setting against the in-repository target definition.",
+      "expression": "merge_setting",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 8611,
+      "target": "src.requests.cookies.extract_cookies_to_jar",
+      "review_note": "Checked src.requests.sessions.SessionRedirectMixin.resolve_redirects::extract_cookies_to_jar against the in-repository target definition.",
+      "expression": "extract_cookies_to_jar",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 24090,
+      "target": "src.requests.sessions.Session.request",
+      "review_note": "Checked src.requests.sessions.Session.put::self.request against the in-repository target definition.",
+      "expression": "self.request",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 11735,
+      "target": "src.requests.utils.resolve_proxies",
+      "review_note": "Checked src.requests.sessions.SessionRedirectMixin.rebuild_proxies::resolve_proxies against the in-repository target definition.",
+      "expression": "resolve_proxies",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 22999,
+      "target": "src.requests.sessions.Session.request",
+      "review_note": "Checked src.requests.sessions.Session.head::self.request against the in-repository target definition.",
+      "expression": "self.request",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 16474,
+      "target": "src.requests.adapters.HTTPAdapter",
+      "review_note": "Checked src.requests.sessions.Session.__init__::HTTPAdapter against the in-repository target definition.",
+      "expression": "HTTPAdapter",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 22220,
+      "target": "src.requests.sessions.Session.request",
+      "review_note": "Checked src.requests.sessions.Session.get::self.request against the in-repository target definition.",
+      "expression": "self.request",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 29280,
+      "target": "src.requests.exceptions.InvalidSchema",
+      "review_note": "Checked src.requests.sessions.Session.get_adapter::InvalidSchema against the in-repository target definition.",
+      "expression": "InvalidSchema",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 6484,
+      "target": "src.requests.exceptions.TooManyRedirects",
+      "review_note": "Checked src.requests.sessions.SessionRedirectMixin.resolve_redirects::TooManyRedirects against the in-repository target definition.",
+      "expression": "TooManyRedirects",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 21452,
+      "target": "src.requests.sessions.Session.prepare_request",
+      "review_note": "Checked src.requests.sessions.Session.request::self.prepare_request against the in-repository target definition.",
+      "expression": "self.prepare_request",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 28701,
+      "target": "src.requests.sessions.merge_setting",
+      "review_note": "Checked src.requests.sessions.Session.merge_environment_settings::merge_setting against the in-repository target definition.",
+      "expression": "merge_setting",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 26902,
+      "target": "src.requests.sessions.SessionRedirectMixin.resolve_redirects",
+      "review_note": "Checked src.requests.sessions.Session.send::self.resolve_redirects against the in-repository target definition.",
+      "expression": "self.resolve_redirects",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 23581,
+      "target": "src.requests.sessions.Session.request",
+      "review_note": "Checked src.requests.sessions.Session.post::self.request against the in-repository target definition.",
+      "expression": "self.request",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 17282,
+      "target": "src.requests.cookies.merge_cookies",
+      "review_note": "Checked src.requests.sessions.Session.prepare_request::merge_cookies against the in-repository target definition.",
+      "expression": "merge_cookies",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 24941,
+      "target": "src.requests.sessions.Session.request",
+      "review_note": "Checked src.requests.sessions.Session.delete::self.request against the in-repository target definition.",
+      "expression": "self.request",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 17323,
+      "target": "src.requests.cookies.RequestsCookieJar",
+      "review_note": "Checked src.requests.sessions.Session.prepare_request::RequestsCookieJar against the in-repository target definition.",
+      "expression": "RequestsCookieJar",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 21146,
+      "target": "src.requests.models.Request",
+      "review_note": "Checked src.requests.sessions.Session.request::Request against the in-repository target definition.",
+      "expression": "Request",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 24591,
+      "target": "src.requests.sessions.Session.request",
+      "review_note": "Checked src.requests.sessions.Session.patch::self.request against the in-repository target definition.",
+      "expression": "self.request",
+      "kind": "CALL_CALLEE"
+    }
+  ],
+  "reference_sites": [
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 12670,
+      "expression": "extract_cookies_to_jar",
+      "line": 365,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 12257,
+      "expression": "CaseInsensitiveDict",
+      "line": 352,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 25155,
+      "expression": "ConnectTimeout",
+      "line": 665,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 23520,
+      "expression": "self.add_headers",
+      "line": 618,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 16592,
+      "expression": "self.build_connection_pool_key_attributes",
+      "line": 445,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 25957,
+      "expression": "SSLError",
+      "line": 688,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 25265,
+      "expression": "RetryError",
+      "line": 668,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 8567,
+      "expression": "get_auth_from_url",
+      "line": 257,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 18739,
+      "expression": "InvalidProxyURL",
+      "line": 499,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 16505,
+      "expression": "select_proxy",
+      "line": 443,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 1619,
+      "expression": "InvalidSchema",
+      "line": 63,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 16839,
+      "expression": "prepend_scheme_if_needed",
+      "line": 453,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 6100,
+      "expression": "super().__init__",
+      "line": 192,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 25533,
+      "expression": "SSLError",
+      "line": 675,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 23477,
+      "expression": "self.request_url",
+      "line": 617,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 23413,
+      "expression": "self.cert_verify",
+      "line": 616,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 15437,
+      "expression": "_urllib3_request_context",
+      "line": 421,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 12040,
+      "expression": "Response",
+      "line": 346,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 8976,
+      "expression": "self.proxy_headers",
+      "line": 268,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 17156,
+      "expression": "self.proxy_manager_for",
+      "line": 460,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 6259,
+      "expression": "self.init_poolmanager",
+      "line": 198,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 22090,
+      "expression": "_basic_auth_str",
+      "line": 586,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 16770,
+      "expression": "InvalidURL",
+      "line": 451,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 12360,
+      "expression": "get_encoding_from_headers",
+      "line": 355,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 20178,
+      "expression": "select_proxy",
+      "line": 537,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 26250,
+      "expression": "self.build_response",
+      "line": 696,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 10245,
+      "expression": "extract_zipped_paths",
+      "line": 300,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 23203,
+      "expression": "self.get_connection_with_tls_context",
+      "line": 610,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 18601,
+      "expression": "prepend_scheme_if_needed",
+      "line": 496,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 18918,
+      "expression": "self.proxy_manager_for",
+      "line": 503,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 20708,
+      "expression": "urldefragauth",
+      "line": 551,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 21998,
+      "expression": "get_auth_from_url",
+      "line": 583,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 16977,
+      "expression": "InvalidProxyURL",
+      "line": 456,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 25369,
+      "expression": "ProxyError",
+      "line": 671,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 26058,
+      "expression": "ReadTimeout",
+      "line": 690,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 26160,
+      "expression": "InvalidHeader",
+      "line": 692,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 25761,
+      "expression": "ProxyError",
+      "line": 683,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 4334,
+      "expression": "BaseAdapter",
+      "line": 143,
+      "status": "EXACT",
+      "kind": "BASE_CLASS_REFERENCE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 6770,
+      "expression": "self.init_poolmanager",
+      "line": 212,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 23373,
+      "expression": "InvalidURL",
+      "line": 614,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 2715,
+      "expression": "self.is_unverifiable",
+      "line": 92,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 10533,
+      "expression": "self._find_no_duplicates",
+      "line": 334,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 4363,
+      "expression": "r.get_new_headers",
+      "line": 148,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 2799,
+      "expression": "self.get_origin_req_host",
+      "line": 96,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 13509,
+      "expression": "CookieConflictError",
+      "line": 405,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 3955,
+      "expression": "MockRequest",
+      "line": 134,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 6321,
+      "expression": "self._find_no_duplicates",
+      "line": 202,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 6771,
+      "expression": "remove_cookie_by_name",
+      "line": 213,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 1584,
+      "expression": "to_native_string",
+      "line": 55,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 8589,
+      "expression": "self.iteritems",
+      "line": 275,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 2876,
+      "expression": "self.get_host",
+      "line": 100,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 14470,
+      "expression": "RequestsCookieJar",
+      "line": 430,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 16650,
+      "expression": "create_cookie",
+      "line": 504,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 7062,
+      "expression": "self.set_cookie",
+      "line": 222,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 11031,
+      "expression": "remove_cookie_by_name",
+      "line": 347,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 1281,
+      "expression": "self.get_host",
+      "line": 47,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 18274,
+      "expression": "cookiejar_from_dict",
+      "line": 553,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 6963,
+      "expression": "morsel_to_cookie",
+      "line": 219,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 8000,
+      "expression": "self.itervalues",
+      "line": 257,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 11605,
+      "expression": "self.set_cookie",
+      "line": 362,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 17757,
+      "expression": "cookiejar.set_cookie",
+      "line": 537,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 7537,
+      "expression": "self.iterkeys",
+      "line": 240,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 4058,
+      "expression": "MockResponse",
+      "line": 136,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 14543,
+      "expression": "new_cj.update",
+      "line": 432,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 7017,
+      "expression": "create_cookie",
+      "line": 221,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 10839,
+      "expression": "self.set",
+      "line": 341,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 17534,
+      "expression": "RequestsCookieJar",
+      "line": 531,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 17778,
+      "expression": "create_cookie",
+      "line": 537,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 14516,
+      "expression": "self.get_policy",
+      "line": 431,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/cookies.py",
+      "start_byte": 4302,
+      "expression": "MockRequest",
+      "line": 146,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 12315,
+      "expression": "_basic_auth_str",
+      "line": 329,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 18008,
+      "expression": "merge_setting",
+      "line": 494,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 2139,
+      "expression": "to_key_val_list",
+      "line": 80,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 28127,
+      "expression": "get_environ_proxies",
+      "line": 760,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 17309,
+      "expression": "merge_cookies",
+      "line": 475,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 7746,
+      "expression": "self.rebuild_method",
+      "line": 221,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 26718,
+      "expression": "extract_cookies_to_jar",
+      "line": 718,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 6875,
+      "expression": "to_native_string",
+      "line": 201,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 16452,
+      "expression": "self.mount",
+      "line": 449,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 28647,
+      "expression": "merge_setting",
+      "line": 774,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 17190,
+      "expression": "cookiejar_from_dict",
+      "line": 471,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 11934,
+      "expression": "get_auth_from_url",
+      "line": 322,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 2907,
+      "expression": "merge_setting",
+      "line": 103,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 8611,
+      "expression": "extract_cookies_to_jar",
+      "line": 240,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 24090,
+      "expression": "self.request",
+      "line": 649,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 11735,
+      "expression": "resolve_proxies",
+      "line": 316,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 22999,
+      "expression": "self.request",
+      "line": 624,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 16474,
+      "expression": "HTTPAdapter",
+      "line": 449,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 22220,
+      "expression": "self.request",
+      "line": 602,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 29280,
+      "expression": "InvalidSchema",
+      "line": 792,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 6484,
+      "expression": "TooManyRedirects",
+      "line": 191,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 21452,
+      "expression": "self.prepare_request",
+      "line": 575,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 28701,
+      "expression": "merge_setting",
+      "line": 775,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 26902,
+      "expression": "self.resolve_redirects",
+      "line": 723,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 23581,
+      "expression": "self.request",
+      "line": 637,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 17282,
+      "expression": "merge_cookies",
+      "line": 474,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 24941,
+      "expression": "self.request",
+      "line": 671,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 17323,
+      "expression": "RequestsCookieJar",
+      "line": 475,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 21146,
+      "expression": "Request",
+      "line": 563,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/sessions.py",
+      "start_byte": 24591,
+      "expression": "self.request",
+      "line": 661,
+      "status": "EXACT",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/__init__.py",
+      "start_byte": 1295,
+      "expression": "urllib3_version.split",
+      "line": 59,
+      "status": "UNRESOLVED",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/__init__.py",
+      "start_byte": 1506,
+      "expression": "urllib3_version.append",
+      "line": 64,
+      "status": "UNRESOLVED",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/__init__.py",
+      "start_byte": 1888,
+      "expression": "chardet_version.split",
+      "line": 76,
+      "status": "UNRESOLVED",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/__init__.py",
+      "start_byte": 2157,
+      "expression": "charset_normalizer_version.split",
+      "line": 81,
+      "status": "UNRESOLVED",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/__init__.py",
+      "start_byte": 2704,
+      "expression": "cryptography_version.split",
+      "line": 96,
+      "status": "UNRESOLVED",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/__init__.py",
+      "start_byte": 3779,
+      "expression": "pyopenssl.inject_into_urllib3",
+      "line": 133,
+      "status": "UNRESOLVED",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/_internal_utils.py",
+      "start_byte": 1079,
+      "expression": "string.decode",
+      "line": 33,
+      "status": "UNRESOLVED",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 5940,
+      "expression": "Retry",
+      "line": 186,
+      "status": "UNRESOLVED",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 6707,
+      "expression": "state.items",
+      "line": 209,
+      "status": "UNRESOLVED",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 7724,
+      "expression": "PoolManager",
+      "line": 235,
+      "status": "UNRESOLVED",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 8499,
+      "expression": "proxy.lower().startswith",
+      "line": 256,
+      "status": "UNRESOLVED",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 9052,
+      "expression": "proxy_from_url",
+      "line": 269,
+      "status": "UNRESOLVED",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 9996,
+      "expression": "url.lower().startswith",
+      "line": 292,
+      "status": "UNRESOLVED",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 17390,
+      "expression": "self.poolmanager.connection_from_host",
+      "line": 466,
+      "status": "UNRESOLVED",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 18967,
+      "expression": "proxy_manager.connection_from_url",
+      "line": 504,
+      "status": "UNRESOLVED",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 19120,
+      "expression": "parsed.geturl",
+      "line": 508,
+      "status": "UNRESOLVED",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 19155,
+      "expression": "self.poolmanager.connection_from_url",
+      "line": 509,
+      "status": "UNRESOLVED",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 19425,
+      "expression": "self.poolmanager.clear",
+      "line": 519,
+      "status": "UNRESOLVED",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 23912,
+      "expression": "TimeoutSauce",
+      "line": 632,
+      "status": "UNRESOLVED",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 24307,
+      "expression": "TimeoutSauce",
+      "line": 641,
+      "status": "UNRESOLVED",
+      "kind": "CALL_CALLEE"
+    }
+  ],
+  "unresolved_dynamic_cases": [
+    {
+      "file_path": "src/requests/__init__.py",
+      "start_byte": 1295,
+      "expression": "urllib3_version.split",
+      "line": 59,
+      "context": "src.requests.check_compatibility",
+      "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/__init__.py",
+      "start_byte": 1506,
+      "expression": "urllib3_version.append",
+      "line": 64,
+      "context": "src.requests.check_compatibility",
+      "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/__init__.py",
+      "start_byte": 1888,
+      "expression": "chardet_version.split",
+      "line": 76,
+      "context": "src.requests.check_compatibility",
+      "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/__init__.py",
+      "start_byte": 2157,
+      "expression": "charset_normalizer_version.split",
+      "line": 81,
+      "context": "src.requests.check_compatibility",
+      "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/__init__.py",
+      "start_byte": 2704,
+      "expression": "cryptography_version.split",
+      "line": 96,
+      "context": "src.requests._check_cryptography",
+      "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/__init__.py",
+      "start_byte": 3779,
+      "expression": "pyopenssl.inject_into_urllib3",
+      "line": 133,
+      "context": "src.requests",
+      "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/_internal_utils.py",
+      "start_byte": 1079,
+      "expression": "string.decode",
+      "line": 33,
+      "context": "src.requests._internal_utils.to_native_string",
+      "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 5940,
+      "expression": "Retry",
+      "line": 186,
+      "context": "src.requests.adapters.HTTPAdapter.__init__",
+      "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 6707,
+      "expression": "state.items",
+      "line": 209,
+      "context": "src.requests.adapters.HTTPAdapter.__setstate__",
+      "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 7724,
+      "expression": "PoolManager",
+      "line": 235,
+      "context": "src.requests.adapters.HTTPAdapter.init_poolmanager",
+      "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 8499,
+      "expression": "proxy.lower().startswith",
+      "line": 256,
+      "context": "src.requests.adapters.HTTPAdapter.proxy_manager_for",
+      "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 9052,
+      "expression": "proxy_from_url",
+      "line": 269,
+      "context": "src.requests.adapters.HTTPAdapter.proxy_manager_for",
+      "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 9996,
+      "expression": "url.lower().startswith",
+      "line": 292,
+      "context": "src.requests.adapters.HTTPAdapter.cert_verify",
+      "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 17390,
+      "expression": "self.poolmanager.connection_from_host",
+      "line": 466,
+      "context": "src.requests.adapters.HTTPAdapter.get_connection_with_tls_context",
+      "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 18967,
+      "expression": "proxy_manager.connection_from_url",
+      "line": 504,
+      "context": "src.requests.adapters.HTTPAdapter.get_connection",
+      "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 19120,
+      "expression": "parsed.geturl",
+      "line": 508,
+      "context": "src.requests.adapters.HTTPAdapter.get_connection",
+      "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 19155,
+      "expression": "self.poolmanager.connection_from_url",
+      "line": 509,
+      "context": "src.requests.adapters.HTTPAdapter.get_connection",
+      "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 19425,
+      "expression": "self.poolmanager.clear",
+      "line": 519,
+      "context": "src.requests.adapters.HTTPAdapter.close",
+      "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 23912,
+      "expression": "TimeoutSauce",
+      "line": 632,
+      "context": "src.requests.adapters.HTTPAdapter.send",
+      "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+      "kind": "CALL_CALLEE"
+    },
+    {
+      "file_path": "src/requests/adapters.py",
+      "start_byte": 24307,
+      "expression": "TimeoutSauce",
+      "line": 641,
+      "context": "src.requests.adapters.HTTPAdapter.send",
+      "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+      "kind": "CALL_CALLEE"
+    }
+  ],
+  "dispatch_cases": [],
+  "multi_hop_questions": [
+    {
+      "id": "requests-mh-01",
+      "question": "How does `build_response` reach `MockRequest` through Requests internal calls?",
+      "path": [
+        "src.requests.adapters.HTTPAdapter.build_response",
+        "src.requests.cookies.extract_cookies_to_jar",
+        "src.requests.cookies.MockRequest"
+      ],
+      "review_note": "The listed call chain was checked against the frozen exact-binding graph and source definitions."
+    },
+    {
+      "id": "requests-mh-02",
+      "question": "How does `build_response` reach `MockResponse` through Requests internal calls?",
+      "path": [
+        "src.requests.adapters.HTTPAdapter.build_response",
+        "src.requests.cookies.extract_cookies_to_jar",
+        "src.requests.cookies.MockResponse"
+      ],
+      "review_note": "The listed call chain was checked against the frozen exact-binding graph and source definitions."
+    },
+    {
+      "id": "requests-mh-03",
+      "question": "How does `build_response` reach `_parse_content_type_header` through Requests internal calls?",
+      "path": [
+        "src.requests.adapters.HTTPAdapter.build_response",
+        "src.requests.utils.get_encoding_from_headers",
+        "src.requests.utils._parse_content_type_header"
+      ],
+      "review_note": "The listed call chain was checked against the frozen exact-binding graph and source definitions."
+    },
+    {
+      "id": "requests-mh-04",
+      "question": "How does `cert_verify` reach `atomic_open` through Requests internal calls?",
+      "path": [
+        "src.requests.adapters.HTTPAdapter.cert_verify",
+        "src.requests.utils.extract_zipped_paths",
+        "src.requests.utils.atomic_open"
+      ],
+      "review_note": "The listed call chain was checked against the frozen exact-binding graph and source definitions."
+    },
+    {
+      "id": "requests-mh-05",
+      "question": "How does `get_connection` reach `proxy_headers` through Requests internal calls?",
+      "path": [
+        "src.requests.adapters.HTTPAdapter.get_connection",
+        "src.requests.adapters.HTTPAdapter.proxy_manager_for",
+        "src.requests.adapters.HTTPAdapter.proxy_headers"
+      ],
+      "review_note": "The listed call chain was checked against the frozen exact-binding graph and source definitions."
+    },
+    {
+      "id": "requests-mh-06",
+      "question": "How does `get_connection` reach `get_auth_from_url` through Requests internal calls?",
+      "path": [
+        "src.requests.adapters.HTTPAdapter.get_connection",
+        "src.requests.adapters.HTTPAdapter.proxy_manager_for",
+        "src.requests.utils.get_auth_from_url"
+      ],
+      "review_note": "The listed call chain was checked against the frozen exact-binding graph and source definitions."
+    },
+    {
+      "id": "requests-mh-07",
+      "question": "How does `get_connection` reach `_basic_auth_str` through Requests internal calls?",
+      "path": [
+        "src.requests.adapters.HTTPAdapter.get_connection",
+        "src.requests.adapters.HTTPAdapter.proxy_manager_for",
+        "src.requests.adapters.HTTPAdapter.proxy_headers",
+        "src.requests.auth._basic_auth_str"
+      ],
+      "review_note": "The listed call chain was checked against the frozen exact-binding graph and source definitions."
+    },
+    {
+      "id": "requests-mh-08",
+      "question": "How does `get_connection` reach `get_auth_from_url` through Requests internal calls?",
+      "path": [
+        "src.requests.adapters.HTTPAdapter.get_connection",
+        "src.requests.adapters.HTTPAdapter.proxy_manager_for",
+        "src.requests.adapters.HTTPAdapter.proxy_headers",
+        "src.requests.utils.get_auth_from_url"
+      ],
+      "review_note": "The listed call chain was checked against the frozen exact-binding graph and source definitions."
+    },
+    {
+      "id": "requests-mh-09",
+      "question": "How does `get_connection_with_tls_context` reach `_urllib3_request_context` through Requests internal calls?",
+      "path": [
+        "src.requests.adapters.HTTPAdapter.get_connection_with_tls_context",
+        "src.requests.adapters.HTTPAdapter.build_connection_pool_key_attributes",
+        "src.requests.adapters._urllib3_request_context"
+      ],
+      "review_note": "The listed call chain was checked against the frozen exact-binding graph and source definitions."
+    },
+    {
+      "id": "requests-mh-10",
+      "question": "How does `get_connection_with_tls_context` reach `proxy_headers` through Requests internal calls?",
+      "path": [
+        "src.requests.adapters.HTTPAdapter.get_connection_with_tls_context",
+        "src.requests.adapters.HTTPAdapter.proxy_manager_for",
+        "src.requests.adapters.HTTPAdapter.proxy_headers"
+      ],
+      "review_note": "The listed call chain was checked against the frozen exact-binding graph and source definitions."
+    },
+    {
+      "id": "requests-mh-11",
+      "question": "How does `get_connection_with_tls_context` reach `get_auth_from_url` through Requests internal calls?",
+      "path": [
+        "src.requests.adapters.HTTPAdapter.get_connection_with_tls_context",
+        "src.requests.adapters.HTTPAdapter.proxy_manager_for",
+        "src.requests.utils.get_auth_from_url"
+      ],
+      "review_note": "The listed call chain was checked against the frozen exact-binding graph and source definitions."
+    },
+    {
+      "id": "requests-mh-12",
+      "question": "How does `get_connection_with_tls_context` reach `_basic_auth_str` through Requests internal calls?",
+      "path": [
+        "src.requests.adapters.HTTPAdapter.get_connection_with_tls_context",
+        "src.requests.adapters.HTTPAdapter.proxy_manager_for",
+        "src.requests.adapters.HTTPAdapter.proxy_headers",
+        "src.requests.auth._basic_auth_str"
+      ],
+      "review_note": "The listed call chain was checked against the frozen exact-binding graph and source definitions."
+    },
+    {
+      "id": "requests-mh-13",
+      "question": "How does `get_connection_with_tls_context` reach `get_auth_from_url` through Requests internal calls?",
+      "path": [
+        "src.requests.adapters.HTTPAdapter.get_connection_with_tls_context",
+        "src.requests.adapters.HTTPAdapter.proxy_manager_for",
+        "src.requests.adapters.HTTPAdapter.proxy_headers",
+        "src.requests.utils.get_auth_from_url"
+      ],
+      "review_note": "The listed call chain was checked against the frozen exact-binding graph and source definitions."
+    },
+    {
+      "id": "requests-mh-14",
+      "question": "How does `proxy_headers` reach `to_native_string` through Requests internal calls?",
+      "path": [
+        "src.requests.adapters.HTTPAdapter.proxy_headers",
+        "src.requests.auth._basic_auth_str",
+        "src.requests._internal_utils.to_native_string"
+      ],
+      "review_note": "The listed call chain was checked against the frozen exact-binding graph and source definitions."
+    },
+    {
+      "id": "requests-mh-15",
+      "question": "How does `proxy_manager_for` reach `_basic_auth_str` through Requests internal calls?",
+      "path": [
+        "src.requests.adapters.HTTPAdapter.proxy_manager_for",
+        "src.requests.adapters.HTTPAdapter.proxy_headers",
+        "src.requests.auth._basic_auth_str"
+      ],
+      "review_note": "The listed call chain was checked against the frozen exact-binding graph and source definitions."
+    },
+    {
+      "id": "requests-mh-16",
+      "question": "How does `proxy_manager_for` reach `get_auth_from_url` through Requests internal calls?",
+      "path": [
+        "src.requests.adapters.HTTPAdapter.proxy_manager_for",
+        "src.requests.adapters.HTTPAdapter.proxy_headers",
+        "src.requests.utils.get_auth_from_url"
+      ],
+      "review_note": "The listed call chain was checked against the frozen exact-binding graph and source definitions."
+    },
+    {
+      "id": "requests-mh-17",
+      "question": "How does `proxy_manager_for` reach `to_native_string` through Requests internal calls?",
+      "path": [
+        "src.requests.adapters.HTTPAdapter.proxy_manager_for",
+        "src.requests.adapters.HTTPAdapter.proxy_headers",
+        "src.requests.auth._basic_auth_str",
+        "src.requests._internal_utils.to_native_string"
+      ],
+      "review_note": "The listed call chain was checked against the frozen exact-binding graph and source definitions."
+    },
+    {
+      "id": "requests-mh-18",
+      "question": "How does `send` reach `extract_cookies_to_jar` through Requests internal calls?",
+      "path": [
+        "src.requests.adapters.HTTPAdapter.send",
+        "src.requests.adapters.HTTPAdapter.build_response",
+        "src.requests.cookies.extract_cookies_to_jar"
+      ],
+      "review_note": "The listed call chain was checked against the frozen exact-binding graph and source definitions."
+    },
+    {
+      "id": "requests-mh-19",
+      "question": "How does `send` reach `Response` through Requests internal calls?",
+      "path": [
+        "src.requests.adapters.HTTPAdapter.send",
+        "src.requests.adapters.HTTPAdapter.build_response",
+        "src.requests.models.Response"
+      ],
+      "review_note": "The listed call chain was checked against the frozen exact-binding graph and source definitions."
+    },
+    {
+      "id": "requests-mh-20",
+      "question": "How does `send` reach `CaseInsensitiveDict` through Requests internal calls?",
+      "path": [
+        "src.requests.adapters.HTTPAdapter.send",
+        "src.requests.adapters.HTTPAdapter.build_response",
+        "src.requests.structures.CaseInsensitiveDict"
+      ],
+      "review_note": "The listed call chain was checked against the frozen exact-binding graph and source definitions."
+    },
+    {
+      "id": "requests-mh-21",
+      "question": "How does `send` reach `get_encoding_from_headers` through Requests internal calls?",
+      "path": [
+        "src.requests.adapters.HTTPAdapter.send",
+        "src.requests.adapters.HTTPAdapter.build_response",
+        "src.requests.utils.get_encoding_from_headers"
+      ],
+      "review_note": "The listed call chain was checked against the frozen exact-binding graph and source definitions."
+    },
+    {
+      "id": "requests-mh-22",
+      "question": "How does `send` reach `extract_zipped_paths` through Requests internal calls?",
+      "path": [
+        "src.requests.adapters.HTTPAdapter.send",
+        "src.requests.adapters.HTTPAdapter.cert_verify",
+        "src.requests.utils.extract_zipped_paths"
+      ],
+      "review_note": "The listed call chain was checked against the frozen exact-binding graph and source definitions."
+    },
+    {
+      "id": "requests-mh-23",
+      "question": "How does `send` reach `build_connection_pool_key_attributes` through Requests internal calls?",
+      "path": [
+        "src.requests.adapters.HTTPAdapter.send",
+        "src.requests.adapters.HTTPAdapter.get_connection_with_tls_context",
+        "src.requests.adapters.HTTPAdapter.build_connection_pool_key_attributes"
+      ],
+      "review_note": "The listed call chain was checked against the frozen exact-binding graph and source definitions."
+    },
+    {
+      "id": "requests-mh-24",
+      "question": "How does `send` reach `proxy_manager_for` through Requests internal calls?",
+      "path": [
+        "src.requests.adapters.HTTPAdapter.send",
+        "src.requests.adapters.HTTPAdapter.get_connection_with_tls_context",
+        "src.requests.adapters.HTTPAdapter.proxy_manager_for"
+      ],
+      "review_note": "The listed call chain was checked against the frozen exact-binding graph and source definitions."
+    },
+    {
+      "id": "requests-mh-25",
+      "question": "How does `send` reach `InvalidProxyURL` through Requests internal calls?",
+      "path": [
+        "src.requests.adapters.HTTPAdapter.send",
+        "src.requests.adapters.HTTPAdapter.get_connection_with_tls_context",
+        "src.requests.exceptions.InvalidProxyURL"
+      ],
+      "review_note": "The listed call chain was checked against the frozen exact-binding graph and source definitions."
+    },
+    {
+      "id": "requests-mh-26",
+      "question": "How does `send` reach `InvalidURL` through Requests internal calls?",
+      "path": [
+        "src.requests.adapters.HTTPAdapter.send",
+        "src.requests.adapters.HTTPAdapter.get_connection_with_tls_context",
+        "src.requests.exceptions.InvalidURL"
+      ],
+      "review_note": "The listed call chain was checked against the frozen exact-binding graph and source definitions."
+    },
+    {
+      "id": "requests-mh-27",
+      "question": "How does `send` reach `prepend_scheme_if_needed` through Requests internal calls?",
+      "path": [
+        "src.requests.adapters.HTTPAdapter.send",
+        "src.requests.adapters.HTTPAdapter.get_connection_with_tls_context",
+        "src.requests.utils.prepend_scheme_if_needed"
+      ],
+      "review_note": "The listed call chain was checked against the frozen exact-binding graph and source definitions."
+    },
+    {
+      "id": "requests-mh-28",
+      "question": "How does `send` reach `select_proxy` through Requests internal calls?",
+      "path": [
+        "src.requests.adapters.HTTPAdapter.send",
+        "src.requests.adapters.HTTPAdapter.get_connection_with_tls_context",
+        "src.requests.utils.select_proxy"
+      ],
+      "review_note": "The listed call chain was checked against the frozen exact-binding graph and source definitions."
+    },
+    {
+      "id": "requests-mh-29",
+      "question": "How does `send` reach `select_proxy` through Requests internal calls?",
+      "path": [
+        "src.requests.adapters.HTTPAdapter.send",
+        "src.requests.adapters.HTTPAdapter.request_url",
+        "src.requests.utils.select_proxy"
+      ],
+      "review_note": "The listed call chain was checked against the frozen exact-binding graph and source definitions."
+    },
+    {
+      "id": "requests-mh-30",
+      "question": "How does `send` reach `urldefragauth` through Requests internal calls?",
+      "path": [
+        "src.requests.adapters.HTTPAdapter.send",
+        "src.requests.adapters.HTTPAdapter.request_url",
+        "src.requests.utils.urldefragauth"
+      ],
+      "review_note": "The listed call chain was checked against the frozen exact-binding graph and source definitions."
+    }
+  ],
+  "unicode_spans": [
+    {
+      "file_path": "src/requests/certs.py",
+      "start_byte": 141,
+      "end_byte": 144,
+      "utf8_hex": "e28094"
+    },
+    {
+      "file_path": "src/requests/status_codes.py",
+      "start_byte": 846,
+      "end_byte": 849,
+      "utf8_hex": "e29c93"
+    }
+  ]
+}

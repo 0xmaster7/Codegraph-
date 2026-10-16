@@ -1,0 +1,48 @@
+{
+  "dataset_id": "codegraph-retrieval-m15-v1",
+  "cutoff": 5,
+  "candidate_paths": [
+    "backend/app/retrieval.py",
+    "backend/app/graph.py",
+    "docs/graph-schema.md",
+    "backend/app/test_execution.py",
+    "docs/security.md",
+    "backend/app/scip.py",
+    "docs/architecture.md",
+    "backend/app/runtime_validation.py",
+    "docs/runtime-observations.md",
+    "backend/app/chunking.py"
+  ],
+  "queries": [
+    {
+      "id": "symbol-resolution",
+      "query": "How are Python symbols resolved from exact identifiers and normalized full text?",
+      "relevant_paths": ["backend/app/retrieval.py", "backend/app/graph.py"]
+    },
+    {
+      "id": "snapshot-retention",
+      "query": "How does snapshot garbage collection keep recent and pinned snapshots?",
+      "relevant_paths": ["backend/app/graph.py", "docs/graph-schema.md"]
+    },
+    {
+      "id": "test-container-security",
+      "query": "How are approved repository tests executed in an isolated Docker container?",
+      "relevant_paths": ["backend/app/test_execution.py", "docs/security.md"]
+    },
+    {
+      "id": "semantic-indexing",
+      "query": "How does SCIP join semantic occurrences to Python source locations?",
+      "relevant_paths": ["backend/app/scip.py", "docs/architecture.md"]
+    },
+    {
+      "id": "runtime-observations",
+      "query": "How are observed test calls compared with static dispatch candidates?",
+      "relevant_paths": ["backend/app/runtime_validation.py", "docs/runtime-observations.md"]
+    },
+    {
+      "id": "retrieval-evidence",
+      "query": "How is retrieval passage evidence kept separate from verified structural graph facts?",
+      "relevant_paths": ["backend/app/chunking.py", "docs/graph-schema.md", "docs/architecture.md"]
+    }
+  ]
+}

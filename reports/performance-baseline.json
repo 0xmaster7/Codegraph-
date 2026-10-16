@@ -1,0 +1,137 @@
+{
+  "benchmark": "M26 baseline with measured post-optimization comparison",
+  "correctness": {
+    "entity_count": 827,
+    "provenance_count": 7498,
+    "retrieval_chunk_count": 866,
+    "schema_validation": "PASS",
+    "semantic_indexing": "INDEXED",
+    "site_count": 2937,
+    "snapshot_status": "READY"
+  },
+  "frontend_graph_render": {
+    "status": "MEASURED_BASELINE_AND_POST_OPTIMIZATION",
+    "method": "Measured actual Graph Explorer tab transitions in Edge on the same READY Requests v2.32.5 snapshot. Timing uses Date.now() in the page immediately before and after a UI click; row and relationship DOM counts were checked after each transition.",
+    "baseline": {
+      "graph_explorer_transition_ms": 2649,
+      "rendered_rows": 400,
+      "rendered_relationships": 60,
+      "source": "Pre-optimization baseline observation recorded before implementation changes."
+    },
+    "optimized": {
+      "graph_explorer_transition_samples_ms": [
+        810,
+        701,
+        948,
+        709,
+        797,
+        758,
+        1498
+      ],
+      "p50_ms": 797,
+      "p95_ms": 1498,
+      "rendered_rows_per_initial_page": 100,
+      "rendered_relationships": 60,
+      "expand_to_400_rows_verified": true,
+      "edge_filter_verified": true,
+      "full_data_search_verified": true,
+      "median_reduction_percent_vs_baseline": 69.9,
+      "p95_reduction_percent_vs_baseline": 43.4
+    },
+    "overview_render_samples_ms": [
+      384,
+      447,
+      396,
+      394,
+      357,
+      442,
+      510
+    ],
+    "overview_render_p50_ms": 396,
+    "overview_render_p95_ms": 510,
+    "measurement_limits": [
+      "Browser transition timing includes click dispatch and React render, but excludes a separate accessibility-tree serialization step.",
+      "The baseline view rendered 400 rows; the optimized view renders 100 initially and expands in batches, preserving access through the Show next control."
+    ]
+  },
+  "host": {
+    "docker_vm_memory_bytes": 8400605184,
+    "memory_bytes": 17179869184,
+    "memory_pressure": "The system has 17179869184 (4194304 pages with a page size of 4096).\nSystem-wide memory free percentage: 60%",
+    "model_identifier": "MacBookPro15,1",
+    "platform": "macOS 15.7.9 x86_64",
+    "processor": "Intel Core i7-8850H, 6 cores",
+    "swap_usage": "total = 15360.00M  used = 14320.75M  free = 1039.25M  (encrypted)",
+    "post_optimization_memory_pressure": "System-wide memory free percentage: 55%",
+    "post_optimization_swap_usage": "total = 15360.00M  used = 12993.75M  free = 2366.25M (encrypted)",
+    "swap_monitoring_samples": {
+      "duration_seconds": 30,
+      "sample_interval_seconds": 5,
+      "free_memory_percent": [
+        64,
+        61,
+        62,
+        63,
+        54,
+        52
+      ],
+      "swap_used_mb": [
+        14300.75,
+        13916.25,
+        13966.25,
+        14009.0,
+        13169.0,
+        12993.75
+      ],
+      "interpretation": "Swap use decreased over the sample window; host memory pressure remained at or above 52% free. No sustained swap-thrashing signal was observed during this workload."
+    }
+  },
+  "measurement_limits": [
+    "This report is a cold ingestion and first-time local-vector baseline for the frozen repository. It does not claim performance on other repositories.",
+    "The default long-running Compose service and its persistent volume are not used or modified; FalkorDB runs in the separate bounded ephemeral benchmark container.",
+    "Post-optimization browser measurements are for the actual local Edge UI and use progressive initial row rendering; the full request ingestion and ONNX encoding were not rerun because the implementation change only affects frontend rendering."
+  ],
+  "pipeline": {
+    "analysis_total_seconds": 41.5906917359971,
+    "graph_load_seconds": 37.242336422001245,
+    "materialization_stage_seconds": 0.3461100159911439,
+    "parse_stage_seconds": 0.8306152250006562,
+    "query": {
+      "endpoint": "GET /api/snapshots/{snapshot_id}/graph/callers",
+      "p50_ms": 462.22545999626163,
+      "p95_ms": 622.4115980003262,
+      "samples": 25,
+      "scope": "In-process FastAPI TestClient; includes snapshot-context load, READY guard, graph-tool construction, query, and JSON serialization; excludes network/browser latency.",
+      "status_counts": {
+        "200": 25
+      }
+    },
+    "semantic_index_and_join_seconds": 38.09397365900804,
+    "validation_and_cache_write_seconds": 0.20734497699595522,
+    "vector_cache_hits": 0,
+    "vector_chunk_count": 866,
+    "vector_encode_seconds": 98.71064961299999,
+    "vector_encode_wrapper_seconds": 98.71459201599646,
+    "vector_persist_and_index_seconds": 3.619679638009984
+  },
+  "repository": {
+    "head_commit": "b25c87d7cb8d6a18a37fa12442b5f883f9e41741",
+    "is_dirty": false,
+    "path": "/Users/keshavnanda/wemakedevs - track1/.codegraph-cache/evaluations/requests-v2.32.5",
+    "snapshot_id": "snap_34b5c73e702277e8060a1f4885bddd584b982f4f6ebdfc6b43641ef6ab605f50"
+  },
+  "resources": {
+    "backend_process_peak_rss_bytes": 1451380736,
+    "backend_process_rss_after_bytes": 1109782528,
+    "backend_process_rss_before_bytes": 53174272,
+    "docker_containers_in_measurement": [
+      "codex-m26-falkordb"
+    ],
+    "docker_total_ram_bytes": 8400605184,
+    "falkordb_container_cpu_percent": "0.88%",
+    "falkordb_container_memory_usage": "109.7MiB / 2GiB",
+    "falkordb_container_memory_usage_post_optimization": "101MiB / 2GiB",
+    "docker_running_containers_total_ram_usage": "801.3MiB",
+    "docker_running_containers_ram_scope": "Read-only sum of all running Docker containers at measurement time; includes the existing wemakedevs-track1 persistent service and unrelated already-running containers. The isolated M26 FalkorDB container remained separately capped at 2GiB."
+  }
+}

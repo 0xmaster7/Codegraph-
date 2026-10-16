@@ -1,0 +1,310 @@
+{
+  "fixture_version": "ground-truth-v1",
+  "history": {
+    "expected_events": [
+      "initial",
+      "rename-delete",
+      "mainline",
+      "merge"
+    ],
+    "expected_commit_count": 4,
+    "renamed_from": "pkg/legacy.py",
+    "renamed_to": "pkg/current.py",
+    "deleted_path": "pkg/obsolete.py",
+    "shallow_clone_required": true,
+    "expected_commits": {
+      "initial": "5c2e8a9d692bf397d8ba7cd5c4d3b27a3a2eabcb",
+      "rename-delete": "f537816c0b0e88c3806c7e424af6123a01d8e75b",
+      "mainline": "090f7911b86b8ea1fb22afe3efa2d8bc73815fc0",
+      "merge": "8bfeaee906ce862b7063534b88e6083668195176"
+    }
+  },
+  "expected_dependencies": [
+    {"name": "setuptools", "source_file": "pyproject.toml", "optional_group": "build-system"},
+    {"name": "requests", "source_file": "pyproject.toml", "specifier": ">=2.31"},
+    {"name": "pytest", "source_file": "pyproject.toml", "optional_group": "test"},
+    {"name": "typing-extensions", "source_file": "pyproject.toml", "optional_group": "test"},
+    {"name": "Pillow", "source_file": "pyproject.toml", "optional_group": "images"},
+    {"name": "typing-extensions", "source_file": "requirements/base.txt", "marker": "python_version < \"3.11\""}
+  ],
+  "expected_definitions": [
+    "pkg.auth.verify_token",
+    "pkg.auth.dynamic_lookup",
+    "pkg.auth.conditional_value",
+    "pkg.checkout.make_checkout",
+    "pkg.checkout.Base.validate",
+    "pkg.checkout.StrictCheckout.validate",
+    "pkg.checkout.FastCheckout.validate",
+    "pkg.checkout.nested_factory.inner",
+    "pkg.checkout.callback",
+    "pkg.common.normalize",
+    "pkg.other.normalize",
+    "pkg.models.Overloaded.render",
+    "pkg.imports.load_optional",
+    "pkg.current.legacy_entry",
+    "pkg.base_dispatch.Grandparent.run",
+    "pkg.base_dispatch.Left.run",
+    "pkg.base_dispatch.Right.run",
+    "pkg.base_dispatch.Child"
+  ],
+  "expected_structural_definitions": [
+    "pkg.auth.dynamic_lookup",
+    "pkg.auth.verify_token",
+    "pkg.base_dispatch.Child",
+    "pkg.base_dispatch.ExternalChild",
+    "pkg.base_dispatch.Grandparent",
+    "pkg.base_dispatch.Grandparent.run",
+    "pkg.base_dispatch.Left",
+    "pkg.base_dispatch.Left.run",
+    "pkg.base_dispatch.Right",
+    "pkg.base_dispatch.Right.run",
+    "pkg.base_dispatch.dispatch",
+    "pkg.checkout.Base",
+    "pkg.checkout.Base.validate",
+    "pkg.checkout.FastCheckout",
+    "pkg.checkout.FastCheckout.validate",
+    "pkg.checkout.Registry",
+    "pkg.checkout.StrictCheckout",
+    "pkg.checkout.StrictCheckout.from_value",
+    "pkg.checkout.StrictCheckout.is_supported",
+    "pkg.checkout.StrictCheckout.label",
+    "pkg.checkout.StrictCheckout.validate",
+    "pkg.checkout.UnresolvedCheckout",
+    "pkg.checkout._is_nonempty",
+    "pkg.checkout.callback",
+    "pkg.checkout.make_checkout",
+    "pkg.checkout.nested_factory",
+    "pkg.checkout.nested_factory.inner",
+    "pkg.checkout.pass_callback",
+    "pkg.checkout.verify_and_normalize",
+    "pkg.common.normalize",
+    "pkg.image_support.image_module_available",
+    "pkg.imports.load_optional",
+    "pkg.imports.use_imports",
+    "pkg.legacy.legacy_entry",
+    "pkg.models.Overloaded",
+    "pkg.models.Overloaded.render",
+    "pkg.other.normalize",
+    "pkg.unvisited.never_called",
+    "tests.integration.test_flow.test_duplicate_basename_collects",
+    "tests.unit.test_flow.test_fixture_value",
+    "tests.unit.test_flow.test_imports_module_without_entering_unvisited",
+    "tests.unit.test_flow.test_monkeypatch_case",
+    "tests.unit.test_flow.test_multiple_inheritance_has_deterministic_c3_mro",
+    "tests.unit.test_flow.test_optional_subprocess_case",
+    "tests.unit.test_flow.test_threaded_callback",
+    "tests.unit.test_flow.test_verifies_token",
+    "tests.unit.test_flow.token"
+  ],
+  "expected_structural_sites": {
+    "pkg/__init__.py": {"IMPORT_REFERENCE": {"from .auth import verify_token": 1}},
+    "pkg/auth.py": {
+      "CALL_CALLEE": {"bool": 1, "getattr": 1, "getattr(target, name)": 1}
+    },
+    "pkg/base_dispatch.py": {
+      "BASE_CLASS_REFERENCE": {"Grandparent": 2, "Left": 1, "Right": 1},
+      "CALL_CALLEE": {"child.run": 1}
+    },
+    "pkg/checkout.py": {
+      "BASE_CLASS_REFERENCE": {"Base": 2, "UnknownExternalBase": 1},
+      "CALLBACK_REFERENCE": {"callback": 1},
+      "CALL_CALLEE": {
+        "StrictCheckout": 1,
+        "StrictCheckout().validate": 1,
+        "StrictCheckout.from_value": 2,
+        "bool": 6,
+        "check": 2,
+        "cls": 1,
+        "normalize": 1,
+        "super": 1,
+        "super().validate": 1,
+        "verify_token": 1
+      },
+      "DECORATOR_REFERENCE": {"classmethod": 1, "property": 1, "staticmethod": 1},
+      "IMPORT_REFERENCE": {
+        "from .auth import verify_token": 1,
+        "from .auth import verify_token as check": 1,
+        "from .common import normalize": 1,
+        "from external_dependency import UnknownExternalBase": 1
+      }
+    },
+    "pkg/common.py": {
+      "CALL_CALLEE": {"value.strip": 1, "value.strip().lower": 1}
+    },
+    "pkg/image_support.py": {"IMPORT_REFERENCE": {"from PIL import Image": 1}},
+    "pkg/imports.py": {
+      "CALL_CALLEE": {"common_alias.normalize": 1, "importlib.import_module": 1, "normalize": 1},
+      "IMPORT_REFERENCE": {
+        "from . import common as common_alias": 1,
+        "from .common import normalize": 1,
+        "from .models import Overloaded": 1,
+        "from .platform_posix import platform_name": 1,
+        "from .platform_win import platform_name": 1,
+        "from typing import TYPE_CHECKING": 1,
+        "import importlib": 1,
+        "import os": 1
+      }
+    },
+    "pkg/models.py": {
+      "DECORATOR_REFERENCE": {"overload": 2},
+      "IMPORT_REFERENCE": {"from typing import overload": 1}
+    },
+    "pkg/other.py": {
+      "CALL_CALLEE": {"value.strip": 1, "value.strip().upper": 1}
+    },
+    "pkg/reexports.py": {"IMPORT_REFERENCE": {"from .auth import verify_token": 1}},
+    "tests/unit/test_flow.py": {
+      "CALLBACK_REFERENCE": {"callback": 1},
+      "CALL_CALLEE": {
+        "ThreadPoolExecutor": 1,
+        "list": 1,
+        "monkeypatch.setattr": 1,
+        "pkg.auth.verify_token": 1,
+        "pool.map": 1,
+        "subprocess.run": 1,
+        "verify_token": 2
+      },
+      "DECORATOR_REFERENCE": {
+        "pytest.fixture": 1,
+        "pytest.mark.expected_partial": 1,
+        "pytest.mark.parametrize": 1
+      },
+      "IMPORT_REFERENCE": {
+        "from concurrent.futures import ThreadPoolExecutor": 1,
+        "from pkg.auth import verify_token": 1,
+        "from pkg.base_dispatch import Child": 1,
+        "from pkg.checkout import callback": 1,
+        "import pkg.auth": 1,
+        "import pkg.unvisited": 1,
+        "import pytest": 1,
+        "import subprocess": 1,
+        "import sys": 1
+      }
+    }
+  },
+  "expected_semantics": [
+    {
+      "id": "call.direct",
+      "path": "pkg/checkout.py",
+      "snippet": "verify_token(value)",
+      "target": "pkg.auth.verify_token",
+      "span": {
+        "start_byte": 700,
+        "end_byte": 719
+      }
+    },
+    {
+      "id": "call.aliased",
+      "path": "pkg/checkout.py",
+      "snippet": "check(value)",
+      "target": "pkg.auth.verify_token",
+      "span": {
+        "start_byte": 724,
+        "end_byte": 736
+      }
+    },
+    {
+      "id": "call.dynamic_getattr",
+      "path": "pkg/auth.py",
+      "snippet": "getattr(target, name)()",
+      "target": null,
+      "reason": "dynamic attribute lookup",
+      "span": {
+        "start_byte": 121,
+        "end_byte": 144
+      }
+    },
+    {
+      "id": "dispatch.child",
+      "path": "pkg/base_dispatch.py",
+      "snippet": "child.run()",
+      "target": "pkg.base_dispatch.Left.run",
+      "candidates": [
+        "pkg.base_dispatch.Left.run"
+      ],
+      "mro": [
+        "Child",
+        "Left",
+        "Right",
+        "Grandparent",
+        "object"
+      ],
+      "span": {
+        "start_byte": 419,
+        "end_byte": 430
+      }
+    },
+    {
+      "id": "unicode.reference",
+      "path": "pkg/checkout.py",
+      "snippet": "check(value)",
+      "preceding_text": "🚀 café λ",
+      "span": {
+        "start_byte": 724,
+        "end_byte": 736
+      }
+    }
+  ],
+  "unicode_samples": [
+    {
+      "path": "pkg/checkout.py",
+      "text": "🚀 café λ"
+    }
+  ],
+  "required_cases": [
+    "top_level_function",
+    "nested_function",
+    "lambda",
+    "class",
+    "method",
+    "property",
+    "staticmethod",
+    "classmethod",
+    "same_name_two_modules",
+    "overload",
+    "conditional_redefinition",
+    "plain_import",
+    "from_import",
+    "alias",
+    "relative_import",
+    "re_export",
+    "type_checking_import",
+    "conditional_import",
+    "dynamic_import",
+    "direct_call",
+    "aliased_call",
+    "method_call",
+    "constructor_call",
+    "callback_value",
+    "module_level_call",
+    "class_body_call",
+    "dynamic_getattr",
+    "monkeypatch",
+    "decorator_reference",
+    "simple_inheritance",
+    "override",
+    "two_overrides",
+    "multiple_inheritance_mro",
+    "external_base",
+    "emoji",
+    "accented_text",
+    "unicode_identifier",
+    "pytest_function",
+    "parametrized_test",
+    "pytest_fixture",
+    "duplicate_test_basename",
+    "import_without_call",
+    "threaded_call",
+    "optional_subprocess_expected_partial",
+    "multiple_commits",
+    "rename",
+    "deletion",
+    "merge_commit",
+    "mailmap",
+    "shallow_clone",
+    "pyproject_dependencies",
+    "requirements_include",
+    "extras_and_markers",
+    "distribution_import_name_mismatch"
+  ]
+}

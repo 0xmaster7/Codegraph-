@@ -1,0 +1,18 @@
+services:
+  falkordb:
+    image: falkordb/falkordb@sha256:e2765e207e5ba4ee90e47ed31eb7491ad6dd3d42241c326e429375c02ad9882f
+    restart: unless-stopped
+    volumes:
+      - falkordb-data:/var/lib/falkordb/data
+    # Bind to loopback for local development. The database is not exposed to LAN.
+    ports:
+      - "127.0.0.1:6379:6379"
+      - "127.0.0.1:3000:3000"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  falkordb-data:

@@ -1,0 +1,138 @@
+{
+  "dataset_id": "query-operations-post-m20-v1",
+  "description": "Independent operation and typed-argument evaluation. Expected values are authored separately from the production planner.",
+  "cases": [
+    {
+      "id": "callers-of-target",
+      "category": "callers",
+      "question": "Who calls `callee`?",
+      "expected_routes": ["GRAPH"],
+      "expected_calls": [{"tool": "find_callers", "target_id": "callee"}],
+      "forbidden_tools": ["find_callees"]
+    },
+    {
+      "id": "callees-of-context",
+      "category": "callees",
+      "question": "What does `caller` call?",
+      "expected_routes": ["GRAPH"],
+      "expected_calls": [
+        {"tool": "find_call_sites", "entity_id": "caller"},
+        {"tool": "find_callees", "site_id": "call-known"}
+      ]
+    },
+    {
+      "id": "call-sites-in-context",
+      "category": "call_sites",
+      "question": "Which call sites are in `caller`?",
+      "expected_routes": ["GRAPH"],
+      "expected_calls": [{"tool": "find_call_sites", "entity_id": "caller"}]
+    },
+    {
+      "id": "definition-lookup",
+      "category": "definitions",
+      "question": "Find the definition of `caller`.",
+      "expected_routes": ["EXACT"],
+      "expected_calls": [{"tool": "resolve_symbol", "query": "caller"}],
+      "forbidden_tools": ["find_callers", "find_callees", "find_paths"]
+    },
+    {
+      "id": "importers-of-module",
+      "category": "imports",
+      "question": "Who imports `mod-b`?",
+      "expected_routes": ["GRAPH"],
+      "expected_calls": [{"tool": "find_importers", "target_id": "mod-b"}]
+    },
+    {
+      "id": "inheritance-for-base",
+      "category": "inheritance",
+      "question": "Show inheritance for `base`.",
+      "expected_routes": ["GRAPH"],
+      "expected_calls": [{"tool": "find_inheritance", "entity_id": "base"}]
+    },
+    {
+      "id": "overrides-of-method",
+      "category": "overrides",
+      "question": "Show overrides for `base-run`.",
+      "expected_routes": ["GRAPH"],
+      "expected_calls": [{"tool": "find_overrides", "entity_id": "base-run"}]
+    },
+    {
+      "id": "dispatch-for-selected-site",
+      "category": "dispatch",
+      "question": "Which dispatch candidates belong to this call site?",
+      "selected_site_id": "call-known",
+      "expected_routes": ["GRAPH"],
+      "expected_calls": [{"tool": "find_dispatch_candidates", "site_id": "call-known"}],
+      "expected_mode": "CONSERVATIVE_DISPATCH"
+    },
+    {
+      "id": "strict-static-path",
+      "category": "paths",
+      "question": "Find paths from `caller` to `callee`.",
+      "expected_routes": ["GRAPH"],
+      "expected_calls": [{"tool": "find_paths", "source_id": "caller", "destination_id": "callee"}],
+      "expected_mode": "STRICT_STATIC_BINDING"
+    },
+    {
+      "id": "conservative-dispatch-path",
+      "category": "dispatch_paths",
+      "question": "Could `caller` possibly reach `derived-run` through dispatch?",
+      "expected_routes": ["GRAPH"],
+      "expected_calls": [{"tool": "find_paths", "source_id": "caller", "destination_id": "derived-run"}],
+      "expected_mode": "CONSERVATIVE_DISPATCH"
+    },
+    {
+      "id": "runtime-test-selection",
+      "category": "runtime_tests",
+      "question": "Which tests observed `caller`?",
+      "expected_routes": ["RUNTIME"],
+      "expected_calls": [{"tool": "find_observed_tests", "entity_ids": ["caller"]}]
+    },
+    {
+      "id": "retrieval-only",
+      "category": "retrieval",
+      "question": "How does authorization work?",
+      "expected_routes": ["FULL_TEXT", "VECTOR"],
+      "expected_calls": [
+        {"tool": "search_code_text", "query": "How does authorization work?"},
+        {"tool": "search_semantic_chunks", "query": "How does authorization work?"}
+      ],
+      "forbidden_tools": ["find_callers", "find_callees", "find_paths", "find_importers"]
+    },
+    {
+      "id": "selected-exact-site",
+      "category": "selected_site_followup",
+      "question": "What target does this call site reach?",
+      "selected_site_id": "call-known",
+      "expected_routes": ["GRAPH"],
+      "expected_calls": [{"tool": "find_callees", "site_id": "call-known"}],
+      "forbidden_tools": ["find_call_sites"]
+    },
+    {
+      "id": "selected-unresolved-site",
+      "category": "selected_site_followup",
+      "question": "What target does this call site reach?",
+      "selected_site_id": "call-unknown",
+      "expected_routes": ["GRAPH"],
+      "expected_calls": [{"tool": "find_callees", "site_id": "call-unknown"}],
+      "forbidden_tools": ["find_call_sites"]
+    },
+    {
+      "id": "unknown-selected-site",
+      "category": "negative_selected_site",
+      "question": "What target does this call site reach?",
+      "selected_site_id": "site-from-another-snapshot",
+      "expected_routes": ["GRAPH"],
+      "expected_calls": [],
+      "forbidden_tools": ["find_call_sites", "find_callees"]
+    },
+    {
+      "id": "out-of-scope-negative",
+      "category": "negative",
+      "question": "What is the weather today?",
+      "expected_routes": ["FULL_TEXT", "VECTOR"],
+      "expected_calls": [],
+      "forbidden_tools": ["find_callers", "find_callees", "find_paths", "find_importers", "find_inheritance", "find_overrides", "find_dispatch_candidates", "find_observed_tests"]
+    }
+  ]
+}

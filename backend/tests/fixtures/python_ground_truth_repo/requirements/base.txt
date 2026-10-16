@@ -1,0 +1,2 @@
+# Included by requirements.txt to exercise recursive requirement metadata.
+typing-extensions>=4.8; python_version < "3.11"

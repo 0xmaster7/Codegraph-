@@ -1,0 +1,11 @@
+{
+  "cost_scope": "External service usage only; electricity, local hardware depreciation, and human annotation time are not monetized.",
+  "evaluation": "M25 measured evaluation cost",
+  "hosted_api_calls": 0,
+  "hosted_benchmark": "not run; no hosted data transmission authorized for M25",
+  "hosted_cost_usd": 0.0,
+  "hosted_provider_used": false,
+  "hosted_tokens": 0,
+  "local_embedding_provider": "sentence-transformers/all-MiniLM-L6-v2",
+  "local_provider_reported_external_cost_usd": 0.0
+}

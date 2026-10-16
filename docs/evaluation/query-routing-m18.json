@@ -1,0 +1,1506 @@
+{
+  "dataset_id": "query-routing-m18-v1",
+  "description": "Frozen deterministic M18 routing set. Mandatory routes are expected to be retained after rule analysis and safe proposal merging.",
+  "examples": [
+    {
+      "intent": "exact_identifier",
+      "question": "Resolve the exact symbol `verify_token`.",
+      "mandatory_routes": [
+        "EXACT"
+      ]
+    },
+    {
+      "intent": "exact_identifier",
+      "question": "Find the definition of `verify_token`.",
+      "mandatory_routes": [
+        "EXACT"
+      ]
+    },
+    {
+      "intent": "exact_identifier",
+      "question": "Look up function `verify_token`.",
+      "mandatory_routes": [
+        "EXACT"
+      ]
+    },
+    {
+      "intent": "exact_identifier",
+      "question": "Resolve the exact symbol `parse_request`.",
+      "mandatory_routes": [
+        "EXACT"
+      ]
+    },
+    {
+      "intent": "exact_identifier",
+      "question": "Find the definition of `parse_request`.",
+      "mandatory_routes": [
+        "EXACT"
+      ]
+    },
+    {
+      "intent": "exact_identifier",
+      "question": "Look up function `parse_request`.",
+      "mandatory_routes": [
+        "EXACT"
+      ]
+    },
+    {
+      "intent": "exact_identifier",
+      "question": "Resolve the exact symbol `load_config`.",
+      "mandatory_routes": [
+        "EXACT"
+      ]
+    },
+    {
+      "intent": "exact_identifier",
+      "question": "Find the definition of `load_config`.",
+      "mandatory_routes": [
+        "EXACT"
+      ]
+    },
+    {
+      "intent": "exact_identifier",
+      "question": "Look up function `load_config`.",
+      "mandatory_routes": [
+        "EXACT"
+      ]
+    },
+    {
+      "intent": "exact_identifier",
+      "question": "Resolve the exact symbol `validate_user`.",
+      "mandatory_routes": [
+        "EXACT"
+      ]
+    },
+    {
+      "intent": "exact_identifier",
+      "question": "Find the definition of `validate_user`.",
+      "mandatory_routes": [
+        "EXACT"
+      ]
+    },
+    {
+      "intent": "exact_identifier",
+      "question": "Look up function `validate_user`.",
+      "mandatory_routes": [
+        "EXACT"
+      ]
+    },
+    {
+      "intent": "exact_identifier",
+      "question": "Resolve the exact symbol `build_index`.",
+      "mandatory_routes": [
+        "EXACT"
+      ]
+    },
+    {
+      "intent": "exact_identifier",
+      "question": "Find the definition of `build_index`.",
+      "mandatory_routes": [
+        "EXACT"
+      ]
+    },
+    {
+      "intent": "exact_identifier",
+      "question": "Look up function `build_index`.",
+      "mandatory_routes": [
+        "EXACT"
+      ]
+    },
+    {
+      "intent": "caller",
+      "question": "Who are the callers of `verify_token`?",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "caller",
+      "question": "Which functions call `verify_token`?",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "caller",
+      "question": "Show caller relationships for `verify_token`.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "caller",
+      "question": "Who are the callers of `parse_request`?",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "caller",
+      "question": "Which functions call `parse_request`?",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "caller",
+      "question": "Show caller relationships for `parse_request`.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "caller",
+      "question": "Who are the callers of `load_config`?",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "caller",
+      "question": "Which functions call `load_config`?",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "caller",
+      "question": "Show caller relationships for `load_config`.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "caller",
+      "question": "Who are the callers of `validate_user`?",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "caller",
+      "question": "Which functions call `validate_user`?",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "caller",
+      "question": "Show caller relationships for `validate_user`.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "caller",
+      "question": "Who are the callers of `build_index`?",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "caller",
+      "question": "Which functions call `build_index`?",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "caller",
+      "question": "Show caller relationships for `build_index`.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "reference",
+      "question": "Find references to `verify_token`.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "reference",
+      "question": "Which source sites reference `verify_token`?",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "reference",
+      "question": "Show exact references for symbol `verify_token`.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "reference",
+      "question": "Find references to `parse_request`.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "reference",
+      "question": "Which source sites reference `parse_request`?",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "reference",
+      "question": "Show exact references for symbol `parse_request`.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "reference",
+      "question": "Find references to `load_config`.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "reference",
+      "question": "Which source sites reference `load_config`?",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "reference",
+      "question": "Show exact references for symbol `load_config`.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "reference",
+      "question": "Find references to `validate_user`.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "reference",
+      "question": "Which source sites reference `validate_user`?",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "reference",
+      "question": "Show exact references for symbol `validate_user`.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "reference",
+      "question": "Find references to `build_index`.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "reference",
+      "question": "Which source sites reference `build_index`?",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "reference",
+      "question": "Show exact references for symbol `build_index`.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "inheritance",
+      "question": "Show subclasses of `AuthBase`.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "inheritance",
+      "question": "Find inheritance relationships for class `AuthBase`.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "inheritance",
+      "question": "Which classes inherit from `AuthBase`?",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "inheritance",
+      "question": "Show subclasses of `RequestBase`.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "inheritance",
+      "question": "Find inheritance relationships for class `RequestBase`.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "inheritance",
+      "question": "Which classes inherit from `RequestBase`?",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "inheritance",
+      "question": "Show subclasses of `ConfigBase`.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "inheritance",
+      "question": "Find inheritance relationships for class `ConfigBase`.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "inheritance",
+      "question": "Which classes inherit from `ConfigBase`?",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "inheritance",
+      "question": "Show subclasses of `UserBase`.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "inheritance",
+      "question": "Find inheritance relationships for class `UserBase`.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "inheritance",
+      "question": "Which classes inherit from `UserBase`?",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "inheritance",
+      "question": "Show subclasses of `IndexBase`.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "inheritance",
+      "question": "Find inheritance relationships for class `IndexBase`.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "inheritance",
+      "question": "Which classes inherit from `IndexBase`?",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "impact",
+      "question": "What could be affected by `verify_token`?",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "impact",
+      "question": "Find the impact of changing `verify_token`.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "impact",
+      "question": "What depends on `verify_token` within 3 hops?",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "impact",
+      "question": "What could be affected by `parse_request`?",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "impact",
+      "question": "Find the impact of changing `parse_request`.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "impact",
+      "question": "What depends on `parse_request` within 3 hops?",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "impact",
+      "question": "What could be affected by `load_config`?",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "impact",
+      "question": "Find the impact of changing `load_config`.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "impact",
+      "question": "What depends on `load_config` within 3 hops?",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "impact",
+      "question": "What could be affected by `validate_user`?",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "impact",
+      "question": "Find the impact of changing `validate_user`.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "impact",
+      "question": "What depends on `validate_user` within 3 hops?",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "impact",
+      "question": "What could be affected by `build_index`?",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "impact",
+      "question": "Find the impact of changing `build_index`.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "impact",
+      "question": "What depends on `build_index` within 3 hops?",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ]
+    },
+    {
+      "intent": "semantic",
+      "question": "How does request authorization work?",
+      "mandatory_routes": [
+        "FULL_TEXT",
+        "VECTOR"
+      ]
+    },
+    {
+      "intent": "semantic",
+      "question": "Explain request authorization conceptually.",
+      "mandatory_routes": [
+        "FULL_TEXT",
+        "VECTOR"
+      ]
+    },
+    {
+      "intent": "semantic",
+      "question": "Give an overview of request authorization.",
+      "mandatory_routes": [
+        "FULL_TEXT",
+        "VECTOR"
+      ]
+    },
+    {
+      "intent": "semantic",
+      "question": "How does token refresh work?",
+      "mandatory_routes": [
+        "FULL_TEXT",
+        "VECTOR"
+      ]
+    },
+    {
+      "intent": "semantic",
+      "question": "Explain token refresh conceptually.",
+      "mandatory_routes": [
+        "FULL_TEXT",
+        "VECTOR"
+      ]
+    },
+    {
+      "intent": "semantic",
+      "question": "Give an overview of token refresh.",
+      "mandatory_routes": [
+        "FULL_TEXT",
+        "VECTOR"
+      ]
+    },
+    {
+      "intent": "semantic",
+      "question": "How does configuration loading work?",
+      "mandatory_routes": [
+        "FULL_TEXT",
+        "VECTOR"
+      ]
+    },
+    {
+      "intent": "semantic",
+      "question": "Explain configuration loading conceptually.",
+      "mandatory_routes": [
+        "FULL_TEXT",
+        "VECTOR"
+      ]
+    },
+    {
+      "intent": "semantic",
+      "question": "Give an overview of configuration loading.",
+      "mandatory_routes": [
+        "FULL_TEXT",
+        "VECTOR"
+      ]
+    },
+    {
+      "intent": "semantic",
+      "question": "How does user validation work?",
+      "mandatory_routes": [
+        "FULL_TEXT",
+        "VECTOR"
+      ]
+    },
+    {
+      "intent": "semantic",
+      "question": "Explain user validation conceptually.",
+      "mandatory_routes": [
+        "FULL_TEXT",
+        "VECTOR"
+      ]
+    },
+    {
+      "intent": "semantic",
+      "question": "Give an overview of user validation.",
+      "mandatory_routes": [
+        "FULL_TEXT",
+        "VECTOR"
+      ]
+    },
+    {
+      "intent": "semantic",
+      "question": "How does index construction work?",
+      "mandatory_routes": [
+        "FULL_TEXT",
+        "VECTOR"
+      ]
+    },
+    {
+      "intent": "semantic",
+      "question": "Explain index construction conceptually.",
+      "mandatory_routes": [
+        "FULL_TEXT",
+        "VECTOR"
+      ]
+    },
+    {
+      "intent": "semantic",
+      "question": "Give an overview of index construction.",
+      "mandatory_routes": [
+        "FULL_TEXT",
+        "VECTOR"
+      ]
+    },
+    {
+      "intent": "hybrid",
+      "question": "How does `verify_token` relate conceptually to request authorization?",
+      "mandatory_routes": [
+        "EXACT",
+        "FULL_TEXT",
+        "VECTOR"
+      ]
+    },
+    {
+      "intent": "hybrid",
+      "question": "Explain how `verify_token` connects to token refresh.",
+      "mandatory_routes": [
+        "EXACT",
+        "FULL_TEXT",
+        "VECTOR"
+      ]
+    },
+    {
+      "intent": "hybrid",
+      "question": "What is the conceptual role of `verify_token` in configuration loading?",
+      "mandatory_routes": [
+        "EXACT",
+        "FULL_TEXT",
+        "VECTOR"
+      ]
+    },
+    {
+      "intent": "hybrid",
+      "question": "How does `parse_request` relate conceptually to request authorization?",
+      "mandatory_routes": [
+        "EXACT",
+        "FULL_TEXT",
+        "VECTOR"
+      ]
+    },
+    {
+      "intent": "hybrid",
+      "question": "Explain how `parse_request` connects to token refresh.",
+      "mandatory_routes": [
+        "EXACT",
+        "FULL_TEXT",
+        "VECTOR"
+      ]
+    },
+    {
+      "intent": "hybrid",
+      "question": "What is the conceptual role of `parse_request` in configuration loading?",
+      "mandatory_routes": [
+        "EXACT",
+        "FULL_TEXT",
+        "VECTOR"
+      ]
+    },
+    {
+      "intent": "hybrid",
+      "question": "How does `load_config` relate conceptually to request authorization?",
+      "mandatory_routes": [
+        "EXACT",
+        "FULL_TEXT",
+        "VECTOR"
+      ]
+    },
+    {
+      "intent": "hybrid",
+      "question": "Explain how `load_config` connects to token refresh.",
+      "mandatory_routes": [
+        "EXACT",
+        "FULL_TEXT",
+        "VECTOR"
+      ]
+    },
+    {
+      "intent": "hybrid",
+      "question": "What is the conceptual role of `load_config` in configuration loading?",
+      "mandatory_routes": [
+        "EXACT",
+        "FULL_TEXT",
+        "VECTOR"
+      ]
+    },
+    {
+      "intent": "hybrid",
+      "question": "How does `validate_user` relate conceptually to request authorization?",
+      "mandatory_routes": [
+        "EXACT",
+        "FULL_TEXT",
+        "VECTOR"
+      ]
+    },
+    {
+      "intent": "hybrid",
+      "question": "Explain how `validate_user` connects to token refresh.",
+      "mandatory_routes": [
+        "EXACT",
+        "FULL_TEXT",
+        "VECTOR"
+      ]
+    },
+    {
+      "intent": "hybrid",
+      "question": "What is the conceptual role of `validate_user` in configuration loading?",
+      "mandatory_routes": [
+        "EXACT",
+        "FULL_TEXT",
+        "VECTOR"
+      ]
+    },
+    {
+      "intent": "hybrid",
+      "question": "How does `build_index` relate conceptually to request authorization?",
+      "mandatory_routes": [
+        "EXACT",
+        "FULL_TEXT",
+        "VECTOR"
+      ]
+    },
+    {
+      "intent": "hybrid",
+      "question": "Explain how `build_index` connects to token refresh.",
+      "mandatory_routes": [
+        "EXACT",
+        "FULL_TEXT",
+        "VECTOR"
+      ]
+    },
+    {
+      "intent": "hybrid",
+      "question": "What is the conceptual role of `build_index` in configuration loading?",
+      "mandatory_routes": [
+        "EXACT",
+        "FULL_TEXT",
+        "VECTOR"
+      ]
+    },
+    {
+      "intent": "git",
+      "question": "Which paths changed in commit `abcdef0123456789`?",
+      "mandatory_routes": [
+        "GIT"
+      ]
+    },
+    {
+      "intent": "git",
+      "question": "Show the changed files for commit `abcdef0123456789`.",
+      "mandatory_routes": [
+        "GIT"
+      ]
+    },
+    {
+      "intent": "git",
+      "question": "What files were modified by commit `abcdef0123456789`?",
+      "mandatory_routes": [
+        "GIT"
+      ]
+    },
+    {
+      "intent": "git",
+      "question": "Which paths changed in commit `0123456789abcdef`?",
+      "mandatory_routes": [
+        "GIT"
+      ]
+    },
+    {
+      "intent": "git",
+      "question": "Show the changed files for commit `0123456789abcdef`.",
+      "mandatory_routes": [
+        "GIT"
+      ]
+    },
+    {
+      "intent": "git",
+      "question": "What files were modified by commit `0123456789abcdef`?",
+      "mandatory_routes": [
+        "GIT"
+      ]
+    },
+    {
+      "intent": "git",
+      "question": "Which paths changed in commit `fedcba9876543210`?",
+      "mandatory_routes": [
+        "GIT"
+      ]
+    },
+    {
+      "intent": "git",
+      "question": "Show the changed files for commit `fedcba9876543210`.",
+      "mandatory_routes": [
+        "GIT"
+      ]
+    },
+    {
+      "intent": "git",
+      "question": "What files were modified by commit `fedcba9876543210`?",
+      "mandatory_routes": [
+        "GIT"
+      ]
+    },
+    {
+      "intent": "git",
+      "question": "Which paths changed in commit `1234567890abcdef`?",
+      "mandatory_routes": [
+        "GIT"
+      ]
+    },
+    {
+      "intent": "git",
+      "question": "Show the changed files for commit `1234567890abcdef`.",
+      "mandatory_routes": [
+        "GIT"
+      ]
+    },
+    {
+      "intent": "git",
+      "question": "What files were modified by commit `1234567890abcdef`?",
+      "mandatory_routes": [
+        "GIT"
+      ]
+    },
+    {
+      "intent": "git",
+      "question": "Which paths changed in commit `a1b2c3d4e5f67890`?",
+      "mandatory_routes": [
+        "GIT"
+      ]
+    },
+    {
+      "intent": "git",
+      "question": "Show the changed files for commit `a1b2c3d4e5f67890`.",
+      "mandatory_routes": [
+        "GIT"
+      ]
+    },
+    {
+      "intent": "git",
+      "question": "What files were modified by commit `a1b2c3d4e5f67890`?",
+      "mandatory_routes": [
+        "GIT"
+      ]
+    },
+    {
+      "intent": "runtime_test",
+      "question": "Which tests observed `verify_token`?",
+      "mandatory_routes": [
+        "EXACT",
+        "RUNTIME"
+      ]
+    },
+    {
+      "intent": "runtime_test",
+      "question": "What tests have executed symbol `verify_token`?",
+      "mandatory_routes": [
+        "EXACT",
+        "RUNTIME"
+      ]
+    },
+    {
+      "intent": "runtime_test",
+      "question": "Find runtime observations for `verify_token`.",
+      "mandatory_routes": [
+        "EXACT",
+        "RUNTIME"
+      ]
+    },
+    {
+      "intent": "runtime_test",
+      "question": "Which tests observed `parse_request`?",
+      "mandatory_routes": [
+        "EXACT",
+        "RUNTIME"
+      ]
+    },
+    {
+      "intent": "runtime_test",
+      "question": "What tests have executed symbol `parse_request`?",
+      "mandatory_routes": [
+        "EXACT",
+        "RUNTIME"
+      ]
+    },
+    {
+      "intent": "runtime_test",
+      "question": "Find runtime observations for `parse_request`.",
+      "mandatory_routes": [
+        "EXACT",
+        "RUNTIME"
+      ]
+    },
+    {
+      "intent": "runtime_test",
+      "question": "Which tests observed `load_config`?",
+      "mandatory_routes": [
+        "EXACT",
+        "RUNTIME"
+      ]
+    },
+    {
+      "intent": "runtime_test",
+      "question": "What tests have executed symbol `load_config`?",
+      "mandatory_routes": [
+        "EXACT",
+        "RUNTIME"
+      ]
+    },
+    {
+      "intent": "runtime_test",
+      "question": "Find runtime observations for `load_config`.",
+      "mandatory_routes": [
+        "EXACT",
+        "RUNTIME"
+      ]
+    },
+    {
+      "intent": "runtime_test",
+      "question": "Which tests observed `validate_user`?",
+      "mandatory_routes": [
+        "EXACT",
+        "RUNTIME"
+      ]
+    },
+    {
+      "intent": "runtime_test",
+      "question": "What tests have executed symbol `validate_user`?",
+      "mandatory_routes": [
+        "EXACT",
+        "RUNTIME"
+      ]
+    },
+    {
+      "intent": "runtime_test",
+      "question": "Find runtime observations for `validate_user`.",
+      "mandatory_routes": [
+        "EXACT",
+        "RUNTIME"
+      ]
+    },
+    {
+      "intent": "runtime_test",
+      "question": "Which tests observed `build_index`?",
+      "mandatory_routes": [
+        "EXACT",
+        "RUNTIME"
+      ]
+    },
+    {
+      "intent": "runtime_test",
+      "question": "What tests have executed symbol `build_index`?",
+      "mandatory_routes": [
+        "EXACT",
+        "RUNTIME"
+      ]
+    },
+    {
+      "intent": "runtime_test",
+      "question": "Find runtime observations for `build_index`.",
+      "mandatory_routes": [
+        "EXACT",
+        "RUNTIME"
+      ]
+    },
+    {
+      "intent": "diff",
+      "question": "Show the diff for commit `abcdef0123456789`.",
+      "mandatory_routes": [
+        "GIT"
+      ]
+    },
+    {
+      "intent": "diff",
+      "question": "Which paths were changed by `abcdef0123456789`?",
+      "mandatory_routes": [
+        "GIT"
+      ]
+    },
+    {
+      "intent": "diff",
+      "question": "Summarize files touched in commit `abcdef0123456789`.",
+      "mandatory_routes": [
+        "GIT"
+      ]
+    },
+    {
+      "intent": "diff",
+      "question": "Show the diff for commit `0123456789abcdef`.",
+      "mandatory_routes": [
+        "GIT"
+      ]
+    },
+    {
+      "intent": "diff",
+      "question": "Which paths were changed by `0123456789abcdef`?",
+      "mandatory_routes": [
+        "GIT"
+      ]
+    },
+    {
+      "intent": "diff",
+      "question": "Summarize files touched in commit `0123456789abcdef`.",
+      "mandatory_routes": [
+        "GIT"
+      ]
+    },
+    {
+      "intent": "diff",
+      "question": "Show the diff for commit `fedcba9876543210`.",
+      "mandatory_routes": [
+        "GIT"
+      ]
+    },
+    {
+      "intent": "diff",
+      "question": "Which paths were changed by `fedcba9876543210`?",
+      "mandatory_routes": [
+        "GIT"
+      ]
+    },
+    {
+      "intent": "diff",
+      "question": "Summarize files touched in commit `fedcba9876543210`.",
+      "mandatory_routes": [
+        "GIT"
+      ]
+    },
+    {
+      "intent": "diff",
+      "question": "Show the diff for commit `1234567890abcdef`.",
+      "mandatory_routes": [
+        "GIT"
+      ]
+    },
+    {
+      "intent": "diff",
+      "question": "Which paths were changed by `1234567890abcdef`?",
+      "mandatory_routes": [
+        "GIT"
+      ]
+    },
+    {
+      "intent": "diff",
+      "question": "Summarize files touched in commit `1234567890abcdef`.",
+      "mandatory_routes": [
+        "GIT"
+      ]
+    },
+    {
+      "intent": "diff",
+      "question": "Show the diff for commit `a1b2c3d4e5f67890`.",
+      "mandatory_routes": [
+        "GIT"
+      ]
+    },
+    {
+      "intent": "diff",
+      "question": "Which paths were changed by `a1b2c3d4e5f67890`?",
+      "mandatory_routes": [
+        "GIT"
+      ]
+    },
+    {
+      "intent": "diff",
+      "question": "Summarize files touched in commit `a1b2c3d4e5f67890`.",
+      "mandatory_routes": [
+        "GIT"
+      ]
+    },
+    {
+      "intent": "selected_node_followup",
+      "question": "Why does this call fail to resolve?",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ],
+      "selected_node_id": "node_auth_1"
+    },
+    {
+      "intent": "selected_node_followup",
+      "question": "Explain this selected node's references.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ],
+      "selected_node_id": "node_auth_1"
+    },
+    {
+      "intent": "selected_node_followup",
+      "question": "Show callers of the selected symbol.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ],
+      "selected_node_id": "node_auth_1"
+    },
+    {
+      "intent": "selected_node_followup",
+      "question": "Why does this call fail to resolve?",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ],
+      "selected_node_id": "node_parse_2"
+    },
+    {
+      "intent": "selected_node_followup",
+      "question": "Explain this selected node's references.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ],
+      "selected_node_id": "node_parse_2"
+    },
+    {
+      "intent": "selected_node_followup",
+      "question": "Show callers of the selected symbol.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ],
+      "selected_node_id": "node_parse_2"
+    },
+    {
+      "intent": "selected_node_followup",
+      "question": "Why does this call fail to resolve?",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ],
+      "selected_node_id": "node_config_3"
+    },
+    {
+      "intent": "selected_node_followup",
+      "question": "Explain this selected node's references.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ],
+      "selected_node_id": "node_config_3"
+    },
+    {
+      "intent": "selected_node_followup",
+      "question": "Show callers of the selected symbol.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ],
+      "selected_node_id": "node_config_3"
+    },
+    {
+      "intent": "selected_node_followup",
+      "question": "Why does this call fail to resolve?",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ],
+      "selected_node_id": "node_user_4"
+    },
+    {
+      "intent": "selected_node_followup",
+      "question": "Explain this selected node's references.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ],
+      "selected_node_id": "node_user_4"
+    },
+    {
+      "intent": "selected_node_followup",
+      "question": "Show callers of the selected symbol.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ],
+      "selected_node_id": "node_user_4"
+    },
+    {
+      "intent": "selected_node_followup",
+      "question": "Why does this call fail to resolve?",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ],
+      "selected_node_id": "node_index_5"
+    },
+    {
+      "intent": "selected_node_followup",
+      "question": "Explain this selected node's references.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ],
+      "selected_node_id": "node_index_5"
+    },
+    {
+      "intent": "selected_node_followup",
+      "question": "Show callers of the selected symbol.",
+      "mandatory_routes": [
+        "EXACT",
+        "GRAPH"
+      ],
+      "selected_node_id": "node_index_5"
+    },
+    {
+      "intent": "selected_site_followup",
+      "question": "Why does this selected call fail to resolve?",
+      "mandatory_routes": [
+        "GRAPH"
+      ],
+      "selected_site_id": "site_call_1"
+    },
+    {
+      "intent": "selected_site_followup",
+      "question": "Explain the selected call site.",
+      "mandatory_routes": [
+        "GRAPH"
+      ],
+      "selected_site_id": "site_call_1"
+    },
+    {
+      "intent": "selected_site_followup",
+      "question": "Show the target of this call.",
+      "mandatory_routes": [
+        "GRAPH"
+      ],
+      "selected_site_id": "site_call_1"
+    },
+    {
+      "intent": "selected_site_followup",
+      "question": "Why does this selected call fail to resolve?",
+      "mandatory_routes": [
+        "GRAPH"
+      ],
+      "selected_site_id": "site_call_2"
+    },
+    {
+      "intent": "selected_site_followup",
+      "question": "Explain the selected call site.",
+      "mandatory_routes": [
+        "GRAPH"
+      ],
+      "selected_site_id": "site_call_2"
+    },
+    {
+      "intent": "selected_site_followup",
+      "question": "Show the target of this call.",
+      "mandatory_routes": [
+        "GRAPH"
+      ],
+      "selected_site_id": "site_call_2"
+    },
+    {
+      "intent": "selected_site_followup",
+      "question": "Why does this selected call fail to resolve?",
+      "mandatory_routes": [
+        "GRAPH"
+      ],
+      "selected_site_id": "site_call_3"
+    },
+    {
+      "intent": "selected_site_followup",
+      "question": "Explain the selected call site.",
+      "mandatory_routes": [
+        "GRAPH"
+      ],
+      "selected_site_id": "site_call_3"
+    },
+    {
+      "intent": "selected_site_followup",
+      "question": "Show the target of this call.",
+      "mandatory_routes": [
+        "GRAPH"
+      ],
+      "selected_site_id": "site_call_3"
+    },
+    {
+      "intent": "selected_site_followup",
+      "question": "Why does this selected call fail to resolve?",
+      "mandatory_routes": [
+        "GRAPH"
+      ],
+      "selected_site_id": "site_call_4"
+    },
+    {
+      "intent": "selected_site_followup",
+      "question": "Explain the selected call site.",
+      "mandatory_routes": [
+        "GRAPH"
+      ],
+      "selected_site_id": "site_call_4"
+    },
+    {
+      "intent": "selected_site_followup",
+      "question": "Show the target of this call.",
+      "mandatory_routes": [
+        "GRAPH"
+      ],
+      "selected_site_id": "site_call_4"
+    },
+    {
+      "intent": "selected_site_followup",
+      "question": "Why does this selected call fail to resolve?",
+      "mandatory_routes": [
+        "GRAPH"
+      ],
+      "selected_site_id": "site_call_5"
+    },
+    {
+      "intent": "selected_site_followup",
+      "question": "Explain the selected call site.",
+      "mandatory_routes": [
+        "GRAPH"
+      ],
+      "selected_site_id": "site_call_5"
+    },
+    {
+      "intent": "selected_site_followup",
+      "question": "Show the target of this call.",
+      "mandatory_routes": [
+        "GRAPH"
+      ],
+      "selected_site_id": "site_call_5"
+    },
+    {
+      "intent": "irrelevant_out_of_scope",
+      "question": "Tell me an unrelated joke about coffee.",
+      "mandatory_routes": []
+    },
+    {
+      "intent": "irrelevant_out_of_scope",
+      "question": "Should I choose coffee for lunch?",
+      "mandatory_routes": []
+    },
+    {
+      "intent": "irrelevant_out_of_scope",
+      "question": "Give me general advice about coffee.",
+      "mandatory_routes": []
+    },
+    {
+      "intent": "irrelevant_out_of_scope",
+      "question": "Tell me an unrelated joke about weather.",
+      "mandatory_routes": []
+    },
+    {
+      "intent": "irrelevant_out_of_scope",
+      "question": "Should I choose weather for lunch?",
+      "mandatory_routes": []
+    },
+    {
+      "intent": "irrelevant_out_of_scope",
+      "question": "Give me general advice about weather.",
+      "mandatory_routes": []
+    },
+    {
+      "intent": "irrelevant_out_of_scope",
+      "question": "Tell me an unrelated joke about color.",
+      "mandatory_routes": []
+    },
+    {
+      "intent": "irrelevant_out_of_scope",
+      "question": "Should I choose color for lunch?",
+      "mandatory_routes": []
+    },
+    {
+      "intent": "irrelevant_out_of_scope",
+      "question": "Give me general advice about color.",
+      "mandatory_routes": []
+    },
+    {
+      "intent": "irrelevant_out_of_scope",
+      "question": "Tell me an unrelated joke about music.",
+      "mandatory_routes": []
+    },
+    {
+      "intent": "irrelevant_out_of_scope",
+      "question": "Should I choose music for lunch?",
+      "mandatory_routes": []
+    },
+    {
+      "intent": "irrelevant_out_of_scope",
+      "question": "Give me general advice about music.",
+      "mandatory_routes": []
+    },
+    {
+      "intent": "irrelevant_out_of_scope",
+      "question": "Tell me an unrelated joke about travel.",
+      "mandatory_routes": []
+    },
+    {
+      "intent": "irrelevant_out_of_scope",
+      "question": "Should I choose travel for lunch?",
+      "mandatory_routes": []
+    },
+    {
+      "intent": "irrelevant_out_of_scope",
+      "question": "Give me general advice about travel.",
+      "mandatory_routes": []
+    }
+  ]
+}

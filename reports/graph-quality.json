@@ -1,0 +1,89 @@
+{
+  "annotation_version": "requests-v2.32.5-m10-v1",
+  "controlled_fixture": {
+    "asserted_metrics": {
+      "definition_precision": 1.0,
+      "definition_recall": 1.0,
+      "dispatch_candidate_errors": 0,
+      "exact_binding_precision": 1.0,
+      "exact_binding_recall": 1.0,
+      "import_precision": 1.0,
+      "import_recall": 1.0,
+      "provenance_coverage": 1.0,
+      "replay_pass_rate": 1.0,
+      "schema_validation": "PASS",
+      "unicode_coordinate_errors": 0
+    },
+    "basis": "Values are the passing assertions in the named real-SCIP acceptance test; counts are derived from the frozen fixture manifest.",
+    "command": "SCIP_PYTHON_BIN=$PWD/node_modules/.bin/scip-python SCIP_CLI_BIN=$PWD/.tools/scip/scip .venv/bin/pytest -q backend/tests/test_scip_real_integration.py::test_controlled_fixture_meets_gold_graph_quality_gates backend/tests/test_ground_truth_fixture.py::test_ground_truth_manifest_covers_every_planned_fixture_case",
+    "expected_dispatch_cases": 1,
+    "expected_exact_bindings": 3,
+    "expected_import_sites": 25,
+    "expected_structural_definitions": 47,
+    "fixture_sha256": "8b3d39cddcac7c32bf76ffce709cb393525f6d1248d408a60d7fdbbd371a6724",
+    "fixture_version": "ground-truth-v1",
+    "required_fixture_cases": 54,
+    "tests_passed": 2,
+    "verification": "PASS"
+  },
+  "error_taxonomy": {},
+  "errors": [],
+  "metrics": {
+    "annotated_reference_sites": 120,
+    "dangling_ids": 0,
+    "definitions": {
+      "actual": 53,
+      "expected": 53,
+      "false_negative": 0,
+      "false_positive": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "true_positive": 53
+    },
+    "dispatch_cases": {
+      "errors": 0,
+      "expected": 0,
+      "measurement_status": "UNMEASURED"
+    },
+    "duplicate_edge_ids": 0,
+    "evidence_paths": {
+      "expected": 30,
+      "path_validity": 1.0,
+      "valid": 30
+    },
+    "exact_bindings": {
+      "actual": 100,
+      "expected": 100,
+      "false_exact": 0,
+      "false_exact_rate": 0.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "true_positive": 100
+    },
+    "imports": {
+      "actual": 58,
+      "expected": 58,
+      "false_negative": 0,
+      "false_positive": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "true_positive": 58
+    },
+    "multi_hop_questions": 30,
+    "provenance_coverage": 1.0,
+    "schema_invalid_facts": 0,
+    "structural_imports": {
+      "resolved_edges": 158
+    },
+    "unicode_coordinate_errors": 0,
+    "unresolved_dynamic_cases": 20
+  },
+  "repository": {
+    "commit_sha": "b25c87d7cb8d6a18a37fa12442b5f883f9e41741",
+    "name": "Requests",
+    "release": "v2.32.5",
+    "selection_rationale": "Public conventional Python package; test suite is runnable; moderate source size; meaningful adapter, session, cookie, and request call/inheritance structure.",
+    "url": "https://github.com/psf/requests"
+  },
+  "snapshot_id": "snap_34b5c73e702277e8060a1f4885bddd584b982f4f6ebdfc6b43641ef6ab605f50"
+}

@@ -1,0 +1,20 @@
+{
+  "evaluation_id": "m21-commit-diff-v1",
+  "description": "Controlled two-commit fixture for source-range mapping, rename identity, impact paths, and tiered test selection.",
+  "expected_symbol_changes": [
+    {"classification": "MODIFIED", "base_qualified_name": "pkg.mod.Base.method", "target_qualified_name": "pkg.mod.Base.method"},
+    {"classification": "MODIFIED", "base_qualified_name": "pkg.mod.change_me", "target_qualified_name": "pkg.mod.change_me"},
+    {"classification": "DELETED", "base_qualified_name": "pkg.mod.removed", "target_qualified_name": null},
+    {"classification": "ADDED", "base_qualified_name": null, "target_qualified_name": "pkg.mod.added"},
+    {"classification": "RENAMED_OR_MOVED", "base_qualified_name": "pkg.old.moved", "target_qualified_name": "pkg.new.moved"}
+  ],
+  "required_invariants": [
+    "all changed symbol evidence carries the exact base or target snapshot ID",
+    "changed method impact includes its override without relabeling the relation as a call",
+    "ambiguous dispatch paths remain conservative and carry uncertainty",
+    "runtime evidence from another snapshot is excluded",
+    "without runtime baseline, Tier A and Tier B are unavailable",
+    "Tier C ordering is stable by pytest node ID",
+    "Tier C evidence binds to the isolated collection run and runtime environment"
+  ]
+}

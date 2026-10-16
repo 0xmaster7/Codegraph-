@@ -1,0 +1,4116 @@
+{
+  "run_type": "deterministic rescoring of retained live-model outputs; no model calls",
+  "provider": "Ollama local CPU runtime",
+  "model": "qwen2.5:0.5b",
+  "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+  "dataset": "docs/evaluation/requests-v2.32.5.annotations.json",
+  "dataset_sha256": "13a92d28eded53ade44cdf4c519b88b2e161f9598b51abc4d39f31ae6101d5fd",
+  "positive_cases": 30,
+  "unresolved_cases": 20,
+  "positive_exact_path_rate": 0.9,
+  "positive_evidence_completeness": 0.7,
+  "positive_unsupported_claim_rate": 0.047619047619047616,
+  "positive_citation_fidelity": 0.746031746031746,
+  "unresolved_correct_abstention_rate": 1.0,
+  "unresolved_unsupported_target_claims": 0,
+  "ambiguity_explicit_rate": 1.0,
+  "input_tokens_total": 9195,
+  "output_tokens_total": 5252,
+  "mean_latency_ms": 12933.306199999999,
+  "p50_latency_ms": 11575.479,
+  "cost_usd": 0.0,
+  "hosted_transmission": false,
+  "records": [
+    {
+      "case_id": "requests-mh-01",
+      "mode": "LOCAL_LIVE_MODEL_GOLD_EVIDENCE",
+      "question": "How does `build_response` reach `MockRequest` through Requests internal calls?",
+      "expected_path": [
+        "src.requests.adapters.HTTPAdapter.build_response",
+        "src.requests.cookies.extract_cookies_to_jar",
+        "src.requests.cookies.MockRequest"
+      ],
+      "graph_path_ids": [
+        "sym_0efa62e0194105177799756135e4ec7b9ff7d2a017500642aa1d4ce46ef3d733",
+        "sym_195ccd7a31670b8ea536a13892709ede04c1f6c68b8d14ae586e9bc3bbe69b51",
+        "sym_155ad8eb2266f25a11a1ffc5ed2fa91bdab42c90dca615a59c6aacd394b5d447"
+      ],
+      "graph_evidence_ids": [
+        "evidence_05759a3f1ac12c78c58d012be3aa042234e2083f1c3206eaf88c5f55a41bde3f",
+        "evidence_16a868d8c43ed9b52eee7255f66c5dd8acc9d7652a97d62e7619a3cfe7f64830",
+        "evidence_8153fe326edbb26004d1ab4b3d7320b0068e12516b7039789847eda414d26c78",
+        "evidence_da797ff3ed5d837f9d5b0bf9642c3dfc71f7398342ba8edcb44a4be6578ae35e"
+      ],
+      "answer": "build_response reaches MockRequest through Requests internal calls by using the HTTPAdapter and cookies functionalities.",
+      "claims": [
+        {
+          "source": "sym_0efa62e0194105177799756135e4ec7b9ff7d2a017500642aa1d4ce46ef3d733",
+          "target": "sym_195ccd7a31670b8ea536a13892709ede04c1f6c68b8d14ae586e9bc3bbe69b51",
+          "evidence_ids": [
+            "evidence_8153fe326edbb26004d1ab4b3d7320b0068e12516b7039789847eda414d26c78"
+          ]
+        },
+        {
+          "source": "sym_195ccd7a31670b8ea536a13892709ede04c1f6c68b8d14ae586e9bc3bbe69b51",
+          "target": "sym_155ad8eb2266f25a11a1ffc5ed2fa91bdab42c90dca615a59c6aacd394b5d447",
+          "evidence_ids": [
+            "evidence_05759a3f1ac12c78c58d012be3aa042234e2083f1c3206eaf88c5f55a41bde3f"
+          ]
+        }
+      ],
+      "model_claims": [
+        {
+          "source": "n0",
+          "target": "n1",
+          "evidence_refs": [
+            "e0"
+          ]
+        },
+        {
+          "source": "n1",
+          "target": "n2",
+          "evidence_refs": [
+            "e1"
+          ]
+        }
+      ],
+      "abstain": false,
+      "uncertainty": "",
+      "scores": {
+        "claim_count": 2,
+        "supported_claim_count": 2,
+        "unsupported_claim_count": 0,
+        "unsupported_claim_rate": 0.0,
+        "validly_cited_claim_count": 2,
+        "citation_fidelity": 1.0,
+        "evidence_complete": true,
+        "expected_path_exact": true
+      },
+      "usage": {
+        "prompt_eval_count": 199,
+        "eval_count": 117,
+        "total_duration_ns": 17939943875,
+        "wall_latency_ms": 17952.954
+      },
+      "graph_evidence_by_edge": [
+        {
+          "source_id": "sym_0efa62e0194105177799756135e4ec7b9ff7d2a017500642aa1d4ce46ef3d733",
+          "target_id": "sym_195ccd7a31670b8ea536a13892709ede04c1f6c68b8d14ae586e9bc3bbe69b51",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_3eb989c1f0e77bdebc313b8d97e15f261a4f9069cbf082a39142f05578d33fe4",
+            "edge_c8c30e48e51d0306adf7a88aec3f482052b4043153613970b68219ab3f5b586d"
+          ],
+          "evidence_ids": [
+            "evidence_8153fe326edbb26004d1ab4b3d7320b0068e12516b7039789847eda414d26c78"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_8153fe326edbb26004d1ab4b3d7320b0068e12516b7039789847eda414d26c78"
+          ],
+          "all_evidence_ids": [
+            "evidence_da797ff3ed5d837f9d5b0bf9642c3dfc71f7398342ba8edcb44a4be6578ae35e",
+            "evidence_8153fe326edbb26004d1ab4b3d7320b0068e12516b7039789847eda414d26c78"
+          ]
+        },
+        {
+          "source_id": "sym_195ccd7a31670b8ea536a13892709ede04c1f6c68b8d14ae586e9bc3bbe69b51",
+          "target_id": "sym_155ad8eb2266f25a11a1ffc5ed2fa91bdab42c90dca615a59c6aacd394b5d447",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_781d478d465ebc5acd6afa98eeb3a88a9beabbf7a40b097922d42e126181d987",
+            "edge_05f92d008259cd1a853cd5c345e492cc1db30741cc1905586eb36c851b363ef3"
+          ],
+          "evidence_ids": [
+            "evidence_05759a3f1ac12c78c58d012be3aa042234e2083f1c3206eaf88c5f55a41bde3f"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_05759a3f1ac12c78c58d012be3aa042234e2083f1c3206eaf88c5f55a41bde3f"
+          ],
+          "all_evidence_ids": [
+            "evidence_16a868d8c43ed9b52eee7255f66c5dd8acc9d7652a97d62e7619a3cfe7f64830",
+            "evidence_05759a3f1ac12c78c58d012be3aa042234e2083f1c3206eaf88c5f55a41bde3f"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "requests-mh-02",
+      "mode": "LOCAL_LIVE_MODEL_GOLD_EVIDENCE",
+      "question": "How does `build_response` reach `MockResponse` through Requests internal calls?",
+      "expected_path": [
+        "src.requests.adapters.HTTPAdapter.build_response",
+        "src.requests.cookies.extract_cookies_to_jar",
+        "src.requests.cookies.MockResponse"
+      ],
+      "graph_path_ids": [
+        "sym_0efa62e0194105177799756135e4ec7b9ff7d2a017500642aa1d4ce46ef3d733",
+        "sym_195ccd7a31670b8ea536a13892709ede04c1f6c68b8d14ae586e9bc3bbe69b51",
+        "sym_fbc0af88abea38152b7d59ab4d1207b9520ce31dff81c4882ec477bc60f9d267"
+      ],
+      "graph_evidence_ids": [
+        "evidence_26c55a05811dd72efd58e10dc82fa366dc1c83473d7f9f7c0ac2ef275be59711",
+        "evidence_8153fe326edbb26004d1ab4b3d7320b0068e12516b7039789847eda414d26c78",
+        "evidence_9a448222a0bbaf0ebc4b37ef90ce2db7eaa22eb40a9bc284a88f0e5cb46ec922",
+        "evidence_da797ff3ed5d837f9d5b0bf9642c3dfc71f7398342ba8edcb44a4be6578ae35e"
+      ],
+      "answer": "build_response reaches MockResponse through Requests internal calls.",
+      "claims": [
+        {
+          "source": "sym_0efa62e0194105177799756135e4ec7b9ff7d2a017500642aa1d4ce46ef3d733",
+          "target": "sym_195ccd7a31670b8ea536a13892709ede04c1f6c68b8d14ae586e9bc3bbe69b51",
+          "evidence_ids": [
+            "evidence_8153fe326edbb26004d1ab4b3d7320b0068e12516b7039789847eda414d26c78"
+          ]
+        },
+        {
+          "source": "sym_195ccd7a31670b8ea536a13892709ede04c1f6c68b8d14ae586e9bc3bbe69b51",
+          "target": "sym_fbc0af88abea38152b7d59ab4d1207b9520ce31dff81c4882ec477bc60f9d267",
+          "evidence_ids": [
+            "evidence_26c55a05811dd72efd58e10dc82fa366dc1c83473d7f9f7c0ac2ef275be59711"
+          ]
+        }
+      ],
+      "model_claims": [
+        {
+          "source": "n0",
+          "target": "n1",
+          "evidence_refs": [
+            "e0"
+          ]
+        },
+        {
+          "source": "n1",
+          "target": "n2",
+          "evidence_refs": [
+            "e1"
+          ]
+        }
+      ],
+      "abstain": false,
+      "uncertainty": "",
+      "scores": {
+        "claim_count": 2,
+        "supported_claim_count": 2,
+        "unsupported_claim_count": 0,
+        "unsupported_claim_rate": 0.0,
+        "validly_cited_claim_count": 2,
+        "citation_fidelity": 1.0,
+        "evidence_complete": true,
+        "expected_path_exact": true
+      },
+      "usage": {
+        "prompt_eval_count": 199,
+        "eval_count": 109,
+        "total_duration_ns": 15452278216,
+        "wall_latency_ms": 15459.116
+      },
+      "graph_evidence_by_edge": [
+        {
+          "source_id": "sym_0efa62e0194105177799756135e4ec7b9ff7d2a017500642aa1d4ce46ef3d733",
+          "target_id": "sym_195ccd7a31670b8ea536a13892709ede04c1f6c68b8d14ae586e9bc3bbe69b51",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_3eb989c1f0e77bdebc313b8d97e15f261a4f9069cbf082a39142f05578d33fe4",
+            "edge_c8c30e48e51d0306adf7a88aec3f482052b4043153613970b68219ab3f5b586d"
+          ],
+          "evidence_ids": [
+            "evidence_8153fe326edbb26004d1ab4b3d7320b0068e12516b7039789847eda414d26c78"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_8153fe326edbb26004d1ab4b3d7320b0068e12516b7039789847eda414d26c78"
+          ],
+          "all_evidence_ids": [
+            "evidence_da797ff3ed5d837f9d5b0bf9642c3dfc71f7398342ba8edcb44a4be6578ae35e",
+            "evidence_8153fe326edbb26004d1ab4b3d7320b0068e12516b7039789847eda414d26c78"
+          ]
+        },
+        {
+          "source_id": "sym_195ccd7a31670b8ea536a13892709ede04c1f6c68b8d14ae586e9bc3bbe69b51",
+          "target_id": "sym_fbc0af88abea38152b7d59ab4d1207b9520ce31dff81c4882ec477bc60f9d267",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_e1ff97d07f48781d3d77d8601fbb352e1d03695908e584a5f6152fa878a11e8c",
+            "edge_702831802c6be5110df7051d9264658f1c9f4710efae049536db00d23a599a58"
+          ],
+          "evidence_ids": [
+            "evidence_26c55a05811dd72efd58e10dc82fa366dc1c83473d7f9f7c0ac2ef275be59711"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_26c55a05811dd72efd58e10dc82fa366dc1c83473d7f9f7c0ac2ef275be59711"
+          ],
+          "all_evidence_ids": [
+            "evidence_9a448222a0bbaf0ebc4b37ef90ce2db7eaa22eb40a9bc284a88f0e5cb46ec922",
+            "evidence_26c55a05811dd72efd58e10dc82fa366dc1c83473d7f9f7c0ac2ef275be59711"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "requests-mh-03",
+      "mode": "LOCAL_LIVE_MODEL_GOLD_EVIDENCE",
+      "question": "How does `build_response` reach `_parse_content_type_header` through Requests internal calls?",
+      "expected_path": [
+        "src.requests.adapters.HTTPAdapter.build_response",
+        "src.requests.utils.get_encoding_from_headers",
+        "src.requests.utils._parse_content_type_header"
+      ],
+      "graph_path_ids": [
+        "sym_0efa62e0194105177799756135e4ec7b9ff7d2a017500642aa1d4ce46ef3d733",
+        "sym_f5a9127be3f31ce7e328bb83fb5a86746040f706543cccd672c42dcdb9101c71",
+        "sym_555efb34d7c0a94c7002dfa1323c4adf951f1f67affe4c98ac2723cf8f7d5025"
+      ],
+      "graph_evidence_ids": [
+        "evidence_0670f1ce71916566ddd772ec2c54275c5e252013e76ff563b9454f07d72f72a9",
+        "evidence_8bc47a879bc6c11056ea25424e6db4a40ac8cc6d4133fd0156db4ae521729e07",
+        "evidence_9981a704a2cd0aa72f97b8bf9c9abdad32460ccd06db6fb8e6e471918c69378c",
+        "evidence_b873b7f1a3d2933c77419ec13c66faeccf2851468581315a749b9f935cb4f192"
+      ],
+      "answer": "build_response reaches _parse_content_type_header through Requests internal calls.",
+      "claims": [
+        {
+          "source": "sym_0efa62e0194105177799756135e4ec7b9ff7d2a017500642aa1d4ce46ef3d733",
+          "target": "sym_f5a9127be3f31ce7e328bb83fb5a86746040f706543cccd672c42dcdb9101c71",
+          "evidence_ids": [
+            "src.requests.adapters.HTTPAdapter.build_response"
+          ]
+        },
+        {
+          "source": "sym_f5a9127be3f31ce7e328bb83fb5a86746040f706543cccd672c42dcdb9101c71",
+          "target": "sym_555efb34d7c0a94c7002dfa1323c4adf951f1f67affe4c98ac2723cf8f7d5025",
+          "evidence_ids": [
+            "src.requests.utils.get_encoding_from_headers",
+            "src.requests.utils._parse_content_type_header"
+          ]
+        }
+      ],
+      "model_claims": [
+        {
+          "source": "n0",
+          "target": "n1",
+          "evidence_refs": [
+            "src.requests.adapters.HTTPAdapter.build_response"
+          ]
+        },
+        {
+          "source": "n1",
+          "target": "n2",
+          "evidence_refs": [
+            "src.requests.utils.get_encoding_from_headers",
+            "src.requests.utils._parse_content_type_header"
+          ]
+        }
+      ],
+      "abstain": false,
+      "uncertainty": "",
+      "scores": {
+        "claim_count": 2,
+        "supported_claim_count": 2,
+        "unsupported_claim_count": 0,
+        "unsupported_claim_rate": 0.0,
+        "validly_cited_claim_count": 0,
+        "citation_fidelity": 0.0,
+        "evidence_complete": false,
+        "expected_path_exact": true
+      },
+      "usage": {
+        "prompt_eval_count": 203,
+        "eval_count": 133,
+        "total_duration_ns": 18224057356,
+        "wall_latency_ms": 18233.707
+      },
+      "graph_evidence_by_edge": [
+        {
+          "source_id": "sym_0efa62e0194105177799756135e4ec7b9ff7d2a017500642aa1d4ce46ef3d733",
+          "target_id": "sym_f5a9127be3f31ce7e328bb83fb5a86746040f706543cccd672c42dcdb9101c71",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_eeb81108792541dbfba696d5d3343727e5a7d7a62a27721e28579148294f5c2d",
+            "edge_bed7fce096c38633b9e17e764eab157ae5a751d3c26f2a8a981a6f0e647f2276"
+          ],
+          "evidence_ids": [
+            "evidence_8bc47a879bc6c11056ea25424e6db4a40ac8cc6d4133fd0156db4ae521729e07"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_8bc47a879bc6c11056ea25424e6db4a40ac8cc6d4133fd0156db4ae521729e07"
+          ],
+          "all_evidence_ids": [
+            "evidence_0670f1ce71916566ddd772ec2c54275c5e252013e76ff563b9454f07d72f72a9",
+            "evidence_8bc47a879bc6c11056ea25424e6db4a40ac8cc6d4133fd0156db4ae521729e07"
+          ]
+        },
+        {
+          "source_id": "sym_f5a9127be3f31ce7e328bb83fb5a86746040f706543cccd672c42dcdb9101c71",
+          "target_id": "sym_555efb34d7c0a94c7002dfa1323c4adf951f1f67affe4c98ac2723cf8f7d5025",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_5f25ab13ff99484ef068b6b8b9162b783521dbfaa5615c4064b5fd1612b507ed",
+            "edge_fe8a84cbab054b8333d98dc9a0502864374730023e954b557bd6c8ee03f2c20a"
+          ],
+          "evidence_ids": [
+            "evidence_b873b7f1a3d2933c77419ec13c66faeccf2851468581315a749b9f935cb4f192"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_b873b7f1a3d2933c77419ec13c66faeccf2851468581315a749b9f935cb4f192"
+          ],
+          "all_evidence_ids": [
+            "evidence_9981a704a2cd0aa72f97b8bf9c9abdad32460ccd06db6fb8e6e471918c69378c",
+            "evidence_b873b7f1a3d2933c77419ec13c66faeccf2851468581315a749b9f935cb4f192"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "requests-mh-04",
+      "mode": "LOCAL_LIVE_MODEL_GOLD_EVIDENCE",
+      "question": "How does `cert_verify` reach `atomic_open` through Requests internal calls?",
+      "expected_path": [
+        "src.requests.adapters.HTTPAdapter.cert_verify",
+        "src.requests.utils.extract_zipped_paths",
+        "src.requests.utils.atomic_open"
+      ],
+      "graph_path_ids": [
+        "sym_9d2228c36e18eb1175964fe4856dd00598f3b17da38186569072a199d40ba35e",
+        "sym_589ba8144c57b36d1a11fdb8abb7ffa1671cb64067e6f4c7109762066c03ca8e",
+        "sym_7d4db020863f31187d7e4c4765830ea8426f0e8f68b8d1d8d5b550efaf690e50"
+      ],
+      "graph_evidence_ids": [
+        "evidence_0d4ac2c3c458bcc18428fd33910dc5588cef7727e88972e35bbf753b7dbb353a",
+        "evidence_620c6e71edc95966354c3c8150636a157cc848b901781767afc4563531e581eb",
+        "evidence_c661bbb101240fbd9c9365d65a343fff374ad5a65f8c27274ee4e4ba953fc47e",
+        "evidence_dab72af268f612afaf0c69765b561c09888a16517325ff959f876d2f214106e2"
+      ],
+      "answer": "`cert_verify` reaches `atomic_open` through Requests internal calls by using the `HTTPAdapter.cert_verify` method.",
+      "claims": [
+        {
+          "source": "sym_9d2228c36e18eb1175964fe4856dd00598f3b17da38186569072a199d40ba35e",
+          "target": "sym_589ba8144c57b36d1a11fdb8abb7ffa1671cb64067e6f4c7109762066c03ca8e",
+          "evidence_ids": [
+            "evidence_c661bbb101240fbd9c9365d65a343fff374ad5a65f8c27274ee4e4ba953fc47e"
+          ]
+        },
+        {
+          "source": "sym_589ba8144c57b36d1a11fdb8abb7ffa1671cb64067e6f4c7109762066c03ca8e",
+          "target": "sym_7d4db020863f31187d7e4c4765830ea8426f0e8f68b8d1d8d5b550efaf690e50",
+          "evidence_ids": [
+            "evidence_dab72af268f612afaf0c69765b561c09888a16517325ff959f876d2f214106e2"
+          ]
+        }
+      ],
+      "model_claims": [
+        {
+          "source": "n0",
+          "target": "n1",
+          "evidence_refs": [
+            "e0"
+          ]
+        },
+        {
+          "source": "n1",
+          "target": "n2",
+          "evidence_refs": [
+            "e1"
+          ]
+        }
+      ],
+      "abstain": false,
+      "uncertainty": "",
+      "scores": {
+        "claim_count": 2,
+        "supported_claim_count": 2,
+        "unsupported_claim_count": 0,
+        "unsupported_claim_rate": 0.0,
+        "validly_cited_claim_count": 2,
+        "citation_fidelity": 1.0,
+        "evidence_complete": true,
+        "expected_path_exact": true
+      },
+      "usage": {
+        "prompt_eval_count": 198,
+        "eval_count": 123,
+        "total_duration_ns": 42333504947,
+        "wall_latency_ms": 42417.312
+      },
+      "graph_evidence_by_edge": [
+        {
+          "source_id": "sym_9d2228c36e18eb1175964fe4856dd00598f3b17da38186569072a199d40ba35e",
+          "target_id": "sym_589ba8144c57b36d1a11fdb8abb7ffa1671cb64067e6f4c7109762066c03ca8e",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_0f74da877d5de20d1f6dbd7b6a793f4201637beb86cccf7fb739bb99e796e03b",
+            "edge_a8336523ba703ff262aae1de5b534ee615223a6f16b3ef99a17135b84b7ffcf1"
+          ],
+          "evidence_ids": [
+            "evidence_c661bbb101240fbd9c9365d65a343fff374ad5a65f8c27274ee4e4ba953fc47e"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_c661bbb101240fbd9c9365d65a343fff374ad5a65f8c27274ee4e4ba953fc47e"
+          ],
+          "all_evidence_ids": [
+            "evidence_620c6e71edc95966354c3c8150636a157cc848b901781767afc4563531e581eb",
+            "evidence_c661bbb101240fbd9c9365d65a343fff374ad5a65f8c27274ee4e4ba953fc47e"
+          ]
+        },
+        {
+          "source_id": "sym_589ba8144c57b36d1a11fdb8abb7ffa1671cb64067e6f4c7109762066c03ca8e",
+          "target_id": "sym_7d4db020863f31187d7e4c4765830ea8426f0e8f68b8d1d8d5b550efaf690e50",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_ef95b398c96ffc41ba4d447d52f76096986f73a1421159569fb9503a7efba561",
+            "edge_0a671c79249be511f62bee3d1eae0c255568c7a0dfbcbcf38d5fab161d9466aa"
+          ],
+          "evidence_ids": [
+            "evidence_dab72af268f612afaf0c69765b561c09888a16517325ff959f876d2f214106e2"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_dab72af268f612afaf0c69765b561c09888a16517325ff959f876d2f214106e2"
+          ],
+          "all_evidence_ids": [
+            "evidence_0d4ac2c3c458bcc18428fd33910dc5588cef7727e88972e35bbf753b7dbb353a",
+            "evidence_dab72af268f612afaf0c69765b561c09888a16517325ff959f876d2f214106e2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "requests-mh-05",
+      "mode": "LOCAL_LIVE_MODEL_GOLD_EVIDENCE",
+      "question": "How does `get_connection` reach `proxy_headers` through Requests internal calls?",
+      "expected_path": [
+        "src.requests.adapters.HTTPAdapter.get_connection",
+        "src.requests.adapters.HTTPAdapter.proxy_manager_for",
+        "src.requests.adapters.HTTPAdapter.proxy_headers"
+      ],
+      "graph_path_ids": [
+        "sym_6e0006fd657e81d17e0493a4ca14c7c2ef149ef3e4cccdced3f7d909bcd2977d",
+        "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+        "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422"
+      ],
+      "graph_evidence_ids": [
+        "evidence_7fc7f246280023530c0268da6fc9d4bf049f31e6ef309f558fd662985b83ada3",
+        "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180",
+        "evidence_dfc24c41cb13588f759101d514e852903d45514e90c0728f7a10fd4410fc1520",
+        "evidence_e37eced8d0450604ef41ab89a906fd9a46446f465e6f3d274ea78062d08240bc"
+      ],
+      "answer": "The `get_connection` method of the `requests` library is called through the proxy manager for the HTTPAdapter.",
+      "claims": [
+        {
+          "source": "sym_6e0006fd657e81d17e0493a4ca14c7c2ef149ef3e4cccdced3f7d909bcd2977d",
+          "target": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "evidence_ids": [
+            "evidence_e37eced8d0450604ef41ab89a906fd9a46446f465e6f3d274ea78062d08240bc"
+          ]
+        },
+        {
+          "source": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "target": "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+          "evidence_ids": [
+            "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+          ]
+        }
+      ],
+      "model_claims": [
+        {
+          "source": "n0",
+          "target": "n1",
+          "evidence_refs": [
+            "e0"
+          ]
+        },
+        {
+          "source": "n1",
+          "target": "n2",
+          "evidence_refs": [
+            "e1"
+          ]
+        }
+      ],
+      "abstain": false,
+      "uncertainty": "",
+      "scores": {
+        "claim_count": 2,
+        "supported_claim_count": 2,
+        "unsupported_claim_count": 0,
+        "unsupported_claim_rate": 0.0,
+        "validly_cited_claim_count": 2,
+        "citation_fidelity": 1.0,
+        "evidence_complete": true,
+        "expected_path_exact": true
+      },
+      "usage": {
+        "prompt_eval_count": 201,
+        "eval_count": 122,
+        "total_duration_ns": 18052820453,
+        "wall_latency_ms": 18079.466
+      },
+      "graph_evidence_by_edge": [
+        {
+          "source_id": "sym_6e0006fd657e81d17e0493a4ca14c7c2ef149ef3e4cccdced3f7d909bcd2977d",
+          "target_id": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_d374d5169db730362556b09e2d592fac0c642d15696b8941a2e8aaa3ad47255d",
+            "edge_e68be025b45de0b25e8a903d3dcaa4188401e22cf4d658bbfbe2f0029dbafe4f"
+          ],
+          "evidence_ids": [
+            "evidence_e37eced8d0450604ef41ab89a906fd9a46446f465e6f3d274ea78062d08240bc"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_e37eced8d0450604ef41ab89a906fd9a46446f465e6f3d274ea78062d08240bc"
+          ],
+          "all_evidence_ids": [
+            "evidence_dfc24c41cb13588f759101d514e852903d45514e90c0728f7a10fd4410fc1520",
+            "evidence_e37eced8d0450604ef41ab89a906fd9a46446f465e6f3d274ea78062d08240bc"
+          ]
+        },
+        {
+          "source_id": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "target_id": "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_b726d374ce8522739dce6689e6bb431dffe049aaa7d972953b6395a8406db367",
+            "edge_980b0f8f4900d6a14f8c7c13f657c875dc50059726a30572fa42d19d9de80fb3"
+          ],
+          "evidence_ids": [
+            "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+          ],
+          "all_evidence_ids": [
+            "evidence_7fc7f246280023530c0268da6fc9d4bf049f31e6ef309f558fd662985b83ada3",
+            "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "requests-mh-06",
+      "mode": "LOCAL_LIVE_MODEL_GOLD_EVIDENCE",
+      "question": "How does `get_connection` reach `get_auth_from_url` through Requests internal calls?",
+      "expected_path": [
+        "src.requests.adapters.HTTPAdapter.get_connection",
+        "src.requests.adapters.HTTPAdapter.proxy_manager_for",
+        "src.requests.utils.get_auth_from_url"
+      ],
+      "graph_path_ids": [
+        "sym_6e0006fd657e81d17e0493a4ca14c7c2ef149ef3e4cccdced3f7d909bcd2977d",
+        "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+        "sym_58c3813a6d3981f77334d80123ba406cdb671f9378c6ba0a981ccac1221629fc"
+      ],
+      "graph_evidence_ids": [
+        "evidence_2502ab6886af37c1de8465b69611138f41499206a21ef1c7449c8e73e894f45f",
+        "evidence_8e72d39289528ba71307e6f1c5c322434df1dd2819eb99c6e0a45ba955253fc8",
+        "evidence_dfc24c41cb13588f759101d514e852903d45514e90c0728f7a10fd4410fc1520",
+        "evidence_e37eced8d0450604ef41ab89a906fd9a46446f465e6f3d274ea78062d08240bc"
+      ],
+      "answer": "`get_connection` reaches `get_auth_from_url` through Requests internal calls.",
+      "claims": [
+        {
+          "source": "sym_6e0006fd657e81d17e0493a4ca14c7c2ef149ef3e4cccdced3f7d909bcd2977d",
+          "target": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "evidence_ids": [
+            "evidence_e37eced8d0450604ef41ab89a906fd9a46446f465e6f3d274ea78062d08240bc"
+          ]
+        },
+        {
+          "source": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "target": "sym_58c3813a6d3981f77334d80123ba406cdb671f9378c6ba0a981ccac1221629fc",
+          "evidence_ids": [
+            "evidence_8e72d39289528ba71307e6f1c5c322434df1dd2819eb99c6e0a45ba955253fc8"
+          ]
+        }
+      ],
+      "model_claims": [
+        {
+          "source": "n0",
+          "target": "n1",
+          "evidence_refs": [
+            "e0"
+          ]
+        },
+        {
+          "source": "n1",
+          "target": "n2",
+          "evidence_refs": [
+            "e1"
+          ]
+        }
+      ],
+      "abstain": false,
+      "uncertainty": "",
+      "scores": {
+        "claim_count": 2,
+        "supported_claim_count": 2,
+        "unsupported_claim_count": 0,
+        "unsupported_claim_rate": 0.0,
+        "validly_cited_claim_count": 2,
+        "citation_fidelity": 1.0,
+        "evidence_complete": true,
+        "expected_path_exact": true
+      },
+      "usage": {
+        "prompt_eval_count": 203,
+        "eval_count": 107,
+        "total_duration_ns": 14221374782,
+        "wall_latency_ms": 14233.588
+      },
+      "graph_evidence_by_edge": [
+        {
+          "source_id": "sym_6e0006fd657e81d17e0493a4ca14c7c2ef149ef3e4cccdced3f7d909bcd2977d",
+          "target_id": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_d374d5169db730362556b09e2d592fac0c642d15696b8941a2e8aaa3ad47255d",
+            "edge_e68be025b45de0b25e8a903d3dcaa4188401e22cf4d658bbfbe2f0029dbafe4f"
+          ],
+          "evidence_ids": [
+            "evidence_e37eced8d0450604ef41ab89a906fd9a46446f465e6f3d274ea78062d08240bc"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_e37eced8d0450604ef41ab89a906fd9a46446f465e6f3d274ea78062d08240bc"
+          ],
+          "all_evidence_ids": [
+            "evidence_dfc24c41cb13588f759101d514e852903d45514e90c0728f7a10fd4410fc1520",
+            "evidence_e37eced8d0450604ef41ab89a906fd9a46446f465e6f3d274ea78062d08240bc"
+          ]
+        },
+        {
+          "source_id": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "target_id": "sym_58c3813a6d3981f77334d80123ba406cdb671f9378c6ba0a981ccac1221629fc",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_f3211409d1ecfb31bf4c4faa158c07bc1e4b333e790f87b62b51071c72cb6c9c",
+            "edge_8fa104f033f8c5862fbd9ca5bec2d04b2609dd0f09a7704888122be21ada7717"
+          ],
+          "evidence_ids": [
+            "evidence_8e72d39289528ba71307e6f1c5c322434df1dd2819eb99c6e0a45ba955253fc8"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_8e72d39289528ba71307e6f1c5c322434df1dd2819eb99c6e0a45ba955253fc8"
+          ],
+          "all_evidence_ids": [
+            "evidence_2502ab6886af37c1de8465b69611138f41499206a21ef1c7449c8e73e894f45f",
+            "evidence_8e72d39289528ba71307e6f1c5c322434df1dd2819eb99c6e0a45ba955253fc8"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "requests-mh-07",
+      "mode": "LOCAL_LIVE_MODEL_GOLD_EVIDENCE",
+      "question": "How does `get_connection` reach `_basic_auth_str` through Requests internal calls?",
+      "expected_path": [
+        "src.requests.adapters.HTTPAdapter.get_connection",
+        "src.requests.adapters.HTTPAdapter.proxy_manager_for",
+        "src.requests.adapters.HTTPAdapter.proxy_headers",
+        "src.requests.auth._basic_auth_str"
+      ],
+      "graph_path_ids": [
+        "sym_6e0006fd657e81d17e0493a4ca14c7c2ef149ef3e4cccdced3f7d909bcd2977d",
+        "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+        "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+        "sym_5e536621dc05a6e74be3d3ef179c24d7f74c73b5056e4900b3990d5a3b2fbbaa"
+      ],
+      "graph_evidence_ids": [
+        "evidence_4edbee5bdb776085c2368e6d72a3f6eaf4cb9c06988ea3ab688fd71466aae08a",
+        "evidence_7fc7f246280023530c0268da6fc9d4bf049f31e6ef309f558fd662985b83ada3",
+        "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180",
+        "evidence_dfc24c41cb13588f759101d514e852903d45514e90c0728f7a10fd4410fc1520",
+        "evidence_e37eced8d0450604ef41ab89a906fd9a46446f465e6f3d274ea78062d08240bc",
+        "evidence_e7e2b72bacdc11df53aa54a0d98f45a332f21d21c1be700bbe797b2e1d7421c9"
+      ],
+      "answer": "The `get_connection` method in the Requests internal calls reaches `_basic_auth_str` through the proxy manager for HTTPAdapter.",
+      "claims": [
+        {
+          "source": "sym_6e0006fd657e81d17e0493a4ca14c7c2ef149ef3e4cccdced3f7d909bcd2977d",
+          "target": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "evidence_ids": [
+            "evidence_e37eced8d0450604ef41ab89a906fd9a46446f465e6f3d274ea78062d08240bc"
+          ]
+        },
+        {
+          "source": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "target": "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+          "evidence_ids": [
+            "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+          ]
+        },
+        {
+          "source": "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+          "target": "sym_5e536621dc05a6e74be3d3ef179c24d7f74c73b5056e4900b3990d5a3b2fbbaa",
+          "evidence_ids": [
+            "evidence_e7e2b72bacdc11df53aa54a0d98f45a332f21d21c1be700bbe797b2e1d7421c9"
+          ]
+        }
+      ],
+      "model_claims": [
+        {
+          "source": "n0",
+          "target": "n1",
+          "evidence_refs": [
+            "e0"
+          ]
+        },
+        {
+          "source": "n1",
+          "target": "n2",
+          "evidence_refs": [
+            "e1"
+          ]
+        },
+        {
+          "source": "n2",
+          "target": "n3",
+          "evidence_refs": [
+            "e2"
+          ]
+        }
+      ],
+      "abstain": false,
+      "uncertainty": "",
+      "scores": {
+        "claim_count": 3,
+        "supported_claim_count": 3,
+        "unsupported_claim_count": 0,
+        "unsupported_claim_rate": 0.0,
+        "validly_cited_claim_count": 3,
+        "citation_fidelity": 1.0,
+        "evidence_complete": true,
+        "expected_path_exact": true
+      },
+      "usage": {
+        "prompt_eval_count": 236,
+        "eval_count": 147,
+        "total_duration_ns": 27204649925,
+        "wall_latency_ms": 27216.918
+      },
+      "graph_evidence_by_edge": [
+        {
+          "source_id": "sym_6e0006fd657e81d17e0493a4ca14c7c2ef149ef3e4cccdced3f7d909bcd2977d",
+          "target_id": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_d374d5169db730362556b09e2d592fac0c642d15696b8941a2e8aaa3ad47255d",
+            "edge_e68be025b45de0b25e8a903d3dcaa4188401e22cf4d658bbfbe2f0029dbafe4f"
+          ],
+          "evidence_ids": [
+            "evidence_e37eced8d0450604ef41ab89a906fd9a46446f465e6f3d274ea78062d08240bc"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_e37eced8d0450604ef41ab89a906fd9a46446f465e6f3d274ea78062d08240bc"
+          ],
+          "all_evidence_ids": [
+            "evidence_dfc24c41cb13588f759101d514e852903d45514e90c0728f7a10fd4410fc1520",
+            "evidence_e37eced8d0450604ef41ab89a906fd9a46446f465e6f3d274ea78062d08240bc"
+          ]
+        },
+        {
+          "source_id": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "target_id": "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_b726d374ce8522739dce6689e6bb431dffe049aaa7d972953b6395a8406db367",
+            "edge_980b0f8f4900d6a14f8c7c13f657c875dc50059726a30572fa42d19d9de80fb3"
+          ],
+          "evidence_ids": [
+            "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+          ],
+          "all_evidence_ids": [
+            "evidence_7fc7f246280023530c0268da6fc9d4bf049f31e6ef309f558fd662985b83ada3",
+            "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+          ]
+        },
+        {
+          "source_id": "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+          "target_id": "sym_5e536621dc05a6e74be3d3ef179c24d7f74c73b5056e4900b3990d5a3b2fbbaa",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_57c10a8052d7385ce486b9b493b38faf3c9fa5c7feed18a95ed4006502edc00a",
+            "edge_afe926d4ddecf7dc0186d8c12a1ed2ad12d30f1fca6d8376da1f17e1f2e5dd8a"
+          ],
+          "evidence_ids": [
+            "evidence_e7e2b72bacdc11df53aa54a0d98f45a332f21d21c1be700bbe797b2e1d7421c9"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_e7e2b72bacdc11df53aa54a0d98f45a332f21d21c1be700bbe797b2e1d7421c9"
+          ],
+          "all_evidence_ids": [
+            "evidence_4edbee5bdb776085c2368e6d72a3f6eaf4cb9c06988ea3ab688fd71466aae08a",
+            "evidence_e7e2b72bacdc11df53aa54a0d98f45a332f21d21c1be700bbe797b2e1d7421c9"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "requests-mh-08",
+      "mode": "LOCAL_LIVE_MODEL_GOLD_EVIDENCE",
+      "question": "How does `get_connection` reach `get_auth_from_url` through Requests internal calls?",
+      "expected_path": [
+        "src.requests.adapters.HTTPAdapter.get_connection",
+        "src.requests.adapters.HTTPAdapter.proxy_manager_for",
+        "src.requests.adapters.HTTPAdapter.proxy_headers",
+        "src.requests.utils.get_auth_from_url"
+      ],
+      "graph_path_ids": [
+        "sym_6e0006fd657e81d17e0493a4ca14c7c2ef149ef3e4cccdced3f7d909bcd2977d",
+        "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+        "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+        "sym_58c3813a6d3981f77334d80123ba406cdb671f9378c6ba0a981ccac1221629fc"
+      ],
+      "graph_evidence_ids": [
+        "evidence_0a8c069771dcd126022b629402cda3d813289766ef320789088ebcb18efb2db8",
+        "evidence_30831db51b58d4a74b7bb926842f42b92a6d38c58b01887032a62442753e86ef",
+        "evidence_7fc7f246280023530c0268da6fc9d4bf049f31e6ef309f558fd662985b83ada3",
+        "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180",
+        "evidence_dfc24c41cb13588f759101d514e852903d45514e90c0728f7a10fd4410fc1520",
+        "evidence_e37eced8d0450604ef41ab89a906fd9a46446f465e6f3d274ea78062d08240bc"
+      ],
+      "answer": "The `get_connection` method reaches the `get_auth_from_url` method through Requests' internal calls.",
+      "claims": [
+        {
+          "source": "sym_6e0006fd657e81d17e0493a4ca14c7c2ef149ef3e4cccdced3f7d909bcd2977d",
+          "target": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "evidence_ids": [
+            "evidence_e37eced8d0450604ef41ab89a906fd9a46446f465e6f3d274ea78062d08240bc"
+          ]
+        },
+        {
+          "source": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "target": "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+          "evidence_ids": [
+            "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+          ]
+        },
+        {
+          "source": "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+          "target": "sym_58c3813a6d3981f77334d80123ba406cdb671f9378c6ba0a981ccac1221629fc",
+          "evidence_ids": [
+            "evidence_30831db51b58d4a74b7bb926842f42b92a6d38c58b01887032a62442753e86ef"
+          ]
+        }
+      ],
+      "model_claims": [
+        {
+          "source": "n0",
+          "target": "n1",
+          "evidence_refs": [
+            "e0"
+          ]
+        },
+        {
+          "source": "n1",
+          "target": "n2",
+          "evidence_refs": [
+            "e1"
+          ]
+        },
+        {
+          "source": "n2",
+          "target": "n3",
+          "evidence_refs": [
+            "e2"
+          ]
+        }
+      ],
+      "abstain": false,
+      "uncertainty": "",
+      "scores": {
+        "claim_count": 3,
+        "supported_claim_count": 3,
+        "unsupported_claim_count": 0,
+        "unsupported_claim_rate": 0.0,
+        "validly_cited_claim_count": 3,
+        "citation_fidelity": 1.0,
+        "evidence_complete": true,
+        "expected_path_exact": true
+      },
+      "usage": {
+        "prompt_eval_count": 237,
+        "eval_count": 143,
+        "total_duration_ns": 29936610020,
+        "wall_latency_ms": 29945.07
+      },
+      "graph_evidence_by_edge": [
+        {
+          "source_id": "sym_6e0006fd657e81d17e0493a4ca14c7c2ef149ef3e4cccdced3f7d909bcd2977d",
+          "target_id": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_d374d5169db730362556b09e2d592fac0c642d15696b8941a2e8aaa3ad47255d",
+            "edge_e68be025b45de0b25e8a903d3dcaa4188401e22cf4d658bbfbe2f0029dbafe4f"
+          ],
+          "evidence_ids": [
+            "evidence_e37eced8d0450604ef41ab89a906fd9a46446f465e6f3d274ea78062d08240bc"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_e37eced8d0450604ef41ab89a906fd9a46446f465e6f3d274ea78062d08240bc"
+          ],
+          "all_evidence_ids": [
+            "evidence_dfc24c41cb13588f759101d514e852903d45514e90c0728f7a10fd4410fc1520",
+            "evidence_e37eced8d0450604ef41ab89a906fd9a46446f465e6f3d274ea78062d08240bc"
+          ]
+        },
+        {
+          "source_id": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "target_id": "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_b726d374ce8522739dce6689e6bb431dffe049aaa7d972953b6395a8406db367",
+            "edge_980b0f8f4900d6a14f8c7c13f657c875dc50059726a30572fa42d19d9de80fb3"
+          ],
+          "evidence_ids": [
+            "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+          ],
+          "all_evidence_ids": [
+            "evidence_7fc7f246280023530c0268da6fc9d4bf049f31e6ef309f558fd662985b83ada3",
+            "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+          ]
+        },
+        {
+          "source_id": "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+          "target_id": "sym_58c3813a6d3981f77334d80123ba406cdb671f9378c6ba0a981ccac1221629fc",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_84868eedfa47c3bb9415d611e46972d57d3d705d16ede306f7f3b0b6d987e9bd",
+            "edge_76565a69d55e6ae4eb7cabc828cebb0bb336aceba541c77fb4ffbd0e92e1a1e5"
+          ],
+          "evidence_ids": [
+            "evidence_30831db51b58d4a74b7bb926842f42b92a6d38c58b01887032a62442753e86ef"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_30831db51b58d4a74b7bb926842f42b92a6d38c58b01887032a62442753e86ef"
+          ],
+          "all_evidence_ids": [
+            "evidence_0a8c069771dcd126022b629402cda3d813289766ef320789088ebcb18efb2db8",
+            "evidence_30831db51b58d4a74b7bb926842f42b92a6d38c58b01887032a62442753e86ef"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "requests-mh-09",
+      "mode": "LOCAL_LIVE_MODEL_GOLD_EVIDENCE",
+      "question": "How does `get_connection_with_tls_context` reach `_urllib3_request_context` through Requests internal calls?",
+      "expected_path": [
+        "src.requests.adapters.HTTPAdapter.get_connection_with_tls_context",
+        "src.requests.adapters.HTTPAdapter.build_connection_pool_key_attributes",
+        "src.requests.adapters._urllib3_request_context"
+      ],
+      "graph_path_ids": [
+        "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+        "sym_c6049a8c9510613499de5d743dd09988b35a4221be807503f8cba2b3eadbac9c",
+        "sym_ba4361872922dda7d118ddccfa19cdea8439a1230ebaa0802b0c68d1fb773a49"
+      ],
+      "graph_evidence_ids": [
+        "evidence_bb681e85aa59843873835c7c866a01c09cdc4b286af6e993e03c3ba9809a8743",
+        "evidence_cd6b7603ab8b75c9d9ba4eaeb0115a8c1016b4ae44566a2ace3d60ec33f60a6b",
+        "evidence_d45462ffb1d8813896cb5afe8a3cb6bffd50400fb6187aeed38c4e4765f48c0b",
+        "evidence_de76aa7d8a8cc88a4920ae2e96cf3df9aa8828432ff2f45926e68da4af60ee74"
+      ],
+      "answer": "The `get_connection_with_tls_context` method reaches `_urllib3_request_context` through the `build_connection_pool_key_attributes` method.",
+      "claims": [
+        {
+          "source": "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+          "target": "sym_c6049a8c9510613499de5d743dd09988b35a4221be807503f8cba2b3eadbac9c",
+          "evidence_ids": [
+            "evidence_d45462ffb1d8813896cb5afe8a3cb6bffd50400fb6187aeed38c4e4765f48c0b"
+          ]
+        },
+        {
+          "source": "sym_c6049a8c9510613499de5d743dd09988b35a4221be807503f8cba2b3eadbac9c",
+          "target": "sym_ba4361872922dda7d118ddccfa19cdea8439a1230ebaa0802b0c68d1fb773a49",
+          "evidence_ids": [
+            "evidence_cd6b7603ab8b75c9d9ba4eaeb0115a8c1016b4ae44566a2ace3d60ec33f60a6b"
+          ]
+        }
+      ],
+      "model_claims": [
+        {
+          "source": "n0",
+          "target": "n1",
+          "evidence_refs": [
+            "e0"
+          ]
+        },
+        {
+          "source": "n1",
+          "target": "n2",
+          "evidence_refs": [
+            "e1"
+          ]
+        }
+      ],
+      "abstain": false,
+      "uncertainty": "",
+      "scores": {
+        "claim_count": 2,
+        "supported_claim_count": 2,
+        "unsupported_claim_count": 0,
+        "unsupported_claim_rate": 0.0,
+        "validly_cited_claim_count": 2,
+        "citation_fidelity": 1.0,
+        "evidence_complete": true,
+        "expected_path_exact": true
+      },
+      "usage": {
+        "prompt_eval_count": 214,
+        "eval_count": 119,
+        "total_duration_ns": 26585221404,
+        "wall_latency_ms": 26597.768
+      },
+      "graph_evidence_by_edge": [
+        {
+          "source_id": "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+          "target_id": "sym_c6049a8c9510613499de5d743dd09988b35a4221be807503f8cba2b3eadbac9c",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_aa0361a42c50a5b05ca1a38f053181090ee15675cac849429b641cd87527f843",
+            "edge_e8b56aff31e204614e22bcc99682e576f77a6bed7c999783aeb9bf80ecdd04a7"
+          ],
+          "evidence_ids": [
+            "evidence_d45462ffb1d8813896cb5afe8a3cb6bffd50400fb6187aeed38c4e4765f48c0b"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_d45462ffb1d8813896cb5afe8a3cb6bffd50400fb6187aeed38c4e4765f48c0b"
+          ],
+          "all_evidence_ids": [
+            "evidence_de76aa7d8a8cc88a4920ae2e96cf3df9aa8828432ff2f45926e68da4af60ee74",
+            "evidence_d45462ffb1d8813896cb5afe8a3cb6bffd50400fb6187aeed38c4e4765f48c0b"
+          ]
+        },
+        {
+          "source_id": "sym_c6049a8c9510613499de5d743dd09988b35a4221be807503f8cba2b3eadbac9c",
+          "target_id": "sym_ba4361872922dda7d118ddccfa19cdea8439a1230ebaa0802b0c68d1fb773a49",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_ee8e45638a2ab76b89cfe87235baf9d72f99ac42793074639b0b122256c615b7",
+            "edge_5801156be93ef2cedcf0bf4b210d0db0d9d7b3dfa96594df3ee4f6ac09512856"
+          ],
+          "evidence_ids": [
+            "evidence_cd6b7603ab8b75c9d9ba4eaeb0115a8c1016b4ae44566a2ace3d60ec33f60a6b"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_cd6b7603ab8b75c9d9ba4eaeb0115a8c1016b4ae44566a2ace3d60ec33f60a6b"
+          ],
+          "all_evidence_ids": [
+            "evidence_bb681e85aa59843873835c7c866a01c09cdc4b286af6e993e03c3ba9809a8743",
+            "evidence_cd6b7603ab8b75c9d9ba4eaeb0115a8c1016b4ae44566a2ace3d60ec33f60a6b"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "requests-mh-10",
+      "mode": "LOCAL_LIVE_MODEL_GOLD_EVIDENCE",
+      "question": "How does `get_connection_with_tls_context` reach `proxy_headers` through Requests internal calls?",
+      "expected_path": [
+        "src.requests.adapters.HTTPAdapter.get_connection_with_tls_context",
+        "src.requests.adapters.HTTPAdapter.proxy_manager_for",
+        "src.requests.adapters.HTTPAdapter.proxy_headers"
+      ],
+      "graph_path_ids": [
+        "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+        "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+        "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422"
+      ],
+      "graph_evidence_ids": [
+        "evidence_7fc7f246280023530c0268da6fc9d4bf049f31e6ef309f558fd662985b83ada3",
+        "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180",
+        "evidence_9883d9e98ad4bbffe548294ff7740f3dc65ac707371a1166a1c9871ae93ca05e",
+        "evidence_a59274dbaef76fd4a7f5b354e7e88f3d33241ca1821932fc5e5d724e394ef594"
+      ],
+      "answer": "`get_connection_with_tls_context` reaches `proxy_headers` through the `proxy_manager_for` and `proxy_headers` properties of the `HTTPAdapter`.",
+      "claims": [
+        {
+          "source": "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+          "target": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "evidence_ids": [
+            "evidence_9883d9e98ad4bbffe548294ff7740f3dc65ac707371a1166a1c9871ae93ca05e",
+            "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+          ]
+        }
+      ],
+      "model_claims": [
+        {
+          "source": "n0",
+          "target": "n1",
+          "evidence_refs": [
+            "e0",
+            "e1"
+          ]
+        }
+      ],
+      "abstain": false,
+      "uncertainty": "",
+      "scores": {
+        "claim_count": 1,
+        "supported_claim_count": 1,
+        "unsupported_claim_count": 0,
+        "unsupported_claim_rate": 0.0,
+        "validly_cited_claim_count": 0,
+        "citation_fidelity": 0.0,
+        "evidence_complete": false,
+        "expected_path_exact": false
+      },
+      "usage": {
+        "prompt_eval_count": 207,
+        "eval_count": 96,
+        "total_duration_ns": 15241541224,
+        "wall_latency_ms": 15250.486
+      },
+      "graph_evidence_by_edge": [
+        {
+          "source_id": "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+          "target_id": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_2fb22d35a98fe5f206942db303eda76a5a9dd73143a10b6babad2703107bcfd2",
+            "edge_213c3880c7b1d966be22eb17aa3dd754b4b7e8717477a84dea5cbe6063cb0a11"
+          ],
+          "evidence_ids": [
+            "evidence_9883d9e98ad4bbffe548294ff7740f3dc65ac707371a1166a1c9871ae93ca05e"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_9883d9e98ad4bbffe548294ff7740f3dc65ac707371a1166a1c9871ae93ca05e"
+          ],
+          "all_evidence_ids": [
+            "evidence_a59274dbaef76fd4a7f5b354e7e88f3d33241ca1821932fc5e5d724e394ef594",
+            "evidence_9883d9e98ad4bbffe548294ff7740f3dc65ac707371a1166a1c9871ae93ca05e"
+          ]
+        },
+        {
+          "source_id": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "target_id": "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_b726d374ce8522739dce6689e6bb431dffe049aaa7d972953b6395a8406db367",
+            "edge_980b0f8f4900d6a14f8c7c13f657c875dc50059726a30572fa42d19d9de80fb3"
+          ],
+          "evidence_ids": [
+            "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+          ],
+          "all_evidence_ids": [
+            "evidence_7fc7f246280023530c0268da6fc9d4bf049f31e6ef309f558fd662985b83ada3",
+            "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "requests-mh-11",
+      "mode": "LOCAL_LIVE_MODEL_GOLD_EVIDENCE",
+      "question": "How does `get_connection_with_tls_context` reach `get_auth_from_url` through Requests internal calls?",
+      "expected_path": [
+        "src.requests.adapters.HTTPAdapter.get_connection_with_tls_context",
+        "src.requests.adapters.HTTPAdapter.proxy_manager_for",
+        "src.requests.utils.get_auth_from_url"
+      ],
+      "graph_path_ids": [
+        "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+        "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+        "sym_58c3813a6d3981f77334d80123ba406cdb671f9378c6ba0a981ccac1221629fc"
+      ],
+      "graph_evidence_ids": [
+        "evidence_2502ab6886af37c1de8465b69611138f41499206a21ef1c7449c8e73e894f45f",
+        "evidence_8e72d39289528ba71307e6f1c5c322434df1dd2819eb99c6e0a45ba955253fc8",
+        "evidence_9883d9e98ad4bbffe548294ff7740f3dc65ac707371a1166a1c9871ae93ca05e",
+        "evidence_a59274dbaef76fd4a7f5b354e7e88f3d33241ca1821932fc5e5d724e394ef594"
+      ],
+      "answer": "get_connection_with_tls_context reaches get_auth_from_url through Requests internal calls.",
+      "claims": [
+        {
+          "source": "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+          "target": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "evidence_ids": [
+            "evidence_9883d9e98ad4bbffe548294ff7740f3dc65ac707371a1166a1c9871ae93ca05e"
+          ]
+        },
+        {
+          "source": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "target": "sym_58c3813a6d3981f77334d80123ba406cdb671f9378c6ba0a981ccac1221629fc",
+          "evidence_ids": [
+            "evidence_8e72d39289528ba71307e6f1c5c322434df1dd2819eb99c6e0a45ba955253fc8"
+          ]
+        }
+      ],
+      "model_claims": [
+        {
+          "source": "n0",
+          "target": "n1",
+          "evidence_refs": [
+            "e0"
+          ]
+        },
+        {
+          "source": "n1",
+          "target": "n2",
+          "evidence_refs": [
+            "e1"
+          ]
+        }
+      ],
+      "abstain": false,
+      "uncertainty": "",
+      "scores": {
+        "claim_count": 2,
+        "supported_claim_count": 2,
+        "unsupported_claim_count": 0,
+        "unsupported_claim_rate": 0.0,
+        "validly_cited_claim_count": 2,
+        "citation_fidelity": 1.0,
+        "evidence_complete": true,
+        "expected_path_exact": true
+      },
+      "usage": {
+        "prompt_eval_count": 209,
+        "eval_count": 106,
+        "total_duration_ns": 13176654633,
+        "wall_latency_ms": 13183.624
+      },
+      "graph_evidence_by_edge": [
+        {
+          "source_id": "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+          "target_id": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_2fb22d35a98fe5f206942db303eda76a5a9dd73143a10b6babad2703107bcfd2",
+            "edge_213c3880c7b1d966be22eb17aa3dd754b4b7e8717477a84dea5cbe6063cb0a11"
+          ],
+          "evidence_ids": [
+            "evidence_9883d9e98ad4bbffe548294ff7740f3dc65ac707371a1166a1c9871ae93ca05e"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_9883d9e98ad4bbffe548294ff7740f3dc65ac707371a1166a1c9871ae93ca05e"
+          ],
+          "all_evidence_ids": [
+            "evidence_a59274dbaef76fd4a7f5b354e7e88f3d33241ca1821932fc5e5d724e394ef594",
+            "evidence_9883d9e98ad4bbffe548294ff7740f3dc65ac707371a1166a1c9871ae93ca05e"
+          ]
+        },
+        {
+          "source_id": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "target_id": "sym_58c3813a6d3981f77334d80123ba406cdb671f9378c6ba0a981ccac1221629fc",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_f3211409d1ecfb31bf4c4faa158c07bc1e4b333e790f87b62b51071c72cb6c9c",
+            "edge_8fa104f033f8c5862fbd9ca5bec2d04b2609dd0f09a7704888122be21ada7717"
+          ],
+          "evidence_ids": [
+            "evidence_8e72d39289528ba71307e6f1c5c322434df1dd2819eb99c6e0a45ba955253fc8"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_8e72d39289528ba71307e6f1c5c322434df1dd2819eb99c6e0a45ba955253fc8"
+          ],
+          "all_evidence_ids": [
+            "evidence_2502ab6886af37c1de8465b69611138f41499206a21ef1c7449c8e73e894f45f",
+            "evidence_8e72d39289528ba71307e6f1c5c322434df1dd2819eb99c6e0a45ba955253fc8"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "requests-mh-12",
+      "mode": "LOCAL_LIVE_MODEL_GOLD_EVIDENCE",
+      "question": "How does `get_connection_with_tls_context` reach `_basic_auth_str` through Requests internal calls?",
+      "expected_path": [
+        "src.requests.adapters.HTTPAdapter.get_connection_with_tls_context",
+        "src.requests.adapters.HTTPAdapter.proxy_manager_for",
+        "src.requests.adapters.HTTPAdapter.proxy_headers",
+        "src.requests.auth._basic_auth_str"
+      ],
+      "graph_path_ids": [
+        "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+        "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+        "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+        "sym_5e536621dc05a6e74be3d3ef179c24d7f74c73b5056e4900b3990d5a3b2fbbaa"
+      ],
+      "graph_evidence_ids": [
+        "evidence_4edbee5bdb776085c2368e6d72a3f6eaf4cb9c06988ea3ab688fd71466aae08a",
+        "evidence_7fc7f246280023530c0268da6fc9d4bf049f31e6ef309f558fd662985b83ada3",
+        "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180",
+        "evidence_9883d9e98ad4bbffe548294ff7740f3dc65ac707371a1166a1c9871ae93ca05e",
+        "evidence_a59274dbaef76fd4a7f5b354e7e88f3d33241ca1821932fc5e5d724e394ef594",
+        "evidence_e7e2b72bacdc11df53aa54a0d98f45a332f21d21c1be700bbe797b2e1d7421c9"
+      ],
+      "answer": "The `get_connection_with_tls_context` method reaches `_basic_auth_str` through the `requests.auth._basic_auth_str` internal call.",
+      "claims": [
+        {
+          "source": "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+          "target": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "evidence_ids": [
+            "evidence_9883d9e98ad4bbffe548294ff7740f3dc65ac707371a1166a1c9871ae93ca05e"
+          ]
+        },
+        {
+          "source": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "target": "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+          "evidence_ids": [
+            "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+          ]
+        },
+        {
+          "source": "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+          "target": "sym_5e536621dc05a6e74be3d3ef179c24d7f74c73b5056e4900b3990d5a3b2fbbaa",
+          "evidence_ids": [
+            "evidence_e7e2b72bacdc11df53aa54a0d98f45a332f21d21c1be700bbe797b2e1d7421c9"
+          ]
+        }
+      ],
+      "model_claims": [
+        {
+          "source": "n0",
+          "target": "n1",
+          "evidence_refs": [
+            "e0"
+          ]
+        },
+        {
+          "source": "n1",
+          "target": "n2",
+          "evidence_refs": [
+            "e1"
+          ]
+        },
+        {
+          "source": "n2",
+          "target": "n3",
+          "evidence_refs": [
+            "e2"
+          ]
+        }
+      ],
+      "abstain": false,
+      "uncertainty": "",
+      "scores": {
+        "claim_count": 3,
+        "supported_claim_count": 3,
+        "unsupported_claim_count": 0,
+        "unsupported_claim_rate": 0.0,
+        "validly_cited_claim_count": 3,
+        "citation_fidelity": 1.0,
+        "evidence_complete": true,
+        "expected_path_exact": true
+      },
+      "usage": {
+        "prompt_eval_count": 242,
+        "eval_count": 150,
+        "total_duration_ns": 19461623027,
+        "wall_latency_ms": 19469.64
+      },
+      "graph_evidence_by_edge": [
+        {
+          "source_id": "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+          "target_id": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_2fb22d35a98fe5f206942db303eda76a5a9dd73143a10b6babad2703107bcfd2",
+            "edge_213c3880c7b1d966be22eb17aa3dd754b4b7e8717477a84dea5cbe6063cb0a11"
+          ],
+          "evidence_ids": [
+            "evidence_9883d9e98ad4bbffe548294ff7740f3dc65ac707371a1166a1c9871ae93ca05e"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_9883d9e98ad4bbffe548294ff7740f3dc65ac707371a1166a1c9871ae93ca05e"
+          ],
+          "all_evidence_ids": [
+            "evidence_a59274dbaef76fd4a7f5b354e7e88f3d33241ca1821932fc5e5d724e394ef594",
+            "evidence_9883d9e98ad4bbffe548294ff7740f3dc65ac707371a1166a1c9871ae93ca05e"
+          ]
+        },
+        {
+          "source_id": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "target_id": "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_b726d374ce8522739dce6689e6bb431dffe049aaa7d972953b6395a8406db367",
+            "edge_980b0f8f4900d6a14f8c7c13f657c875dc50059726a30572fa42d19d9de80fb3"
+          ],
+          "evidence_ids": [
+            "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+          ],
+          "all_evidence_ids": [
+            "evidence_7fc7f246280023530c0268da6fc9d4bf049f31e6ef309f558fd662985b83ada3",
+            "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+          ]
+        },
+        {
+          "source_id": "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+          "target_id": "sym_5e536621dc05a6e74be3d3ef179c24d7f74c73b5056e4900b3990d5a3b2fbbaa",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_57c10a8052d7385ce486b9b493b38faf3c9fa5c7feed18a95ed4006502edc00a",
+            "edge_afe926d4ddecf7dc0186d8c12a1ed2ad12d30f1fca6d8376da1f17e1f2e5dd8a"
+          ],
+          "evidence_ids": [
+            "evidence_e7e2b72bacdc11df53aa54a0d98f45a332f21d21c1be700bbe797b2e1d7421c9"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_e7e2b72bacdc11df53aa54a0d98f45a332f21d21c1be700bbe797b2e1d7421c9"
+          ],
+          "all_evidence_ids": [
+            "evidence_4edbee5bdb776085c2368e6d72a3f6eaf4cb9c06988ea3ab688fd71466aae08a",
+            "evidence_e7e2b72bacdc11df53aa54a0d98f45a332f21d21c1be700bbe797b2e1d7421c9"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "requests-mh-13",
+      "mode": "LOCAL_LIVE_MODEL_GOLD_EVIDENCE",
+      "question": "How does `get_connection_with_tls_context` reach `get_auth_from_url` through Requests internal calls?",
+      "expected_path": [
+        "src.requests.adapters.HTTPAdapter.get_connection_with_tls_context",
+        "src.requests.adapters.HTTPAdapter.proxy_manager_for",
+        "src.requests.adapters.HTTPAdapter.proxy_headers",
+        "src.requests.utils.get_auth_from_url"
+      ],
+      "graph_path_ids": [
+        "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+        "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+        "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+        "sym_58c3813a6d3981f77334d80123ba406cdb671f9378c6ba0a981ccac1221629fc"
+      ],
+      "graph_evidence_ids": [
+        "evidence_0a8c069771dcd126022b629402cda3d813289766ef320789088ebcb18efb2db8",
+        "evidence_30831db51b58d4a74b7bb926842f42b92a6d38c58b01887032a62442753e86ef",
+        "evidence_7fc7f246280023530c0268da6fc9d4bf049f31e6ef309f558fd662985b83ada3",
+        "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180",
+        "evidence_9883d9e98ad4bbffe548294ff7740f3dc65ac707371a1166a1c9871ae93ca05e",
+        "evidence_a59274dbaef76fd4a7f5b354e7e88f3d33241ca1821932fc5e5d724e394ef594"
+      ],
+      "answer": "`get_connection_with_tls_context` reaches `get_auth_from_url` through Requests internal calls.",
+      "claims": [
+        {
+          "source": "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+          "target": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "evidence_ids": [
+            "evidence_9883d9e98ad4bbffe548294ff7740f3dc65ac707371a1166a1c9871ae93ca05e"
+          ]
+        },
+        {
+          "source": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "target": "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+          "evidence_ids": [
+            "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+          ]
+        },
+        {
+          "source": "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+          "target": "sym_58c3813a6d3981f77334d80123ba406cdb671f9378c6ba0a981ccac1221629fc",
+          "evidence_ids": [
+            "evidence_30831db51b58d4a74b7bb926842f42b92a6d38c58b01887032a62442753e86ef"
+          ]
+        }
+      ],
+      "model_claims": [
+        {
+          "source": "n0",
+          "target": "n1",
+          "evidence_refs": [
+            "e0"
+          ]
+        },
+        {
+          "source": "n1",
+          "target": "n2",
+          "evidence_refs": [
+            "e1"
+          ]
+        },
+        {
+          "source": "n2",
+          "target": "n3",
+          "evidence_refs": [
+            "e2"
+          ]
+        }
+      ],
+      "abstain": false,
+      "uncertainty": "",
+      "scores": {
+        "claim_count": 3,
+        "supported_claim_count": 3,
+        "unsupported_claim_count": 0,
+        "unsupported_claim_rate": 0.0,
+        "validly_cited_claim_count": 3,
+        "citation_fidelity": 1.0,
+        "evidence_complete": true,
+        "expected_path_exact": true
+      },
+      "usage": {
+        "prompt_eval_count": 243,
+        "eval_count": 141,
+        "total_duration_ns": 17388112071,
+        "wall_latency_ms": 17398.499
+      },
+      "graph_evidence_by_edge": [
+        {
+          "source_id": "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+          "target_id": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_2fb22d35a98fe5f206942db303eda76a5a9dd73143a10b6babad2703107bcfd2",
+            "edge_213c3880c7b1d966be22eb17aa3dd754b4b7e8717477a84dea5cbe6063cb0a11"
+          ],
+          "evidence_ids": [
+            "evidence_9883d9e98ad4bbffe548294ff7740f3dc65ac707371a1166a1c9871ae93ca05e"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_9883d9e98ad4bbffe548294ff7740f3dc65ac707371a1166a1c9871ae93ca05e"
+          ],
+          "all_evidence_ids": [
+            "evidence_a59274dbaef76fd4a7f5b354e7e88f3d33241ca1821932fc5e5d724e394ef594",
+            "evidence_9883d9e98ad4bbffe548294ff7740f3dc65ac707371a1166a1c9871ae93ca05e"
+          ]
+        },
+        {
+          "source_id": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "target_id": "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_b726d374ce8522739dce6689e6bb431dffe049aaa7d972953b6395a8406db367",
+            "edge_980b0f8f4900d6a14f8c7c13f657c875dc50059726a30572fa42d19d9de80fb3"
+          ],
+          "evidence_ids": [
+            "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+          ],
+          "all_evidence_ids": [
+            "evidence_7fc7f246280023530c0268da6fc9d4bf049f31e6ef309f558fd662985b83ada3",
+            "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+          ]
+        },
+        {
+          "source_id": "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+          "target_id": "sym_58c3813a6d3981f77334d80123ba406cdb671f9378c6ba0a981ccac1221629fc",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_84868eedfa47c3bb9415d611e46972d57d3d705d16ede306f7f3b0b6d987e9bd",
+            "edge_76565a69d55e6ae4eb7cabc828cebb0bb336aceba541c77fb4ffbd0e92e1a1e5"
+          ],
+          "evidence_ids": [
+            "evidence_30831db51b58d4a74b7bb926842f42b92a6d38c58b01887032a62442753e86ef"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_30831db51b58d4a74b7bb926842f42b92a6d38c58b01887032a62442753e86ef"
+          ],
+          "all_evidence_ids": [
+            "evidence_0a8c069771dcd126022b629402cda3d813289766ef320789088ebcb18efb2db8",
+            "evidence_30831db51b58d4a74b7bb926842f42b92a6d38c58b01887032a62442753e86ef"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "requests-mh-14",
+      "mode": "LOCAL_LIVE_MODEL_GOLD_EVIDENCE",
+      "question": "How does `proxy_headers` reach `to_native_string` through Requests internal calls?",
+      "expected_path": [
+        "src.requests.adapters.HTTPAdapter.proxy_headers",
+        "src.requests.auth._basic_auth_str",
+        "src.requests._internal_utils.to_native_string"
+      ],
+      "graph_path_ids": [
+        "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+        "sym_5e536621dc05a6e74be3d3ef179c24d7f74c73b5056e4900b3990d5a3b2fbbaa",
+        "sym_f3e6c38175502375442622dba5ac474e6e9e34268446bc2797ee6d601f13f815"
+      ],
+      "graph_evidence_ids": [
+        "evidence_0e428b95b4b898ae8aa2a13d5486731284500d80bcb4b3d1cb7ba185ed8fc5b8",
+        "evidence_4edbee5bdb776085c2368e6d72a3f6eaf4cb9c06988ea3ab688fd71466aae08a",
+        "evidence_772f7ea80b159adf62928f5792169dbf4cf83067ee6105c3974255101be2745a",
+        "evidence_e7e2b72bacdc11df53aa54a0d98f45a332f21d21c1be700bbe797b2e1d7421c9"
+      ],
+      "answer": "proxy_headers",
+      "claims": [
+        {
+          "source": "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+          "target": "sym_5e536621dc05a6e74be3d3ef179c24d7f74c73b5056e4900b3990d5a3b2fbbaa",
+          "evidence_ids": [
+            "evidence_e7e2b72bacdc11df53aa54a0d98f45a332f21d21c1be700bbe797b2e1d7421c9"
+          ]
+        },
+        {
+          "source": "sym_5e536621dc05a6e74be3d3ef179c24d7f74c73b5056e4900b3990d5a3b2fbbaa",
+          "target": "sym_f3e6c38175502375442622dba5ac474e6e9e34268446bc2797ee6d601f13f815",
+          "evidence_ids": [
+            "evidence_772f7ea80b159adf62928f5792169dbf4cf83067ee6105c3974255101be2745a"
+          ]
+        }
+      ],
+      "model_claims": [
+        {
+          "source": "n0",
+          "target": "n1",
+          "evidence_refs": [
+            "e0"
+          ]
+        },
+        {
+          "source": "n1",
+          "target": "n2",
+          "evidence_refs": [
+            "e1"
+          ]
+        }
+      ],
+      "abstain": false,
+      "uncertainty": "",
+      "scores": {
+        "claim_count": 2,
+        "supported_claim_count": 2,
+        "unsupported_claim_count": 0,
+        "unsupported_claim_rate": 0.0,
+        "validly_cited_claim_count": 2,
+        "citation_fidelity": 1.0,
+        "evidence_complete": true,
+        "expected_path_exact": true
+      },
+      "usage": {
+        "prompt_eval_count": 202,
+        "eval_count": 96,
+        "total_duration_ns": 10204862426,
+        "wall_latency_ms": 10212.571
+      },
+      "graph_evidence_by_edge": [
+        {
+          "source_id": "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+          "target_id": "sym_5e536621dc05a6e74be3d3ef179c24d7f74c73b5056e4900b3990d5a3b2fbbaa",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_57c10a8052d7385ce486b9b493b38faf3c9fa5c7feed18a95ed4006502edc00a",
+            "edge_afe926d4ddecf7dc0186d8c12a1ed2ad12d30f1fca6d8376da1f17e1f2e5dd8a"
+          ],
+          "evidence_ids": [
+            "evidence_e7e2b72bacdc11df53aa54a0d98f45a332f21d21c1be700bbe797b2e1d7421c9"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_e7e2b72bacdc11df53aa54a0d98f45a332f21d21c1be700bbe797b2e1d7421c9"
+          ],
+          "all_evidence_ids": [
+            "evidence_4edbee5bdb776085c2368e6d72a3f6eaf4cb9c06988ea3ab688fd71466aae08a",
+            "evidence_e7e2b72bacdc11df53aa54a0d98f45a332f21d21c1be700bbe797b2e1d7421c9"
+          ]
+        },
+        {
+          "source_id": "sym_5e536621dc05a6e74be3d3ef179c24d7f74c73b5056e4900b3990d5a3b2fbbaa",
+          "target_id": "sym_f3e6c38175502375442622dba5ac474e6e9e34268446bc2797ee6d601f13f815",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_d3b49bf3974b231ddf1fec4a18033f2e31fa31a00355e4bc920494df45c78f07",
+            "edge_99257719f9461abc15fca8814b73cba7f766493f0780b1d184709b5c57162dd1"
+          ],
+          "evidence_ids": [
+            "evidence_772f7ea80b159adf62928f5792169dbf4cf83067ee6105c3974255101be2745a"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_772f7ea80b159adf62928f5792169dbf4cf83067ee6105c3974255101be2745a"
+          ],
+          "all_evidence_ids": [
+            "evidence_0e428b95b4b898ae8aa2a13d5486731284500d80bcb4b3d1cb7ba185ed8fc5b8",
+            "evidence_772f7ea80b159adf62928f5792169dbf4cf83067ee6105c3974255101be2745a"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "requests-mh-15",
+      "mode": "LOCAL_LIVE_MODEL_GOLD_EVIDENCE",
+      "question": "How does `proxy_manager_for` reach `_basic_auth_str` through Requests internal calls?",
+      "expected_path": [
+        "src.requests.adapters.HTTPAdapter.proxy_manager_for",
+        "src.requests.adapters.HTTPAdapter.proxy_headers",
+        "src.requests.auth._basic_auth_str"
+      ],
+      "graph_path_ids": [
+        "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+        "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+        "sym_5e536621dc05a6e74be3d3ef179c24d7f74c73b5056e4900b3990d5a3b2fbbaa"
+      ],
+      "graph_evidence_ids": [
+        "evidence_4edbee5bdb776085c2368e6d72a3f6eaf4cb9c06988ea3ab688fd71466aae08a",
+        "evidence_7fc7f246280023530c0268da6fc9d4bf049f31e6ef309f558fd662985b83ada3",
+        "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180",
+        "evidence_e7e2b72bacdc11df53aa54a0d98f45a332f21d21c1be700bbe797b2e1d7421c9"
+      ],
+      "answer": "proxy_manager_for reaches _basic_auth_str through Requests internal calls by calling HTTPAdapter.proxy_headers.",
+      "claims": [
+        {
+          "source": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "target": "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+          "evidence_ids": [
+            "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+          ]
+        },
+        {
+          "source": "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+          "target": "sym_5e536621dc05a6e74be3d3ef179c24d7f74c73b5056e4900b3990d5a3b2fbbaa",
+          "evidence_ids": [
+            "evidence_e7e2b72bacdc11df53aa54a0d98f45a332f21d21c1be700bbe797b2e1d7421c9"
+          ]
+        }
+      ],
+      "model_claims": [
+        {
+          "source": "n0",
+          "target": "n1",
+          "evidence_refs": [
+            "e0"
+          ]
+        },
+        {
+          "source": "n1",
+          "target": "n2",
+          "evidence_refs": [
+            "e1"
+          ]
+        }
+      ],
+      "abstain": false,
+      "uncertainty": "",
+      "scores": {
+        "claim_count": 2,
+        "supported_claim_count": 2,
+        "unsupported_claim_count": 0,
+        "unsupported_claim_rate": 0.0,
+        "validly_cited_claim_count": 2,
+        "citation_fidelity": 1.0,
+        "evidence_complete": true,
+        "expected_path_exact": true
+      },
+      "usage": {
+        "prompt_eval_count": 203,
+        "eval_count": 110,
+        "total_duration_ns": 11136095807,
+        "wall_latency_ms": 11142.487
+      },
+      "graph_evidence_by_edge": [
+        {
+          "source_id": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "target_id": "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_b726d374ce8522739dce6689e6bb431dffe049aaa7d972953b6395a8406db367",
+            "edge_980b0f8f4900d6a14f8c7c13f657c875dc50059726a30572fa42d19d9de80fb3"
+          ],
+          "evidence_ids": [
+            "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+          ],
+          "all_evidence_ids": [
+            "evidence_7fc7f246280023530c0268da6fc9d4bf049f31e6ef309f558fd662985b83ada3",
+            "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+          ]
+        },
+        {
+          "source_id": "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+          "target_id": "sym_5e536621dc05a6e74be3d3ef179c24d7f74c73b5056e4900b3990d5a3b2fbbaa",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_57c10a8052d7385ce486b9b493b38faf3c9fa5c7feed18a95ed4006502edc00a",
+            "edge_afe926d4ddecf7dc0186d8c12a1ed2ad12d30f1fca6d8376da1f17e1f2e5dd8a"
+          ],
+          "evidence_ids": [
+            "evidence_e7e2b72bacdc11df53aa54a0d98f45a332f21d21c1be700bbe797b2e1d7421c9"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_e7e2b72bacdc11df53aa54a0d98f45a332f21d21c1be700bbe797b2e1d7421c9"
+          ],
+          "all_evidence_ids": [
+            "evidence_4edbee5bdb776085c2368e6d72a3f6eaf4cb9c06988ea3ab688fd71466aae08a",
+            "evidence_e7e2b72bacdc11df53aa54a0d98f45a332f21d21c1be700bbe797b2e1d7421c9"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "requests-mh-16",
+      "mode": "LOCAL_LIVE_MODEL_GOLD_EVIDENCE",
+      "question": "How does `proxy_manager_for` reach `get_auth_from_url` through Requests internal calls?",
+      "expected_path": [
+        "src.requests.adapters.HTTPAdapter.proxy_manager_for",
+        "src.requests.adapters.HTTPAdapter.proxy_headers",
+        "src.requests.utils.get_auth_from_url"
+      ],
+      "graph_path_ids": [
+        "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+        "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+        "sym_58c3813a6d3981f77334d80123ba406cdb671f9378c6ba0a981ccac1221629fc"
+      ],
+      "graph_evidence_ids": [
+        "evidence_0a8c069771dcd126022b629402cda3d813289766ef320789088ebcb18efb2db8",
+        "evidence_30831db51b58d4a74b7bb926842f42b92a6d38c58b01887032a62442753e86ef",
+        "evidence_7fc7f246280023530c0268da6fc9d4bf049f31e6ef309f558fd662985b83ada3",
+        "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+      ],
+      "answer": "proxy_manager_for reaches get_auth_from_url through Requests internal calls by calling HTTPAdapter.proxy_headers.",
+      "claims": [
+        {
+          "source": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "target": "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+          "evidence_ids": [
+            "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+          ]
+        },
+        {
+          "source": "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+          "target": "sym_58c3813a6d3981f77334d80123ba406cdb671f9378c6ba0a981ccac1221629fc",
+          "evidence_ids": [
+            "evidence_30831db51b58d4a74b7bb926842f42b92a6d38c58b01887032a62442753e86ef"
+          ]
+        }
+      ],
+      "model_claims": [
+        {
+          "source": "n0",
+          "target": "n1",
+          "evidence_refs": [
+            "e0"
+          ]
+        },
+        {
+          "source": "n1",
+          "target": "n2",
+          "evidence_refs": [
+            "e1"
+          ]
+        }
+      ],
+      "abstain": false,
+      "uncertainty": "",
+      "scores": {
+        "claim_count": 2,
+        "supported_claim_count": 2,
+        "unsupported_claim_count": 0,
+        "unsupported_claim_rate": 0.0,
+        "validly_cited_claim_count": 2,
+        "citation_fidelity": 1.0,
+        "evidence_complete": true,
+        "expected_path_exact": true
+      },
+      "usage": {
+        "prompt_eval_count": 204,
+        "eval_count": 110,
+        "total_duration_ns": 11614604840,
+        "wall_latency_ms": 11619.48
+      },
+      "graph_evidence_by_edge": [
+        {
+          "source_id": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "target_id": "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_b726d374ce8522739dce6689e6bb431dffe049aaa7d972953b6395a8406db367",
+            "edge_980b0f8f4900d6a14f8c7c13f657c875dc50059726a30572fa42d19d9de80fb3"
+          ],
+          "evidence_ids": [
+            "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+          ],
+          "all_evidence_ids": [
+            "evidence_7fc7f246280023530c0268da6fc9d4bf049f31e6ef309f558fd662985b83ada3",
+            "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+          ]
+        },
+        {
+          "source_id": "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+          "target_id": "sym_58c3813a6d3981f77334d80123ba406cdb671f9378c6ba0a981ccac1221629fc",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_84868eedfa47c3bb9415d611e46972d57d3d705d16ede306f7f3b0b6d987e9bd",
+            "edge_76565a69d55e6ae4eb7cabc828cebb0bb336aceba541c77fb4ffbd0e92e1a1e5"
+          ],
+          "evidence_ids": [
+            "evidence_30831db51b58d4a74b7bb926842f42b92a6d38c58b01887032a62442753e86ef"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_30831db51b58d4a74b7bb926842f42b92a6d38c58b01887032a62442753e86ef"
+          ],
+          "all_evidence_ids": [
+            "evidence_0a8c069771dcd126022b629402cda3d813289766ef320789088ebcb18efb2db8",
+            "evidence_30831db51b58d4a74b7bb926842f42b92a6d38c58b01887032a62442753e86ef"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "requests-mh-17",
+      "mode": "LOCAL_LIVE_MODEL_GOLD_EVIDENCE",
+      "question": "How does `proxy_manager_for` reach `to_native_string` through Requests internal calls?",
+      "expected_path": [
+        "src.requests.adapters.HTTPAdapter.proxy_manager_for",
+        "src.requests.adapters.HTTPAdapter.proxy_headers",
+        "src.requests.auth._basic_auth_str",
+        "src.requests._internal_utils.to_native_string"
+      ],
+      "graph_path_ids": [
+        "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+        "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+        "sym_5e536621dc05a6e74be3d3ef179c24d7f74c73b5056e4900b3990d5a3b2fbbaa",
+        "sym_f3e6c38175502375442622dba5ac474e6e9e34268446bc2797ee6d601f13f815"
+      ],
+      "graph_evidence_ids": [
+        "evidence_0e428b95b4b898ae8aa2a13d5486731284500d80bcb4b3d1cb7ba185ed8fc5b8",
+        "evidence_4edbee5bdb776085c2368e6d72a3f6eaf4cb9c06988ea3ab688fd71466aae08a",
+        "evidence_772f7ea80b159adf62928f5792169dbf4cf83067ee6105c3974255101be2745a",
+        "evidence_7fc7f246280023530c0268da6fc9d4bf049f31e6ef309f558fd662985b83ada3",
+        "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180",
+        "evidence_e7e2b72bacdc11df53aa54a0d98f45a332f21d21c1be700bbe797b2e1d7421c9"
+      ],
+      "answer": "proxy_manager_for reaches to_native_string through Requests internal calls by using the HTTPAdapter proxy manager and its headers.",
+      "claims": [
+        {
+          "source": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "target": "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+          "evidence_ids": [
+            "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+          ]
+        },
+        {
+          "source": "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+          "target": "sym_5e536621dc05a6e74be3d3ef179c24d7f74c73b5056e4900b3990d5a3b2fbbaa",
+          "evidence_ids": [
+            "evidence_e7e2b72bacdc11df53aa54a0d98f45a332f21d21c1be700bbe797b2e1d7421c9"
+          ]
+        },
+        {
+          "source": "sym_5e536621dc05a6e74be3d3ef179c24d7f74c73b5056e4900b3990d5a3b2fbbaa",
+          "target": "sym_f3e6c38175502375442622dba5ac474e6e9e34268446bc2797ee6d601f13f815",
+          "evidence_ids": [
+            "evidence_772f7ea80b159adf62928f5792169dbf4cf83067ee6105c3974255101be2745a"
+          ]
+        }
+      ],
+      "model_claims": [
+        {
+          "source": "n0",
+          "target": "n1",
+          "evidence_refs": [
+            "e0"
+          ]
+        },
+        {
+          "source": "n1",
+          "target": "n2",
+          "evidence_refs": [
+            "e1"
+          ]
+        },
+        {
+          "source": "n2",
+          "target": "n3",
+          "evidence_refs": [
+            "e2"
+          ]
+        }
+      ],
+      "abstain": false,
+      "uncertainty": "",
+      "scores": {
+        "claim_count": 3,
+        "supported_claim_count": 3,
+        "unsupported_claim_count": 0,
+        "unsupported_claim_rate": 0.0,
+        "validly_cited_claim_count": 3,
+        "citation_fidelity": 1.0,
+        "evidence_complete": true,
+        "expected_path_exact": true
+      },
+      "usage": {
+        "prompt_eval_count": 238,
+        "eval_count": 144,
+        "total_duration_ns": 15639146231,
+        "wall_latency_ms": 15646.755
+      },
+      "graph_evidence_by_edge": [
+        {
+          "source_id": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "target_id": "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_b726d374ce8522739dce6689e6bb431dffe049aaa7d972953b6395a8406db367",
+            "edge_980b0f8f4900d6a14f8c7c13f657c875dc50059726a30572fa42d19d9de80fb3"
+          ],
+          "evidence_ids": [
+            "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+          ],
+          "all_evidence_ids": [
+            "evidence_7fc7f246280023530c0268da6fc9d4bf049f31e6ef309f558fd662985b83ada3",
+            "evidence_8153104834683bd27064600566de698af517d974dbe983461a17c1cf1786a180"
+          ]
+        },
+        {
+          "source_id": "sym_9b8872749bb12ca44d5b4f661d9d24d29a430fe686bad772a5441c3e5a9c3422",
+          "target_id": "sym_5e536621dc05a6e74be3d3ef179c24d7f74c73b5056e4900b3990d5a3b2fbbaa",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_57c10a8052d7385ce486b9b493b38faf3c9fa5c7feed18a95ed4006502edc00a",
+            "edge_afe926d4ddecf7dc0186d8c12a1ed2ad12d30f1fca6d8376da1f17e1f2e5dd8a"
+          ],
+          "evidence_ids": [
+            "evidence_e7e2b72bacdc11df53aa54a0d98f45a332f21d21c1be700bbe797b2e1d7421c9"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_e7e2b72bacdc11df53aa54a0d98f45a332f21d21c1be700bbe797b2e1d7421c9"
+          ],
+          "all_evidence_ids": [
+            "evidence_4edbee5bdb776085c2368e6d72a3f6eaf4cb9c06988ea3ab688fd71466aae08a",
+            "evidence_e7e2b72bacdc11df53aa54a0d98f45a332f21d21c1be700bbe797b2e1d7421c9"
+          ]
+        },
+        {
+          "source_id": "sym_5e536621dc05a6e74be3d3ef179c24d7f74c73b5056e4900b3990d5a3b2fbbaa",
+          "target_id": "sym_f3e6c38175502375442622dba5ac474e6e9e34268446bc2797ee6d601f13f815",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_d3b49bf3974b231ddf1fec4a18033f2e31fa31a00355e4bc920494df45c78f07",
+            "edge_99257719f9461abc15fca8814b73cba7f766493f0780b1d184709b5c57162dd1"
+          ],
+          "evidence_ids": [
+            "evidence_772f7ea80b159adf62928f5792169dbf4cf83067ee6105c3974255101be2745a"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_772f7ea80b159adf62928f5792169dbf4cf83067ee6105c3974255101be2745a"
+          ],
+          "all_evidence_ids": [
+            "evidence_0e428b95b4b898ae8aa2a13d5486731284500d80bcb4b3d1cb7ba185ed8fc5b8",
+            "evidence_772f7ea80b159adf62928f5792169dbf4cf83067ee6105c3974255101be2745a"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "requests-mh-18",
+      "mode": "LOCAL_LIVE_MODEL_GOLD_EVIDENCE",
+      "question": "How does `send` reach `extract_cookies_to_jar` through Requests internal calls?",
+      "expected_path": [
+        "src.requests.adapters.HTTPAdapter.send",
+        "src.requests.adapters.HTTPAdapter.build_response",
+        "src.requests.cookies.extract_cookies_to_jar"
+      ],
+      "graph_path_ids": [
+        "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+        "sym_0efa62e0194105177799756135e4ec7b9ff7d2a017500642aa1d4ce46ef3d733",
+        "sym_195ccd7a31670b8ea536a13892709ede04c1f6c68b8d14ae586e9bc3bbe69b51"
+      ],
+      "graph_evidence_ids": [
+        "evidence_1e2f5e2e913388ba1fdad9e2faa93a515ccfe5466854dc3d9d6b04e6bfeea4db",
+        "evidence_8153fe326edbb26004d1ab4b3d7320b0068e12516b7039789847eda414d26c78",
+        "evidence_da797ff3ed5d837f9d5b0bf9642c3dfc71f7398342ba8edcb44a4be6578ae35e",
+        "evidence_fe9a4e1402af75e965d0416d55d3d18c9cb06d7a7acfeae004fd390ec1c3e409"
+      ],
+      "answer": "The `send` method of the HTTPAdapter class in Requests internal calls is used to send a request. The `build_response` method then builds the response object for the request.",
+      "claims": [
+        {
+          "source": "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+          "target": "sym_0efa62e0194105177799756135e4ec7b9ff7d2a017500642aa1d4ce46ef3d733",
+          "evidence_ids": [
+            "evidence_fe9a4e1402af75e965d0416d55d3d18c9cb06d7a7acfeae004fd390ec1c3e409"
+          ]
+        },
+        {
+          "source": "sym_0efa62e0194105177799756135e4ec7b9ff7d2a017500642aa1d4ce46ef3d733",
+          "target": "sym_195ccd7a31670b8ea536a13892709ede04c1f6c68b8d14ae586e9bc3bbe69b51",
+          "evidence_ids": [
+            "evidence_8153fe326edbb26004d1ab4b3d7320b0068e12516b7039789847eda414d26c78"
+          ]
+        }
+      ],
+      "model_claims": [
+        {
+          "source": "n0",
+          "target": "n1",
+          "evidence_refs": [
+            "e0"
+          ]
+        },
+        {
+          "source": "n1",
+          "target": "n2",
+          "evidence_refs": [
+            "e1"
+          ]
+        }
+      ],
+      "abstain": false,
+      "uncertainty": "",
+      "scores": {
+        "claim_count": 2,
+        "supported_claim_count": 2,
+        "unsupported_claim_count": 0,
+        "unsupported_claim_rate": 0.0,
+        "validly_cited_claim_count": 2,
+        "citation_fidelity": 1.0,
+        "evidence_complete": true,
+        "expected_path_exact": true
+      },
+      "usage": {
+        "prompt_eval_count": 202,
+        "eval_count": 135,
+        "total_duration_ns": 11974327010,
+        "wall_latency_ms": 11988.751
+      },
+      "graph_evidence_by_edge": [
+        {
+          "source_id": "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+          "target_id": "sym_0efa62e0194105177799756135e4ec7b9ff7d2a017500642aa1d4ce46ef3d733",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_8675ae72887192308ef229761d8bc50d9fb9f7e285fe0724cb76a6e436d60b56",
+            "edge_88029f8360dc06276ada2333922dd39b588b48253d35073ea13c2e67925908aa"
+          ],
+          "evidence_ids": [
+            "evidence_fe9a4e1402af75e965d0416d55d3d18c9cb06d7a7acfeae004fd390ec1c3e409"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_fe9a4e1402af75e965d0416d55d3d18c9cb06d7a7acfeae004fd390ec1c3e409"
+          ],
+          "all_evidence_ids": [
+            "evidence_1e2f5e2e913388ba1fdad9e2faa93a515ccfe5466854dc3d9d6b04e6bfeea4db",
+            "evidence_fe9a4e1402af75e965d0416d55d3d18c9cb06d7a7acfeae004fd390ec1c3e409"
+          ]
+        },
+        {
+          "source_id": "sym_0efa62e0194105177799756135e4ec7b9ff7d2a017500642aa1d4ce46ef3d733",
+          "target_id": "sym_195ccd7a31670b8ea536a13892709ede04c1f6c68b8d14ae586e9bc3bbe69b51",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_3eb989c1f0e77bdebc313b8d97e15f261a4f9069cbf082a39142f05578d33fe4",
+            "edge_c8c30e48e51d0306adf7a88aec3f482052b4043153613970b68219ab3f5b586d"
+          ],
+          "evidence_ids": [
+            "evidence_8153fe326edbb26004d1ab4b3d7320b0068e12516b7039789847eda414d26c78"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_8153fe326edbb26004d1ab4b3d7320b0068e12516b7039789847eda414d26c78"
+          ],
+          "all_evidence_ids": [
+            "evidence_da797ff3ed5d837f9d5b0bf9642c3dfc71f7398342ba8edcb44a4be6578ae35e",
+            "evidence_8153fe326edbb26004d1ab4b3d7320b0068e12516b7039789847eda414d26c78"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "requests-mh-19",
+      "mode": "LOCAL_LIVE_MODEL_GOLD_EVIDENCE",
+      "question": "How does `send` reach `Response` through Requests internal calls?",
+      "expected_path": [
+        "src.requests.adapters.HTTPAdapter.send",
+        "src.requests.adapters.HTTPAdapter.build_response",
+        "src.requests.models.Response"
+      ],
+      "graph_path_ids": [
+        "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+        "sym_0efa62e0194105177799756135e4ec7b9ff7d2a017500642aa1d4ce46ef3d733",
+        "sym_8fe5d2b1b8f2612af75198e472ef6a59665ff0f7169555fde11ae902e7e4d001"
+      ],
+      "graph_evidence_ids": [
+        "evidence_01a5bb9880317f2d740f4e2df75b6eb2ff3b2ce9ecd70f7ce41b24a36a1877c5",
+        "evidence_1e2f5e2e913388ba1fdad9e2faa93a515ccfe5466854dc3d9d6b04e6bfeea4db",
+        "evidence_7ff7bc2f92431676252fb888863f5fde4e064c770459698e5d6f17cc0dcd2a59",
+        "evidence_fe9a4e1402af75e965d0416d55d3d18c9cb06d7a7acfeae004fd390ec1c3e409"
+      ],
+      "answer": "The `send` method of the `HTTPAdapter` class in Requests internal calls is called by the `build_response` method.",
+      "claims": [
+        {
+          "source": "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+          "target": "sym_0efa62e0194105177799756135e4ec7b9ff7d2a017500642aa1d4ce46ef3d733",
+          "evidence_ids": [
+            "evidence_fe9a4e1402af75e965d0416d55d3d18c9cb06d7a7acfeae004fd390ec1c3e409"
+          ]
+        },
+        {
+          "source": "sym_0efa62e0194105177799756135e4ec7b9ff7d2a017500642aa1d4ce46ef3d733",
+          "target": "sym_8fe5d2b1b8f2612af75198e472ef6a59665ff0f7169555fde11ae902e7e4d001",
+          "evidence_ids": [
+            "evidence_01a5bb9880317f2d740f4e2df75b6eb2ff3b2ce9ecd70f7ce41b24a36a1877c5"
+          ]
+        }
+      ],
+      "model_claims": [
+        {
+          "source": "n0",
+          "target": "n1",
+          "evidence_refs": [
+            "e0"
+          ]
+        },
+        {
+          "source": "n1",
+          "target": "n2",
+          "evidence_refs": [
+            "e1"
+          ]
+        }
+      ],
+      "abstain": false,
+      "uncertainty": "",
+      "scores": {
+        "claim_count": 2,
+        "supported_claim_count": 2,
+        "unsupported_claim_count": 0,
+        "unsupported_claim_rate": 0.0,
+        "validly_cited_claim_count": 2,
+        "citation_fidelity": 1.0,
+        "evidence_complete": true,
+        "expected_path_exact": true
+      },
+      "usage": {
+        "prompt_eval_count": 194,
+        "eval_count": 117,
+        "total_duration_ns": 10386049358,
+        "wall_latency_ms": 10393.078
+      },
+      "graph_evidence_by_edge": [
+        {
+          "source_id": "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+          "target_id": "sym_0efa62e0194105177799756135e4ec7b9ff7d2a017500642aa1d4ce46ef3d733",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_8675ae72887192308ef229761d8bc50d9fb9f7e285fe0724cb76a6e436d60b56",
+            "edge_88029f8360dc06276ada2333922dd39b588b48253d35073ea13c2e67925908aa"
+          ],
+          "evidence_ids": [
+            "evidence_fe9a4e1402af75e965d0416d55d3d18c9cb06d7a7acfeae004fd390ec1c3e409"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_fe9a4e1402af75e965d0416d55d3d18c9cb06d7a7acfeae004fd390ec1c3e409"
+          ],
+          "all_evidence_ids": [
+            "evidence_1e2f5e2e913388ba1fdad9e2faa93a515ccfe5466854dc3d9d6b04e6bfeea4db",
+            "evidence_fe9a4e1402af75e965d0416d55d3d18c9cb06d7a7acfeae004fd390ec1c3e409"
+          ]
+        },
+        {
+          "source_id": "sym_0efa62e0194105177799756135e4ec7b9ff7d2a017500642aa1d4ce46ef3d733",
+          "target_id": "sym_8fe5d2b1b8f2612af75198e472ef6a59665ff0f7169555fde11ae902e7e4d001",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_7eafe5f241cd831c41d54cab739a31ee41f360c05fd70d10f09b74032609aa26",
+            "edge_f11d7ccc2c29c15f25bb0ab2d4577982d370a23574f335b09ca57e312bebbefe"
+          ],
+          "evidence_ids": [
+            "evidence_01a5bb9880317f2d740f4e2df75b6eb2ff3b2ce9ecd70f7ce41b24a36a1877c5"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_01a5bb9880317f2d740f4e2df75b6eb2ff3b2ce9ecd70f7ce41b24a36a1877c5"
+          ],
+          "all_evidence_ids": [
+            "evidence_7ff7bc2f92431676252fb888863f5fde4e064c770459698e5d6f17cc0dcd2a59",
+            "evidence_01a5bb9880317f2d740f4e2df75b6eb2ff3b2ce9ecd70f7ce41b24a36a1877c5"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "requests-mh-20",
+      "mode": "LOCAL_LIVE_MODEL_GOLD_EVIDENCE",
+      "question": "How does `send` reach `CaseInsensitiveDict` through Requests internal calls?",
+      "expected_path": [
+        "src.requests.adapters.HTTPAdapter.send",
+        "src.requests.adapters.HTTPAdapter.build_response",
+        "src.requests.structures.CaseInsensitiveDict"
+      ],
+      "graph_path_ids": [
+        "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+        "sym_0efa62e0194105177799756135e4ec7b9ff7d2a017500642aa1d4ce46ef3d733",
+        "sym_09be44456834374b908153e31177f60a0ab7717cfc7f32f5b5d352725d62f1c7"
+      ],
+      "graph_evidence_ids": [
+        "evidence_1e2f5e2e913388ba1fdad9e2faa93a515ccfe5466854dc3d9d6b04e6bfeea4db",
+        "evidence_eeadd500109fd07d2ca968ed776b988b223c8c68b49d2d2b8e8f3e0b7798b9f2",
+        "evidence_eee11e9dc0ee44cb342ec0aea335cf634ffe02b952297c0bff9a30edfa163a2a",
+        "evidence_fe9a4e1402af75e965d0416d55d3d18c9cb06d7a7acfeae004fd390ec1c3e409"
+      ],
+      "answer": "The `send` method of the `HTTPAdapter` class in Requests internal calls is called through the `build_response` method.",
+      "claims": [
+        {
+          "source": "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+          "target": "sym_0efa62e0194105177799756135e4ec7b9ff7d2a017500642aa1d4ce46ef3d733",
+          "evidence_ids": [
+            "evidence_fe9a4e1402af75e965d0416d55d3d18c9cb06d7a7acfeae004fd390ec1c3e409"
+          ]
+        },
+        {
+          "source": "sym_0efa62e0194105177799756135e4ec7b9ff7d2a017500642aa1d4ce46ef3d733",
+          "target": "sym_09be44456834374b908153e31177f60a0ab7717cfc7f32f5b5d352725d62f1c7",
+          "evidence_ids": [
+            "evidence_eee11e9dc0ee44cb342ec0aea335cf634ffe02b952297c0bff9a30edfa163a2a"
+          ]
+        }
+      ],
+      "model_claims": [
+        {
+          "source": "n0",
+          "target": "n1",
+          "evidence_refs": [
+            "e0"
+          ]
+        },
+        {
+          "source": "n1",
+          "target": "n2",
+          "evidence_refs": [
+            "e1"
+          ]
+        }
+      ],
+      "abstain": false,
+      "uncertainty": "",
+      "scores": {
+        "claim_count": 2,
+        "supported_claim_count": 2,
+        "unsupported_claim_count": 0,
+        "unsupported_claim_rate": 0.0,
+        "validly_cited_claim_count": 2,
+        "citation_fidelity": 1.0,
+        "evidence_complete": true,
+        "expected_path_exact": true
+      },
+      "usage": {
+        "prompt_eval_count": 200,
+        "eval_count": 125,
+        "total_duration_ns": 11557976774,
+        "wall_latency_ms": 11563.398
+      },
+      "graph_evidence_by_edge": [
+        {
+          "source_id": "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+          "target_id": "sym_0efa62e0194105177799756135e4ec7b9ff7d2a017500642aa1d4ce46ef3d733",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_8675ae72887192308ef229761d8bc50d9fb9f7e285fe0724cb76a6e436d60b56",
+            "edge_88029f8360dc06276ada2333922dd39b588b48253d35073ea13c2e67925908aa"
+          ],
+          "evidence_ids": [
+            "evidence_fe9a4e1402af75e965d0416d55d3d18c9cb06d7a7acfeae004fd390ec1c3e409"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_fe9a4e1402af75e965d0416d55d3d18c9cb06d7a7acfeae004fd390ec1c3e409"
+          ],
+          "all_evidence_ids": [
+            "evidence_1e2f5e2e913388ba1fdad9e2faa93a515ccfe5466854dc3d9d6b04e6bfeea4db",
+            "evidence_fe9a4e1402af75e965d0416d55d3d18c9cb06d7a7acfeae004fd390ec1c3e409"
+          ]
+        },
+        {
+          "source_id": "sym_0efa62e0194105177799756135e4ec7b9ff7d2a017500642aa1d4ce46ef3d733",
+          "target_id": "sym_09be44456834374b908153e31177f60a0ab7717cfc7f32f5b5d352725d62f1c7",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_7defab889eede943c049a8a040ab3c9363817c264ea125d986218625f93f0ed4",
+            "edge_658a0bac55efbe649878902ba2404f5074a1f1258f713a042ee7afc5b0cfeba0"
+          ],
+          "evidence_ids": [
+            "evidence_eee11e9dc0ee44cb342ec0aea335cf634ffe02b952297c0bff9a30edfa163a2a"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_eee11e9dc0ee44cb342ec0aea335cf634ffe02b952297c0bff9a30edfa163a2a"
+          ],
+          "all_evidence_ids": [
+            "evidence_eeadd500109fd07d2ca968ed776b988b223c8c68b49d2d2b8e8f3e0b7798b9f2",
+            "evidence_eee11e9dc0ee44cb342ec0aea335cf634ffe02b952297c0bff9a30edfa163a2a"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "requests-mh-21",
+      "mode": "LOCAL_LIVE_MODEL_GOLD_EVIDENCE",
+      "question": "How does `send` reach `get_encoding_from_headers` through Requests internal calls?",
+      "expected_path": [
+        "src.requests.adapters.HTTPAdapter.send",
+        "src.requests.adapters.HTTPAdapter.build_response",
+        "src.requests.utils.get_encoding_from_headers"
+      ],
+      "graph_path_ids": [
+        "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+        "sym_0efa62e0194105177799756135e4ec7b9ff7d2a017500642aa1d4ce46ef3d733",
+        "sym_f5a9127be3f31ce7e328bb83fb5a86746040f706543cccd672c42dcdb9101c71"
+      ],
+      "graph_evidence_ids": [
+        "evidence_0670f1ce71916566ddd772ec2c54275c5e252013e76ff563b9454f07d72f72a9",
+        "evidence_1e2f5e2e913388ba1fdad9e2faa93a515ccfe5466854dc3d9d6b04e6bfeea4db",
+        "evidence_8bc47a879bc6c11056ea25424e6db4a40ac8cc6d4133fd0156db4ae521729e07",
+        "evidence_fe9a4e1402af75e965d0416d55d3d18c9cb06d7a7acfeae004fd390ec1c3e409"
+      ],
+      "answer": "The `send` method of the `HTTPAdapter` class in Requests internal calls is called through the `get_encoding_from_headers` function.",
+      "claims": [
+        {
+          "source": "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+          "target": "sym_0efa62e0194105177799756135e4ec7b9ff7d2a017500642aa1d4ce46ef3d733",
+          "evidence_ids": [
+            "evidence_fe9a4e1402af75e965d0416d55d3d18c9cb06d7a7acfeae004fd390ec1c3e409"
+          ]
+        },
+        {
+          "source": "sym_0efa62e0194105177799756135e4ec7b9ff7d2a017500642aa1d4ce46ef3d733",
+          "target": "sym_f5a9127be3f31ce7e328bb83fb5a86746040f706543cccd672c42dcdb9101c71",
+          "evidence_ids": [
+            "evidence_8bc47a879bc6c11056ea25424e6db4a40ac8cc6d4133fd0156db4ae521729e07"
+          ]
+        }
+      ],
+      "model_claims": [
+        {
+          "source": "n0",
+          "target": "n1",
+          "evidence_refs": [
+            "e0"
+          ]
+        },
+        {
+          "source": "n1",
+          "target": "n2",
+          "evidence_refs": [
+            "e1"
+          ]
+        }
+      ],
+      "abstain": false,
+      "uncertainty": "",
+      "scores": {
+        "claim_count": 2,
+        "supported_claim_count": 2,
+        "unsupported_claim_count": 0,
+        "unsupported_claim_rate": 0.0,
+        "validly_cited_claim_count": 2,
+        "citation_fidelity": 1.0,
+        "evidence_complete": true,
+        "expected_path_exact": true
+      },
+      "usage": {
+        "prompt_eval_count": 200,
+        "eval_count": 119,
+        "total_duration_ns": 11393436438,
+        "wall_latency_ms": 11399.111
+      },
+      "graph_evidence_by_edge": [
+        {
+          "source_id": "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+          "target_id": "sym_0efa62e0194105177799756135e4ec7b9ff7d2a017500642aa1d4ce46ef3d733",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_8675ae72887192308ef229761d8bc50d9fb9f7e285fe0724cb76a6e436d60b56",
+            "edge_88029f8360dc06276ada2333922dd39b588b48253d35073ea13c2e67925908aa"
+          ],
+          "evidence_ids": [
+            "evidence_fe9a4e1402af75e965d0416d55d3d18c9cb06d7a7acfeae004fd390ec1c3e409"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_fe9a4e1402af75e965d0416d55d3d18c9cb06d7a7acfeae004fd390ec1c3e409"
+          ],
+          "all_evidence_ids": [
+            "evidence_1e2f5e2e913388ba1fdad9e2faa93a515ccfe5466854dc3d9d6b04e6bfeea4db",
+            "evidence_fe9a4e1402af75e965d0416d55d3d18c9cb06d7a7acfeae004fd390ec1c3e409"
+          ]
+        },
+        {
+          "source_id": "sym_0efa62e0194105177799756135e4ec7b9ff7d2a017500642aa1d4ce46ef3d733",
+          "target_id": "sym_f5a9127be3f31ce7e328bb83fb5a86746040f706543cccd672c42dcdb9101c71",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_eeb81108792541dbfba696d5d3343727e5a7d7a62a27721e28579148294f5c2d",
+            "edge_bed7fce096c38633b9e17e764eab157ae5a751d3c26f2a8a981a6f0e647f2276"
+          ],
+          "evidence_ids": [
+            "evidence_8bc47a879bc6c11056ea25424e6db4a40ac8cc6d4133fd0156db4ae521729e07"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_8bc47a879bc6c11056ea25424e6db4a40ac8cc6d4133fd0156db4ae521729e07"
+          ],
+          "all_evidence_ids": [
+            "evidence_0670f1ce71916566ddd772ec2c54275c5e252013e76ff563b9454f07d72f72a9",
+            "evidence_8bc47a879bc6c11056ea25424e6db4a40ac8cc6d4133fd0156db4ae521729e07"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "requests-mh-22",
+      "mode": "LOCAL_LIVE_MODEL_GOLD_EVIDENCE",
+      "question": "How does `send` reach `extract_zipped_paths` through Requests internal calls?",
+      "expected_path": [
+        "src.requests.adapters.HTTPAdapter.send",
+        "src.requests.adapters.HTTPAdapter.cert_verify",
+        "src.requests.utils.extract_zipped_paths"
+      ],
+      "graph_path_ids": [
+        "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+        "sym_9d2228c36e18eb1175964fe4856dd00598f3b17da38186569072a199d40ba35e",
+        "sym_589ba8144c57b36d1a11fdb8abb7ffa1671cb64067e6f4c7109762066c03ca8e"
+      ],
+      "graph_evidence_ids": [
+        "evidence_5cdc21625508a5313326381ec9c5bd8f102483bb08e86234e0fa56ac40f6f1a4",
+        "evidence_620c6e71edc95966354c3c8150636a157cc848b901781767afc4563531e581eb",
+        "evidence_a440a6eca3c99fe1c984339da2e932d0a73c9458ba8d8bf09d101c9feb01d864",
+        "evidence_c661bbb101240fbd9c9365d65a343fff374ad5a65f8c27274ee4e4ba953fc47e"
+      ],
+      "answer": "The `send` method of the HTTPAdapter class in Requests is called through the `extract_zipped_paths` function.",
+      "claims": [
+        {
+          "source": "src.requests.utils.extract_zipped_paths",
+          "target": "sym_589ba8144c57b36d1a11fdb8abb7ffa1671cb64067e6f4c7109762066c03ca8e",
+          "evidence_ids": [
+            "evidence_c661bbb101240fbd9c9365d65a343fff374ad5a65f8c27274ee4e4ba953fc47e"
+          ]
+        }
+      ],
+      "model_claims": [
+        {
+          "source": "src.requests.utils.extract_zipped_paths",
+          "target": "n2",
+          "evidence_refs": [
+            "e1"
+          ]
+        }
+      ],
+      "abstain": false,
+      "uncertainty": "",
+      "scores": {
+        "claim_count": 1,
+        "supported_claim_count": 0,
+        "unsupported_claim_count": 1,
+        "unsupported_claim_rate": 1.0,
+        "validly_cited_claim_count": 0,
+        "citation_fidelity": 0.0,
+        "evidence_complete": false,
+        "expected_path_exact": false
+      },
+      "usage": {
+        "prompt_eval_count": 200,
+        "eval_count": 93,
+        "total_duration_ns": 10845055165,
+        "wall_latency_ms": 10852.231
+      },
+      "graph_evidence_by_edge": [
+        {
+          "source_id": "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+          "target_id": "sym_9d2228c36e18eb1175964fe4856dd00598f3b17da38186569072a199d40ba35e",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_52a842916201c49a31b3be0f9b9974fcf63e06d7a55901093debd90c937438d8",
+            "edge_372a20818228df35d401d320869da28ec897494d90515aa1321f582f29ca98b7"
+          ],
+          "evidence_ids": [
+            "evidence_a440a6eca3c99fe1c984339da2e932d0a73c9458ba8d8bf09d101c9feb01d864"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_a440a6eca3c99fe1c984339da2e932d0a73c9458ba8d8bf09d101c9feb01d864"
+          ],
+          "all_evidence_ids": [
+            "evidence_5cdc21625508a5313326381ec9c5bd8f102483bb08e86234e0fa56ac40f6f1a4",
+            "evidence_a440a6eca3c99fe1c984339da2e932d0a73c9458ba8d8bf09d101c9feb01d864"
+          ]
+        },
+        {
+          "source_id": "sym_9d2228c36e18eb1175964fe4856dd00598f3b17da38186569072a199d40ba35e",
+          "target_id": "sym_589ba8144c57b36d1a11fdb8abb7ffa1671cb64067e6f4c7109762066c03ca8e",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_0f74da877d5de20d1f6dbd7b6a793f4201637beb86cccf7fb739bb99e796e03b",
+            "edge_a8336523ba703ff262aae1de5b534ee615223a6f16b3ef99a17135b84b7ffcf1"
+          ],
+          "evidence_ids": [
+            "evidence_c661bbb101240fbd9c9365d65a343fff374ad5a65f8c27274ee4e4ba953fc47e"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_c661bbb101240fbd9c9365d65a343fff374ad5a65f8c27274ee4e4ba953fc47e"
+          ],
+          "all_evidence_ids": [
+            "evidence_620c6e71edc95966354c3c8150636a157cc848b901781767afc4563531e581eb",
+            "evidence_c661bbb101240fbd9c9365d65a343fff374ad5a65f8c27274ee4e4ba953fc47e"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "requests-mh-23",
+      "mode": "LOCAL_LIVE_MODEL_GOLD_EVIDENCE",
+      "question": "How does `send` reach `build_connection_pool_key_attributes` through Requests internal calls?",
+      "expected_path": [
+        "src.requests.adapters.HTTPAdapter.send",
+        "src.requests.adapters.HTTPAdapter.get_connection_with_tls_context",
+        "src.requests.adapters.HTTPAdapter.build_connection_pool_key_attributes"
+      ],
+      "graph_path_ids": [
+        "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+        "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+        "sym_c6049a8c9510613499de5d743dd09988b35a4221be807503f8cba2b3eadbac9c"
+      ],
+      "graph_evidence_ids": [
+        "evidence_757f35b541a9a44f829c21b377a40ea547fb2a527f43398122a74d7eb3193b5c",
+        "evidence_a9399809a172c1d42726c07992199858f0795b9a00963fc8b4ae225fbd18af27",
+        "evidence_d45462ffb1d8813896cb5afe8a3cb6bffd50400fb6187aeed38c4e4765f48c0b",
+        "evidence_de76aa7d8a8cc88a4920ae2e96cf3df9aa8828432ff2f45926e68da4af60ee74"
+      ],
+      "answer": "The `send` method of the HTTPAdapter class is called to build a connection pool key attributes.",
+      "claims": [
+        {
+          "source": "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+          "target": "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+          "evidence_ids": [
+            "evidence_a9399809a172c1d42726c07992199858f0795b9a00963fc8b4ae225fbd18af27"
+          ]
+        },
+        {
+          "source": "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+          "target": "sym_c6049a8c9510613499de5d743dd09988b35a4221be807503f8cba2b3eadbac9c",
+          "evidence_ids": [
+            "evidence_d45462ffb1d8813896cb5afe8a3cb6bffd50400fb6187aeed38c4e4765f48c0b"
+          ]
+        }
+      ],
+      "model_claims": [
+        {
+          "source": "n0",
+          "target": "n1",
+          "evidence_refs": [
+            "e0"
+          ]
+        },
+        {
+          "source": "n1",
+          "target": "n2",
+          "evidence_refs": [
+            "e1"
+          ]
+        }
+      ],
+      "abstain": false,
+      "uncertainty": "",
+      "scores": {
+        "claim_count": 2,
+        "supported_claim_count": 2,
+        "unsupported_claim_count": 0,
+        "unsupported_claim_rate": 0.0,
+        "validly_cited_claim_count": 2,
+        "citation_fidelity": 1.0,
+        "evidence_complete": true,
+        "expected_path_exact": true
+      },
+      "usage": {
+        "prompt_eval_count": 207,
+        "eval_count": 119,
+        "total_duration_ns": 11196041897,
+        "wall_latency_ms": 11203.043
+      },
+      "graph_evidence_by_edge": [
+        {
+          "source_id": "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+          "target_id": "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_84d839325e402dec5bd4d8027d099544fd9a52f4e89eed7889b82908b485a040",
+            "edge_61a355c651de8fb33a5b3cf3d8e251009c8ac7a704420e0a8716d774c4b7ca24"
+          ],
+          "evidence_ids": [
+            "evidence_a9399809a172c1d42726c07992199858f0795b9a00963fc8b4ae225fbd18af27"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_a9399809a172c1d42726c07992199858f0795b9a00963fc8b4ae225fbd18af27"
+          ],
+          "all_evidence_ids": [
+            "evidence_757f35b541a9a44f829c21b377a40ea547fb2a527f43398122a74d7eb3193b5c",
+            "evidence_a9399809a172c1d42726c07992199858f0795b9a00963fc8b4ae225fbd18af27"
+          ]
+        },
+        {
+          "source_id": "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+          "target_id": "sym_c6049a8c9510613499de5d743dd09988b35a4221be807503f8cba2b3eadbac9c",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_aa0361a42c50a5b05ca1a38f053181090ee15675cac849429b641cd87527f843",
+            "edge_e8b56aff31e204614e22bcc99682e576f77a6bed7c999783aeb9bf80ecdd04a7"
+          ],
+          "evidence_ids": [
+            "evidence_d45462ffb1d8813896cb5afe8a3cb6bffd50400fb6187aeed38c4e4765f48c0b"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_d45462ffb1d8813896cb5afe8a3cb6bffd50400fb6187aeed38c4e4765f48c0b"
+          ],
+          "all_evidence_ids": [
+            "evidence_de76aa7d8a8cc88a4920ae2e96cf3df9aa8828432ff2f45926e68da4af60ee74",
+            "evidence_d45462ffb1d8813896cb5afe8a3cb6bffd50400fb6187aeed38c4e4765f48c0b"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "requests-mh-24",
+      "mode": "LOCAL_LIVE_MODEL_GOLD_EVIDENCE",
+      "question": "How does `send` reach `proxy_manager_for` through Requests internal calls?",
+      "expected_path": [
+        "src.requests.adapters.HTTPAdapter.send",
+        "src.requests.adapters.HTTPAdapter.get_connection_with_tls_context",
+        "src.requests.adapters.HTTPAdapter.proxy_manager_for"
+      ],
+      "graph_path_ids": [
+        "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+        "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+        "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6"
+      ],
+      "graph_evidence_ids": [
+        "evidence_757f35b541a9a44f829c21b377a40ea547fb2a527f43398122a74d7eb3193b5c",
+        "evidence_9883d9e98ad4bbffe548294ff7740f3dc65ac707371a1166a1c9871ae93ca05e",
+        "evidence_a59274dbaef76fd4a7f5b354e7e88f3d33241ca1821932fc5e5d724e394ef594",
+        "evidence_a9399809a172c1d42726c07992199858f0795b9a00963fc8b4ae225fbd18af27"
+      ],
+      "answer": "The `send` method of the `HTTPAdapter` class in Requests reaches `proxy_manager_for` through the `proxy_manager_for` internal call.",
+      "claims": [
+        {
+          "source": "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+          "target": "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+          "evidence_ids": [
+            "src.requests.adapters.HTTPAdapter.send",
+            "src.requests.adapters.HTTPAdapter.get_connection_with_tls_context"
+          ]
+        },
+        {
+          "source": "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+          "target": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "evidence_ids": [
+            "src.requests.adapters.HTTPAdapter.proxy_manager_for"
+          ]
+        }
+      ],
+      "model_claims": [
+        {
+          "source": "n0",
+          "target": "n1",
+          "evidence_refs": [
+            "src.requests.adapters.HTTPAdapter.send",
+            "src.requests.adapters.HTTPAdapter.get_connection_with_tls_context"
+          ]
+        },
+        {
+          "source": "n1",
+          "target": "n2",
+          "evidence_refs": [
+            "src.requests.adapters.HTTPAdapter.proxy_manager_for"
+          ]
+        }
+      ],
+      "abstain": false,
+      "uncertainty": "",
+      "scores": {
+        "claim_count": 2,
+        "supported_claim_count": 2,
+        "unsupported_claim_count": 0,
+        "unsupported_claim_rate": 0.0,
+        "validly_cited_claim_count": 0,
+        "citation_fidelity": 0.0,
+        "evidence_complete": false,
+        "expected_path_exact": true
+      },
+      "usage": {
+        "prompt_eval_count": 203,
+        "eval_count": 152,
+        "total_duration_ns": 15323906886,
+        "wall_latency_ms": 15331.887
+      },
+      "graph_evidence_by_edge": [
+        {
+          "source_id": "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+          "target_id": "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_84d839325e402dec5bd4d8027d099544fd9a52f4e89eed7889b82908b485a040",
+            "edge_61a355c651de8fb33a5b3cf3d8e251009c8ac7a704420e0a8716d774c4b7ca24"
+          ],
+          "evidence_ids": [
+            "evidence_a9399809a172c1d42726c07992199858f0795b9a00963fc8b4ae225fbd18af27"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_a9399809a172c1d42726c07992199858f0795b9a00963fc8b4ae225fbd18af27"
+          ],
+          "all_evidence_ids": [
+            "evidence_757f35b541a9a44f829c21b377a40ea547fb2a527f43398122a74d7eb3193b5c",
+            "evidence_a9399809a172c1d42726c07992199858f0795b9a00963fc8b4ae225fbd18af27"
+          ]
+        },
+        {
+          "source_id": "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+          "target_id": "sym_0645f4d205939c3e1edfa57e69602802de3671d2b1cac470a9854809256685d6",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_2fb22d35a98fe5f206942db303eda76a5a9dd73143a10b6babad2703107bcfd2",
+            "edge_213c3880c7b1d966be22eb17aa3dd754b4b7e8717477a84dea5cbe6063cb0a11"
+          ],
+          "evidence_ids": [
+            "evidence_9883d9e98ad4bbffe548294ff7740f3dc65ac707371a1166a1c9871ae93ca05e"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_9883d9e98ad4bbffe548294ff7740f3dc65ac707371a1166a1c9871ae93ca05e"
+          ],
+          "all_evidence_ids": [
+            "evidence_a59274dbaef76fd4a7f5b354e7e88f3d33241ca1821932fc5e5d724e394ef594",
+            "evidence_9883d9e98ad4bbffe548294ff7740f3dc65ac707371a1166a1c9871ae93ca05e"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "requests-mh-25",
+      "mode": "LOCAL_LIVE_MODEL_GOLD_EVIDENCE",
+      "question": "How does `send` reach `InvalidProxyURL` through Requests internal calls?",
+      "expected_path": [
+        "src.requests.adapters.HTTPAdapter.send",
+        "src.requests.adapters.HTTPAdapter.get_connection_with_tls_context",
+        "src.requests.exceptions.InvalidProxyURL"
+      ],
+      "graph_path_ids": [
+        "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+        "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+        "sym_95a5790c42336f48a518b3f6ffbd12b9bc3cda9bc27ad219734d63c0ff0c5dbb"
+      ],
+      "graph_evidence_ids": [
+        "evidence_757f35b541a9a44f829c21b377a40ea547fb2a527f43398122a74d7eb3193b5c",
+        "evidence_a9399809a172c1d42726c07992199858f0795b9a00963fc8b4ae225fbd18af27",
+        "evidence_ba77baba14a272010d36840f2d104b53882252b4ff14122400b1c3dc1b905d82",
+        "evidence_ca44179647264eaf2bc35ff36e2520e0d8b6fd54d73b414f58b632965bb6d0ed"
+      ],
+      "answer": "The `send` method of the `HTTPAdapter` class in Requests reaches the `InvalidProxyURL` through internal calls.",
+      "claims": [
+        {
+          "source": "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+          "target": "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+          "evidence_ids": [
+            "src.requests.adapters.HTTPAdapter.send",
+            "src.requests.adapters.HTTPAdapter.get_connection_with_tls_context"
+          ]
+        },
+        {
+          "source": "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+          "target": "sym_95a5790c42336f48a518b3f6ffbd12b9bc3cda9bc27ad219734d63c0ff0c5dbb",
+          "evidence_ids": [
+            "src.requests.exceptions.InvalidProxyURL"
+          ]
+        }
+      ],
+      "model_claims": [
+        {
+          "source": "n0",
+          "target": "n1",
+          "evidence_refs": [
+            "src.requests.adapters.HTTPAdapter.send",
+            "src.requests.adapters.HTTPAdapter.get_connection_with_tls_context"
+          ]
+        },
+        {
+          "source": "n1",
+          "target": "n2",
+          "evidence_refs": [
+            "src.requests.exceptions.InvalidProxyURL"
+          ]
+        }
+      ],
+      "abstain": false,
+      "uncertainty": "",
+      "scores": {
+        "claim_count": 2,
+        "supported_claim_count": 2,
+        "unsupported_claim_count": 0,
+        "unsupported_claim_rate": 0.0,
+        "validly_cited_claim_count": 0,
+        "citation_fidelity": 0.0,
+        "evidence_complete": false,
+        "expected_path_exact": true
+      },
+      "usage": {
+        "prompt_eval_count": 201,
+        "eval_count": 145,
+        "total_duration_ns": 14888950360,
+        "wall_latency_ms": 14893.157
+      },
+      "graph_evidence_by_edge": [
+        {
+          "source_id": "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+          "target_id": "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_84d839325e402dec5bd4d8027d099544fd9a52f4e89eed7889b82908b485a040",
+            "edge_61a355c651de8fb33a5b3cf3d8e251009c8ac7a704420e0a8716d774c4b7ca24"
+          ],
+          "evidence_ids": [
+            "evidence_a9399809a172c1d42726c07992199858f0795b9a00963fc8b4ae225fbd18af27"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_a9399809a172c1d42726c07992199858f0795b9a00963fc8b4ae225fbd18af27"
+          ],
+          "all_evidence_ids": [
+            "evidence_757f35b541a9a44f829c21b377a40ea547fb2a527f43398122a74d7eb3193b5c",
+            "evidence_a9399809a172c1d42726c07992199858f0795b9a00963fc8b4ae225fbd18af27"
+          ]
+        },
+        {
+          "source_id": "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+          "target_id": "sym_95a5790c42336f48a518b3f6ffbd12b9bc3cda9bc27ad219734d63c0ff0c5dbb",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_2f64e2c071f5a63742ee1f00251dd84054d845c7c47c2fc497b809c0a311f0ab",
+            "edge_413560d37dc1a7cbf8b4a7bb8eb055facf37022dde3008306f8ca6f030634020"
+          ],
+          "evidence_ids": [
+            "evidence_ca44179647264eaf2bc35ff36e2520e0d8b6fd54d73b414f58b632965bb6d0ed"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_ca44179647264eaf2bc35ff36e2520e0d8b6fd54d73b414f58b632965bb6d0ed"
+          ],
+          "all_evidence_ids": [
+            "evidence_ba77baba14a272010d36840f2d104b53882252b4ff14122400b1c3dc1b905d82",
+            "evidence_ca44179647264eaf2bc35ff36e2520e0d8b6fd54d73b414f58b632965bb6d0ed"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "requests-mh-26",
+      "mode": "LOCAL_LIVE_MODEL_GOLD_EVIDENCE",
+      "question": "How does `send` reach `InvalidURL` through Requests internal calls?",
+      "expected_path": [
+        "src.requests.adapters.HTTPAdapter.send",
+        "src.requests.adapters.HTTPAdapter.get_connection_with_tls_context",
+        "src.requests.exceptions.InvalidURL"
+      ],
+      "graph_path_ids": [
+        "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+        "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+        "sym_3fb0acd0efb8421e37a91162c30dcf2bc6d02e28b1c9566bef0ee1ff4ec19053"
+      ],
+      "graph_evidence_ids": [
+        "evidence_0b56ed2b0ff2c183640e9ef186a145ec986493f7e55edd94bff5c0d4ed52d246",
+        "evidence_757f35b541a9a44f829c21b377a40ea547fb2a527f43398122a74d7eb3193b5c",
+        "evidence_a9399809a172c1d42726c07992199858f0795b9a00963fc8b4ae225fbd18af27",
+        "evidence_afa345e94c129e51c949433d2fae9a72d6d05dd39ec1e5c4a770c655a92ee825"
+      ],
+      "answer": "The `send` method of the `HTTPAdapter` class in Requests reaches the `InvalidURL` through the `get_connection_with_tls_context` method.",
+      "claims": [
+        {
+          "source": "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+          "target": "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+          "evidence_ids": [
+            "evidence_a9399809a172c1d42726c07992199858f0795b9a00963fc8b4ae225fbd18af27"
+          ]
+        },
+        {
+          "source": "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+          "target": "sym_3fb0acd0efb8421e37a91162c30dcf2bc6d02e28b1c9566bef0ee1ff4ec19053",
+          "evidence_ids": [
+            "evidence_afa345e94c129e51c949433d2fae9a72d6d05dd39ec1e5c4a770c655a92ee825"
+          ]
+        }
+      ],
+      "model_claims": [
+        {
+          "source": "n0",
+          "target": "n1",
+          "evidence_refs": [
+            "e0"
+          ]
+        },
+        {
+          "source": "n1",
+          "target": "n2",
+          "evidence_refs": [
+            "e1"
+          ]
+        }
+      ],
+      "abstain": false,
+      "uncertainty": "",
+      "scores": {
+        "claim_count": 2,
+        "supported_claim_count": 2,
+        "unsupported_claim_count": 0,
+        "unsupported_claim_rate": 0.0,
+        "validly_cited_claim_count": 2,
+        "citation_fidelity": 1.0,
+        "evidence_complete": true,
+        "expected_path_exact": true
+      },
+      "usage": {
+        "prompt_eval_count": 199,
+        "eval_count": 122,
+        "total_duration_ns": 17135604314,
+        "wall_latency_ms": 17145.338
+      },
+      "graph_evidence_by_edge": [
+        {
+          "source_id": "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+          "target_id": "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_84d839325e402dec5bd4d8027d099544fd9a52f4e89eed7889b82908b485a040",
+            "edge_61a355c651de8fb33a5b3cf3d8e251009c8ac7a704420e0a8716d774c4b7ca24"
+          ],
+          "evidence_ids": [
+            "evidence_a9399809a172c1d42726c07992199858f0795b9a00963fc8b4ae225fbd18af27"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_a9399809a172c1d42726c07992199858f0795b9a00963fc8b4ae225fbd18af27"
+          ],
+          "all_evidence_ids": [
+            "evidence_757f35b541a9a44f829c21b377a40ea547fb2a527f43398122a74d7eb3193b5c",
+            "evidence_a9399809a172c1d42726c07992199858f0795b9a00963fc8b4ae225fbd18af27"
+          ]
+        },
+        {
+          "source_id": "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+          "target_id": "sym_3fb0acd0efb8421e37a91162c30dcf2bc6d02e28b1c9566bef0ee1ff4ec19053",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_818198e0fc49559f9dd43c2a25063ca6679a7f5275b27bdb4a0143cbb563162e",
+            "edge_b3b358cca54a959536eb7c05af76f24d5efe3221b82f03324caccd1e715f671e"
+          ],
+          "evidence_ids": [
+            "evidence_afa345e94c129e51c949433d2fae9a72d6d05dd39ec1e5c4a770c655a92ee825"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_afa345e94c129e51c949433d2fae9a72d6d05dd39ec1e5c4a770c655a92ee825"
+          ],
+          "all_evidence_ids": [
+            "evidence_0b56ed2b0ff2c183640e9ef186a145ec986493f7e55edd94bff5c0d4ed52d246",
+            "evidence_afa345e94c129e51c949433d2fae9a72d6d05dd39ec1e5c4a770c655a92ee825"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "requests-mh-27",
+      "mode": "LOCAL_LIVE_MODEL_GOLD_EVIDENCE",
+      "question": "How does `send` reach `prepend_scheme_if_needed` through Requests internal calls?",
+      "expected_path": [
+        "src.requests.adapters.HTTPAdapter.send",
+        "src.requests.adapters.HTTPAdapter.get_connection_with_tls_context",
+        "src.requests.utils.prepend_scheme_if_needed"
+      ],
+      "graph_path_ids": [
+        "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+        "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+        "sym_e4c63c5c65e68927c004f8edaee4fb1098cad850455bf301fcb3651c6d40e59b"
+      ],
+      "graph_evidence_ids": [
+        "evidence_32b6828eba3cf17b9dd73084bb46a6dbe1cdfa8464d9286d70154e8f67b4e38f",
+        "evidence_4712c10b0cfdfa678d6373f1280ec104f5d54925eead89f0042c14c993420e90",
+        "evidence_757f35b541a9a44f829c21b377a40ea547fb2a527f43398122a74d7eb3193b5c",
+        "evidence_a9399809a172c1d42726c07992199858f0795b9a00963fc8b4ae225fbd18af27"
+      ],
+      "answer": "The `send` method of the `HTTPAdapter` class in Requests reaches `prepend_scheme_if_needed` through the `get_connection_with_tls_context` method.",
+      "claims": [
+        {
+          "source": "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+          "target": "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+          "evidence_ids": [
+            "src.requests.adapters.HTTPAdapter.send",
+            "src.requests.utils.prepend_scheme_if_needed"
+          ]
+        },
+        {
+          "source": "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+          "target": "sym_e4c63c5c65e68927c004f8edaee4fb1098cad850455bf301fcb3651c6d40e59b",
+          "evidence_ids": [
+            "src.requests.adapters.HTTPAdapter.get_connection_with_tls_context"
+          ]
+        }
+      ],
+      "model_claims": [
+        {
+          "source": "n0",
+          "target": "n1",
+          "evidence_refs": [
+            "src.requests.adapters.HTTPAdapter.send",
+            "src.requests.utils.prepend_scheme_if_needed"
+          ]
+        },
+        {
+          "source": "n1",
+          "target": "n2",
+          "evidence_refs": [
+            "src.requests.adapters.HTTPAdapter.get_connection_with_tls_context"
+          ]
+        }
+      ],
+      "abstain": false,
+      "uncertainty": "",
+      "scores": {
+        "claim_count": 2,
+        "supported_claim_count": 2,
+        "unsupported_claim_count": 0,
+        "unsupported_claim_rate": 0.0,
+        "validly_cited_claim_count": 0,
+        "citation_fidelity": 0.0,
+        "evidence_complete": false,
+        "expected_path_exact": true
+      },
+      "usage": {
+        "prompt_eval_count": 203,
+        "eval_count": 153,
+        "total_duration_ns": 16660715489,
+        "wall_latency_ms": 16666.18
+      },
+      "graph_evidence_by_edge": [
+        {
+          "source_id": "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+          "target_id": "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_84d839325e402dec5bd4d8027d099544fd9a52f4e89eed7889b82908b485a040",
+            "edge_61a355c651de8fb33a5b3cf3d8e251009c8ac7a704420e0a8716d774c4b7ca24"
+          ],
+          "evidence_ids": [
+            "evidence_a9399809a172c1d42726c07992199858f0795b9a00963fc8b4ae225fbd18af27"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_a9399809a172c1d42726c07992199858f0795b9a00963fc8b4ae225fbd18af27"
+          ],
+          "all_evidence_ids": [
+            "evidence_757f35b541a9a44f829c21b377a40ea547fb2a527f43398122a74d7eb3193b5c",
+            "evidence_a9399809a172c1d42726c07992199858f0795b9a00963fc8b4ae225fbd18af27"
+          ]
+        },
+        {
+          "source_id": "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+          "target_id": "sym_e4c63c5c65e68927c004f8edaee4fb1098cad850455bf301fcb3651c6d40e59b",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_92cb3b33a60c17277315e9f2a3136a7b3502d4173db360d6ef278e8aba46ce04",
+            "edge_ec1f03c279355ff452addabb8ef0dcf168044af82f367da79236303643ca1e8a"
+          ],
+          "evidence_ids": [
+            "evidence_4712c10b0cfdfa678d6373f1280ec104f5d54925eead89f0042c14c993420e90"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_4712c10b0cfdfa678d6373f1280ec104f5d54925eead89f0042c14c993420e90"
+          ],
+          "all_evidence_ids": [
+            "evidence_32b6828eba3cf17b9dd73084bb46a6dbe1cdfa8464d9286d70154e8f67b4e38f",
+            "evidence_4712c10b0cfdfa678d6373f1280ec104f5d54925eead89f0042c14c993420e90"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "requests-mh-28",
+      "mode": "LOCAL_LIVE_MODEL_GOLD_EVIDENCE",
+      "question": "How does `send` reach `select_proxy` through Requests internal calls?",
+      "expected_path": [
+        "src.requests.adapters.HTTPAdapter.send",
+        "src.requests.adapters.HTTPAdapter.get_connection_with_tls_context",
+        "src.requests.utils.select_proxy"
+      ],
+      "graph_path_ids": [
+        "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+        "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+        "sym_078400173a6c34f123060d378911a810bb7b2924ea8fa2eebfd2ad2fd9ae5b10"
+      ],
+      "graph_evidence_ids": [
+        "evidence_75274ed0d47454491cb29d1bc62b228f1f5c790d4d27c22c33ea8e2601d6de25",
+        "evidence_757f35b541a9a44f829c21b377a40ea547fb2a527f43398122a74d7eb3193b5c",
+        "evidence_a9399809a172c1d42726c07992199858f0795b9a00963fc8b4ae225fbd18af27",
+        "evidence_e79d4b9bcce2646cc662900901602bbfa49910fd6f16eaaf9f8f9ed58c88bdaa"
+      ],
+      "answer": "The `send` method of the HTTPAdapter class in Requests reaches the `select_proxy` through the `get_connection_with_tls_context` method.",
+      "claims": [
+        {
+          "source": "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+          "target": "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+          "evidence_ids": [
+            "src.requests.adapters.HTTPAdapter.send"
+          ]
+        },
+        {
+          "source": "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+          "target": "sym_078400173a6c34f123060d378911a810bb7b2924ea8fa2eebfd2ad2fd9ae5b10",
+          "evidence_ids": [
+            "src.requests.utils.select_proxy"
+          ]
+        }
+      ],
+      "model_claims": [
+        {
+          "source": "n0",
+          "target": "n1",
+          "evidence_refs": [
+            "src.requests.adapters.HTTPAdapter.send"
+          ]
+        },
+        {
+          "source": "n1",
+          "target": "n2",
+          "evidence_refs": [
+            "src.requests.utils.select_proxy"
+          ]
+        }
+      ],
+      "abstain": false,
+      "uncertainty": "",
+      "scores": {
+        "claim_count": 2,
+        "supported_claim_count": 2,
+        "unsupported_claim_count": 0,
+        "unsupported_claim_rate": 0.0,
+        "validly_cited_claim_count": 0,
+        "citation_fidelity": 0.0,
+        "evidence_complete": false,
+        "expected_path_exact": true
+      },
+      "usage": {
+        "prompt_eval_count": 199,
+        "eval_count": 135,
+        "total_duration_ns": 13739940796,
+        "wall_latency_ms": 13744.079
+      },
+      "graph_evidence_by_edge": [
+        {
+          "source_id": "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+          "target_id": "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_84d839325e402dec5bd4d8027d099544fd9a52f4e89eed7889b82908b485a040",
+            "edge_61a355c651de8fb33a5b3cf3d8e251009c8ac7a704420e0a8716d774c4b7ca24"
+          ],
+          "evidence_ids": [
+            "evidence_a9399809a172c1d42726c07992199858f0795b9a00963fc8b4ae225fbd18af27"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_a9399809a172c1d42726c07992199858f0795b9a00963fc8b4ae225fbd18af27"
+          ],
+          "all_evidence_ids": [
+            "evidence_757f35b541a9a44f829c21b377a40ea547fb2a527f43398122a74d7eb3193b5c",
+            "evidence_a9399809a172c1d42726c07992199858f0795b9a00963fc8b4ae225fbd18af27"
+          ]
+        },
+        {
+          "source_id": "sym_9369c07a5ead8b67da85d1dd4fbb802b9f9a691872ef147bf34e321f7b48a7b1",
+          "target_id": "sym_078400173a6c34f123060d378911a810bb7b2924ea8fa2eebfd2ad2fd9ae5b10",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_3112f5fb1aeb0831e410e4a13f2912b689f99c0cce2655fe7ac6381bb6b524d3",
+            "edge_0615c7b09e168115a8fab1c2479d860cc8c9d38aae36f39fbbb73cf0dff93491"
+          ],
+          "evidence_ids": [
+            "evidence_75274ed0d47454491cb29d1bc62b228f1f5c790d4d27c22c33ea8e2601d6de25"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_75274ed0d47454491cb29d1bc62b228f1f5c790d4d27c22c33ea8e2601d6de25"
+          ],
+          "all_evidence_ids": [
+            "evidence_e79d4b9bcce2646cc662900901602bbfa49910fd6f16eaaf9f8f9ed58c88bdaa",
+            "evidence_75274ed0d47454491cb29d1bc62b228f1f5c790d4d27c22c33ea8e2601d6de25"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "requests-mh-29",
+      "mode": "LOCAL_LIVE_MODEL_GOLD_EVIDENCE",
+      "question": "How does `send` reach `select_proxy` through Requests internal calls?",
+      "expected_path": [
+        "src.requests.adapters.HTTPAdapter.send",
+        "src.requests.adapters.HTTPAdapter.request_url",
+        "src.requests.utils.select_proxy"
+      ],
+      "graph_path_ids": [
+        "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+        "sym_b15033f492f5cf565a42beafa76e3d954479f9db6baf4337835e51bb0284be9e",
+        "sym_078400173a6c34f123060d378911a810bb7b2924ea8fa2eebfd2ad2fd9ae5b10"
+      ],
+      "graph_evidence_ids": [
+        "evidence_4060c9996b6319873ca1f969480e49c6d9a08c301fc54ccd0ebbdd51e9dfdf6e",
+        "evidence_41961c8bd2703aa79febcefdd43eb8b35551ab3883bafb0135e3378dded9bdc8",
+        "evidence_ebb3c639e2d38cb46bc9c3b522dfb3e31c576792f1a9b6c2b96555b9b6f5c0ef",
+        "evidence_fd8b75dde0d36191d1b54ae4b4bdc99484437a856568c278cfad65458446b41c"
+      ],
+      "answer": "The `send` method of the `requests.adapters.HTTPAdapter` class is called to send an HTTP request. This request is then passed to the `select_proxy` function.",
+      "claims": [
+        {
+          "source": "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+          "target": "src.requests.adapters.HTTPAdapter.send",
+          "evidence_ids": [
+            "evidence_41961c8bd2703aa79febcefdd43eb8b35551ab3883bafb0135e3378dded9bdc8"
+          ]
+        },
+        {
+          "source": "sym_b15033f492f5cf565a42beafa76e3d954479f9db6baf4337835e51bb0284be9e",
+          "target": "src.requests.utils.select_proxy",
+          "evidence_ids": [
+            "evidence_4060c9996b6319873ca1f969480e49c6d9a08c301fc54ccd0ebbdd51e9dfdf6e"
+          ]
+        }
+      ],
+      "model_claims": [
+        {
+          "source": "n0",
+          "target": "src.requests.adapters.HTTPAdapter.send",
+          "evidence_refs": [
+            "e0"
+          ]
+        },
+        {
+          "source": "n1",
+          "target": "src.requests.utils.select_proxy",
+          "evidence_refs": [
+            "e1"
+          ]
+        }
+      ],
+      "abstain": false,
+      "uncertainty": "",
+      "scores": {
+        "claim_count": 2,
+        "supported_claim_count": 0,
+        "unsupported_claim_count": 2,
+        "unsupported_claim_rate": 1.0,
+        "validly_cited_claim_count": 0,
+        "citation_fidelity": 0.0,
+        "evidence_complete": false,
+        "expected_path_exact": false
+      },
+      "usage": {
+        "prompt_eval_count": 196,
+        "eval_count": 141,
+        "total_duration_ns": 12417802857,
+        "wall_latency_ms": 12423.869
+      },
+      "graph_evidence_by_edge": [
+        {
+          "source_id": "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+          "target_id": "sym_b15033f492f5cf565a42beafa76e3d954479f9db6baf4337835e51bb0284be9e",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_f3d1243a26557cc62d9d14ca150189047681bf591431078a312fcd5e9d795dc1",
+            "edge_cbcf98d35966949a6f0c65cac49df59a29829c1a40f40cdf6bceeea49085d416"
+          ],
+          "evidence_ids": [
+            "evidence_41961c8bd2703aa79febcefdd43eb8b35551ab3883bafb0135e3378dded9bdc8"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_41961c8bd2703aa79febcefdd43eb8b35551ab3883bafb0135e3378dded9bdc8"
+          ],
+          "all_evidence_ids": [
+            "evidence_ebb3c639e2d38cb46bc9c3b522dfb3e31c576792f1a9b6c2b96555b9b6f5c0ef",
+            "evidence_41961c8bd2703aa79febcefdd43eb8b35551ab3883bafb0135e3378dded9bdc8"
+          ]
+        },
+        {
+          "source_id": "sym_b15033f492f5cf565a42beafa76e3d954479f9db6baf4337835e51bb0284be9e",
+          "target_id": "sym_078400173a6c34f123060d378911a810bb7b2924ea8fa2eebfd2ad2fd9ae5b10",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_38bf9a8ab27638a5a3bea338facad32e1973c4d3360acc57e47097245d1dcce1",
+            "edge_fc49423887fcf372921576d09c8a8baf63367a04fc8078974a0e75ffc3a74586"
+          ],
+          "evidence_ids": [
+            "evidence_4060c9996b6319873ca1f969480e49c6d9a08c301fc54ccd0ebbdd51e9dfdf6e"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_4060c9996b6319873ca1f969480e49c6d9a08c301fc54ccd0ebbdd51e9dfdf6e"
+          ],
+          "all_evidence_ids": [
+            "evidence_fd8b75dde0d36191d1b54ae4b4bdc99484437a856568c278cfad65458446b41c",
+            "evidence_4060c9996b6319873ca1f969480e49c6d9a08c301fc54ccd0ebbdd51e9dfdf6e"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "requests-mh-30",
+      "mode": "LOCAL_LIVE_MODEL_GOLD_EVIDENCE",
+      "question": "How does `send` reach `urldefragauth` through Requests internal calls?",
+      "expected_path": [
+        "src.requests.adapters.HTTPAdapter.send",
+        "src.requests.adapters.HTTPAdapter.request_url",
+        "src.requests.utils.urldefragauth"
+      ],
+      "graph_path_ids": [
+        "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+        "sym_b15033f492f5cf565a42beafa76e3d954479f9db6baf4337835e51bb0284be9e",
+        "sym_850cf9c3bc628a52d4ef02bf8b15eef64a0a7b234046cfbf58910096d95c96c0"
+      ],
+      "graph_evidence_ids": [
+        "evidence_41961c8bd2703aa79febcefdd43eb8b35551ab3883bafb0135e3378dded9bdc8",
+        "evidence_4c0b1461a0b2829b67f8e9323e82206633f19de4268dcda4053d3addd80f7909",
+        "evidence_ebb3c639e2d38cb46bc9c3b522dfb3e31c576792f1a9b6c2b96555b9b6f5c0ef",
+        "evidence_f63393d671763b2d6961fcadd99385867a8e88efeea40dea33091c686686f48f"
+      ],
+      "answer": "The `send` method of the HTTPAdapter class in Requests internal calls is used to send a request. The URLDefragAuth method within this context is likely an extension or utility function that uses the `urldefragauth` parameter.",
+      "claims": [
+        {
+          "source": "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+          "target": "sym_b15033f492f5cf565a42beafa76e3d954479f9db6baf4337835e51bb0284be9e",
+          "evidence_ids": [
+            "src.requests.adapters.HTTPAdapter.send"
+          ]
+        },
+        {
+          "source": "sym_b15033f492f5cf565a42beafa76e3d954479f9db6baf4337835e51bb0284be9e",
+          "target": "sym_850cf9c3bc628a52d4ef02bf8b15eef64a0a7b234046cfbf58910096d95c96c0",
+          "evidence_ids": [
+            "src.requests.utils.urldefragauth"
+          ]
+        }
+      ],
+      "model_claims": [
+        {
+          "source": "n0",
+          "target": "n1",
+          "evidence_refs": [
+            "src.requests.adapters.HTTPAdapter.send"
+          ]
+        },
+        {
+          "source": "n1",
+          "target": "n2",
+          "evidence_refs": [
+            "src.requests.utils.urldefragauth"
+          ]
+        }
+      ],
+      "abstain": false,
+      "uncertainty": "",
+      "scores": {
+        "claim_count": 2,
+        "supported_claim_count": 2,
+        "unsupported_claim_count": 0,
+        "unsupported_claim_rate": 0.0,
+        "validly_cited_claim_count": 0,
+        "citation_fidelity": 0.0,
+        "evidence_complete": false,
+        "expected_path_exact": true
+      },
+      "usage": {
+        "prompt_eval_count": 200,
+        "eval_count": 156,
+        "total_duration_ns": 14056650126,
+        "wall_latency_ms": 14064.204
+      },
+      "graph_evidence_by_edge": [
+        {
+          "source_id": "sym_56095d6d614745b8f3948740b87684170ee6e61e6f384183c431c0e08bbb1422",
+          "target_id": "sym_b15033f492f5cf565a42beafa76e3d954479f9db6baf4337835e51bb0284be9e",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_f3d1243a26557cc62d9d14ca150189047681bf591431078a312fcd5e9d795dc1",
+            "edge_cbcf98d35966949a6f0c65cac49df59a29829c1a40f40cdf6bceeea49085d416"
+          ],
+          "evidence_ids": [
+            "evidence_41961c8bd2703aa79febcefdd43eb8b35551ab3883bafb0135e3378dded9bdc8"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_41961c8bd2703aa79febcefdd43eb8b35551ab3883bafb0135e3378dded9bdc8"
+          ],
+          "all_evidence_ids": [
+            "evidence_ebb3c639e2d38cb46bc9c3b522dfb3e31c576792f1a9b6c2b96555b9b6f5c0ef",
+            "evidence_41961c8bd2703aa79febcefdd43eb8b35551ab3883bafb0135e3378dded9bdc8"
+          ]
+        },
+        {
+          "source_id": "sym_b15033f492f5cf565a42beafa76e3d954479f9db6baf4337835e51bb0284be9e",
+          "target_id": "sym_850cf9c3bc628a52d4ef02bf8b15eef64a0a7b234046cfbf58910096d95c96c0",
+          "snapshot_id": "snap_840577c9a59b9c5f74756726936a37040b36affc50f843afeb91b36cfa71267a",
+          "edge_ids": [
+            "edge_f616f8cf020b72963f166b6ccaf0cc5134a11de7d28a7449a0333455ecdea3f6",
+            "edge_f36fcc4941ec9b61db7bee02c16db5f29c62941ef73da4baa988f42f8f02f20c"
+          ],
+          "evidence_ids": [
+            "evidence_4c0b1461a0b2829b67f8e9323e82206633f19de4268dcda4053d3addd80f7909"
+          ],
+          "static_binding_evidence_ids": [
+            "evidence_4c0b1461a0b2829b67f8e9323e82206633f19de4268dcda4053d3addd80f7909"
+          ],
+          "all_evidence_ids": [
+            "evidence_f63393d671763b2d6961fcadd99385867a8e88efeea40dea33091c686686f48f",
+            "evidence_4c0b1461a0b2829b67f8e9323e82206633f19de4268dcda4053d3addd80f7909"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "unresolved-01",
+      "mode": "LOCAL_LIVE_MODEL_NO_TARGET_EVIDENCE",
+      "case": {
+        "file_path": "src/requests/__init__.py",
+        "start_byte": 1295,
+        "expression": "urllib3_version.split",
+        "line": 59,
+        "context": "src.requests.check_compatibility",
+        "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+        "kind": "CALL_CALLEE"
+      },
+      "answer": "The call target is explicitly unresolved and no target evidence is supplied. The expression 'urllib3_version.split' is not provided in the given context.",
+      "claims": [],
+      "abstain": true,
+      "uncertainty": "This information is not sufficient to establish a specific call target from the provided evidence.",
+      "scores": {
+        "correct_abstention": true,
+        "unsupported_target_claim_count": 0,
+        "ambiguity_explicit": true
+      },
+      "usage": {
+        "prompt_eval_count": 147,
+        "eval_count": 73,
+        "total_duration_ns": 7007812938,
+        "wall_latency_ms": 7012.14
+      }
+    },
+    {
+      "case_id": "unresolved-02",
+      "mode": "LOCAL_LIVE_MODEL_NO_TARGET_EVIDENCE",
+      "case": {
+        "file_path": "src/requests/__init__.py",
+        "start_byte": 1506,
+        "expression": "urllib3_version.append",
+        "line": 64,
+        "context": "src.requests.check_compatibility",
+        "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+        "kind": "CALL_CALLEE"
+      },
+      "answer": "The call target is explicitly unresolved and no target evidence is supplied. The call target cannot be established from this evidence.",
+      "claims": [],
+      "abstain": true,
+      "uncertainty": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+      "scores": {
+        "correct_abstention": true,
+        "unsupported_target_claim_count": 0,
+        "ambiguity_explicit": true
+      },
+      "usage": {
+        "prompt_eval_count": 147,
+        "eval_count": 58,
+        "total_duration_ns": 5980677597,
+        "wall_latency_ms": 5984.187
+      }
+    },
+    {
+      "case_id": "unresolved-03",
+      "mode": "LOCAL_LIVE_MODEL_NO_TARGET_EVIDENCE",
+      "case": {
+        "file_path": "src/requests/__init__.py",
+        "start_byte": 1888,
+        "expression": "chardet_version.split",
+        "line": 76,
+        "context": "src.requests.check_compatibility",
+        "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+        "kind": "CALL_CALLEE"
+      },
+      "answer": "The call target is explicitly unresolved and no target evidence is supplied. The expression 'chardet_version.split' is not provided in the given context.",
+      "claims": [],
+      "abstain": true,
+      "uncertainty": "This information is not sufficient to establish a specific call target from the provided evidence.",
+      "scores": {
+        "correct_abstention": true,
+        "unsupported_target_claim_count": 0,
+        "ambiguity_explicit": true
+      },
+      "usage": {
+        "prompt_eval_count": 147,
+        "eval_count": 73,
+        "total_duration_ns": 6893638401,
+        "wall_latency_ms": 6896.751
+      }
+    },
+    {
+      "case_id": "unresolved-04",
+      "mode": "LOCAL_LIVE_MODEL_NO_TARGET_EVIDENCE",
+      "case": {
+        "file_path": "src/requests/__init__.py",
+        "start_byte": 2157,
+        "expression": "charset_normalizer_version.split",
+        "line": 81,
+        "context": "src.requests.check_compatibility",
+        "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+        "kind": "CALL_CALLEE"
+      },
+      "answer": "The call target is explicitly unresolved and no target evidence is supplied. The expression `charset_normalizer_version.split` is not provided in the given context.",
+      "claims": [],
+      "abstain": true,
+      "uncertainty": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+      "scores": {
+        "correct_abstention": true,
+        "unsupported_target_claim_count": 0,
+        "ambiguity_explicit": true
+      },
+      "usage": {
+        "prompt_eval_count": 147,
+        "eval_count": 65,
+        "total_duration_ns": 6402359979,
+        "wall_latency_ms": 6405.18
+      }
+    },
+    {
+      "case_id": "unresolved-05",
+      "mode": "LOCAL_LIVE_MODEL_NO_TARGET_EVIDENCE",
+      "case": {
+        "file_path": "src/requests/__init__.py",
+        "start_byte": 2704,
+        "expression": "cryptography_version.split",
+        "line": 96,
+        "context": "src.requests._check_cryptography",
+        "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+        "kind": "CALL_CALLEE"
+      },
+      "answer": "The call target is explicitly unresolved and no target evidence is supplied. The expression 'cryptography_version.split' is not provided in the given context.",
+      "claims": [],
+      "abstain": true,
+      "uncertainty": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+      "scores": {
+        "correct_abstention": true,
+        "unsupported_target_claim_count": 0,
+        "ambiguity_explicit": true
+      },
+      "usage": {
+        "prompt_eval_count": 147,
+        "eval_count": 64,
+        "total_duration_ns": 6437564635,
+        "wall_latency_ms": 6441.861
+      }
+    },
+    {
+      "case_id": "unresolved-06",
+      "mode": "LOCAL_LIVE_MODEL_NO_TARGET_EVIDENCE",
+      "case": {
+        "file_path": "src/requests/__init__.py",
+        "start_byte": 3779,
+        "expression": "pyopenssl.inject_into_urllib3",
+        "line": 133,
+        "context": "src.requests",
+        "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+        "kind": "CALL_CALLEE"
+      },
+      "answer": "The call target is explicitly unresolved and no target evidence is supplied. The expression 'pyopenssl.inject_into_urllib3' is not provided in the given context.",
+      "claims": [],
+      "abstain": true,
+      "uncertainty": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+      "scores": {
+        "correct_abstention": true,
+        "unsupported_target_claim_count": 0,
+        "ambiguity_explicit": true
+      },
+      "usage": {
+        "prompt_eval_count": 147,
+        "eval_count": 67,
+        "total_duration_ns": 8609245188,
+        "wall_latency_ms": 8614.407
+      }
+    },
+    {
+      "case_id": "unresolved-07",
+      "mode": "LOCAL_LIVE_MODEL_NO_TARGET_EVIDENCE",
+      "case": {
+        "file_path": "src/requests/_internal_utils.py",
+        "start_byte": 1079,
+        "expression": "string.decode",
+        "line": 33,
+        "context": "src.requests._internal_utils.to_native_string",
+        "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+        "kind": "CALL_CALLEE"
+      },
+      "answer": "The call target is explicitly unresolved and no target evidence is supplied. The expression 'string.decode' is used to convert a string into bytes using Python's built-in function, which cannot be directly resolved from the provided context.",
+      "claims": [],
+      "abstain": true,
+      "uncertainty": "This information is not sufficient to establish the call target or provide a resolution. The expression 'string.decode' is used for conversion but does not lead to a specific target evidence.",
+      "scores": {
+        "correct_abstention": true,
+        "unsupported_target_claim_count": 0,
+        "ambiguity_explicit": true
+      },
+      "usage": {
+        "prompt_eval_count": 147,
+        "eval_count": 107,
+        "total_duration_ns": 11586198989,
+        "wall_latency_ms": 11593.937
+      }
+    },
+    {
+      "case_id": "unresolved-08",
+      "mode": "LOCAL_LIVE_MODEL_NO_TARGET_EVIDENCE",
+      "case": {
+        "file_path": "src/requests/adapters.py",
+        "start_byte": 5940,
+        "expression": "Retry",
+        "line": 186,
+        "context": "src.requests.adapters.HTTPAdapter.__init__",
+        "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+        "kind": "CALL_CALLEE"
+      },
+      "answer": "The call target is explicitly unresolved and no target evidence is supplied. The evidence provided does not contain any information about the call target or its resolution.",
+      "claims": [],
+      "abstain": true,
+      "uncertainty": "This question cannot be established from the given evidence.",
+      "scores": {
+        "correct_abstention": true,
+        "unsupported_target_claim_count": 0,
+        "ambiguity_explicit": true
+      },
+      "usage": {
+        "prompt_eval_count": 146,
+        "eval_count": 66,
+        "total_duration_ns": 6413133135,
+        "wall_latency_ms": 6417.56
+      }
+    },
+    {
+      "case_id": "unresolved-09",
+      "mode": "LOCAL_LIVE_MODEL_NO_TARGET_EVIDENCE",
+      "case": {
+        "file_path": "src/requests/adapters.py",
+        "start_byte": 6707,
+        "expression": "state.items",
+        "line": 209,
+        "context": "src.requests.adapters.HTTPAdapter.__setstate__",
+        "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+        "kind": "CALL_CALLEE"
+      },
+      "answer": "The call target is explicitly unresolved and no target evidence is supplied. The expression 'state.items' is not provided in the given context.",
+      "claims": [],
+      "abstain": true,
+      "uncertainty": "This information is not sufficient to establish a specific target for the call.",
+      "scores": {
+        "correct_abstention": true,
+        "unsupported_target_claim_count": 0,
+        "ambiguity_explicit": true
+      },
+      "usage": {
+        "prompt_eval_count": 148,
+        "eval_count": 68,
+        "total_duration_ns": 6118108971,
+        "wall_latency_ms": 6121.45
+      }
+    },
+    {
+      "case_id": "unresolved-10",
+      "mode": "LOCAL_LIVE_MODEL_NO_TARGET_EVIDENCE",
+      "case": {
+        "file_path": "src/requests/adapters.py",
+        "start_byte": 7724,
+        "expression": "PoolManager",
+        "line": 235,
+        "context": "src.requests.adapters.HTTPAdapter.init_poolmanager",
+        "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+        "kind": "CALL_CALLEE"
+      },
+      "answer": "The call target is explicitly unresolved and no target evidence is supplied. The call target is 'PoolManager' from the provided code snippet.",
+      "claims": [],
+      "abstain": true,
+      "uncertainty": "This information is not directly related to the specific call target but rather to the context of the given code snippet.",
+      "scores": {
+        "correct_abstention": true,
+        "unsupported_target_claim_count": 0,
+        "ambiguity_explicit": true
+      },
+      "usage": {
+        "prompt_eval_count": 147,
+        "eval_count": 76,
+        "total_duration_ns": 6710412736,
+        "wall_latency_ms": 6714.678
+      }
+    },
+    {
+      "case_id": "unresolved-11",
+      "mode": "LOCAL_LIVE_MODEL_NO_TARGET_EVIDENCE",
+      "case": {
+        "file_path": "src/requests/adapters.py",
+        "start_byte": 8499,
+        "expression": "proxy.lower().startswith",
+        "line": 256,
+        "context": "src.requests.adapters.HTTPAdapter.proxy_manager_for",
+        "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+        "kind": "CALL_CALLEE"
+      },
+      "answer": "The call target is explicitly unresolved and no target evidence is supplied. The expression `proxy.lower().startswith` is not provided in the given context.",
+      "claims": [],
+      "abstain": true,
+      "uncertainty": "This information is insufficient to establish a specific target.",
+      "scores": {
+        "correct_abstention": true,
+        "unsupported_target_claim_count": 0,
+        "ambiguity_explicit": true
+      },
+      "usage": {
+        "prompt_eval_count": 149,
+        "eval_count": 66,
+        "total_duration_ns": 6368159807,
+        "wall_latency_ms": 6372.519
+      }
+    },
+    {
+      "case_id": "unresolved-12",
+      "mode": "LOCAL_LIVE_MODEL_NO_TARGET_EVIDENCE",
+      "case": {
+        "file_path": "src/requests/adapters.py",
+        "start_byte": 9052,
+        "expression": "proxy_from_url",
+        "line": 269,
+        "context": "src.requests.adapters.HTTPAdapter.proxy_manager_for",
+        "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+        "kind": "CALL_CALLEE"
+      },
+      "answer": "The call target is explicitly unresolved and no target evidence is supplied. The expression `proxy_from_url` is not provided in the given context.",
+      "claims": [],
+      "abstain": true,
+      "uncertainty": "This information is not sufficient to establish a specific call target.",
+      "scores": {
+        "correct_abstention": true,
+        "unsupported_target_claim_count": 0,
+        "ambiguity_explicit": true
+      },
+      "usage": {
+        "prompt_eval_count": 148,
+        "eval_count": 67,
+        "total_duration_ns": 6344992653,
+        "wall_latency_ms": 6348.053
+      }
+    },
+    {
+      "case_id": "unresolved-13",
+      "mode": "LOCAL_LIVE_MODEL_NO_TARGET_EVIDENCE",
+      "case": {
+        "file_path": "src/requests/adapters.py",
+        "start_byte": 9996,
+        "expression": "url.lower().startswith",
+        "line": 292,
+        "context": "src.requests.adapters.HTTPAdapter.cert_verify",
+        "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+        "kind": "CALL_CALLEE"
+      },
+      "answer": "The call target is explicitly unresolved and no target evidence is supplied. The expression `url.lower().startswith` is used to check if the URL starts with a specific prefix, but it cannot be directly resolved from the given context.",
+      "claims": [],
+      "abstain": true,
+      "uncertainty": "This information is not sufficient to establish whether the target can be established. The call target is unresolved and no evidence is provided.",
+      "scores": {
+        "correct_abstention": true,
+        "unsupported_target_claim_count": 0,
+        "ambiguity_explicit": true
+      },
+      "usage": {
+        "prompt_eval_count": 148,
+        "eval_count": 97,
+        "total_duration_ns": 10229572843,
+        "wall_latency_ms": 10235.023
+      }
+    },
+    {
+      "case_id": "unresolved-14",
+      "mode": "LOCAL_LIVE_MODEL_NO_TARGET_EVIDENCE",
+      "case": {
+        "file_path": "src/requests/adapters.py",
+        "start_byte": 17390,
+        "expression": "self.poolmanager.connection_from_host",
+        "line": 466,
+        "context": "src.requests.adapters.HTTPAdapter.get_connection_with_tls_context",
+        "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+        "kind": "CALL_CALLEE"
+      },
+      "answer": "The call target is explicitly unresolved and no target evidence is supplied. The expression 'self.poolmanager.connection_from_host' does not provide any relevant information for the given context.",
+      "claims": [],
+      "abstain": true,
+      "uncertainty": "This question cannot be established from the provided evidence.",
+      "scores": {
+        "correct_abstention": true,
+        "unsupported_target_claim_count": 0,
+        "ambiguity_explicit": true
+      },
+      "usage": {
+        "prompt_eval_count": 153,
+        "eval_count": 71,
+        "total_duration_ns": 7297751031,
+        "wall_latency_ms": 7304.176
+      }
+    },
+    {
+      "case_id": "unresolved-15",
+      "mode": "LOCAL_LIVE_MODEL_NO_TARGET_EVIDENCE",
+      "case": {
+        "file_path": "src/requests/adapters.py",
+        "start_byte": 18967,
+        "expression": "proxy_manager.connection_from_url",
+        "line": 504,
+        "context": "src.requests.adapters.HTTPAdapter.get_connection",
+        "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+        "kind": "CALL_CALLEE"
+      },
+      "answer": "The call target is explicitly unresolved and no target evidence is supplied. The expression 'proxy_manager.connection_from_url' refers to a method or attribute of the 'requests' library, which is not directly related to the context provided in the JSON.",
+      "claims": [],
+      "abstain": true,
+      "uncertainty": "The question cannot be established from the given evidence. The expression does not provide enough information to determine if it refers to a specific method or attribute of the 'requests' library.",
+      "scores": {
+        "correct_abstention": true,
+        "unsupported_target_claim_count": 0,
+        "ambiguity_explicit": true
+      },
+      "usage": {
+        "prompt_eval_count": 149,
+        "eval_count": 111,
+        "total_duration_ns": 11579532122,
+        "wall_latency_ms": 11587.56
+      }
+    },
+    {
+      "case_id": "unresolved-16",
+      "mode": "LOCAL_LIVE_MODEL_NO_TARGET_EVIDENCE",
+      "case": {
+        "file_path": "src/requests/adapters.py",
+        "start_byte": 19120,
+        "expression": "parsed.geturl",
+        "line": 508,
+        "context": "src.requests.adapters.HTTPAdapter.get_connection",
+        "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+        "kind": "CALL_CALLEE"
+      },
+      "answer": "The call target is explicitly unresolved and no target evidence is supplied. The expression `parsed.geturl` is not provided in the given context.",
+      "claims": [],
+      "abstain": true,
+      "uncertainty": "This information is not sufficient to establish a concrete target for the call.",
+      "scores": {
+        "correct_abstention": true,
+        "unsupported_target_claim_count": 0,
+        "ambiguity_explicit": true
+      },
+      "usage": {
+        "prompt_eval_count": 147,
+        "eval_count": 69,
+        "total_duration_ns": 8472637401,
+        "wall_latency_ms": 8479.526
+      }
+    },
+    {
+      "case_id": "unresolved-17",
+      "mode": "LOCAL_LIVE_MODEL_NO_TARGET_EVIDENCE",
+      "case": {
+        "file_path": "src/requests/adapters.py",
+        "start_byte": 19155,
+        "expression": "self.poolmanager.connection_from_url",
+        "line": 509,
+        "context": "src.requests.adapters.HTTPAdapter.get_connection",
+        "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+        "kind": "CALL_CALLEE"
+      },
+      "answer": "The call target is explicitly unresolved and no target evidence is supplied. The expression 'self.poolmanager.connection_from_url' does not provide any relevant information for establishing the connection from URL.",
+      "claims": [],
+      "abstain": true,
+      "uncertainty": "This question cannot be established from the provided evidence.",
+      "scores": {
+        "correct_abstention": true,
+        "unsupported_target_claim_count": 0,
+        "ambiguity_explicit": true
+      },
+      "usage": {
+        "prompt_eval_count": 150,
+        "eval_count": 73,
+        "total_duration_ns": 9386666146,
+        "wall_latency_ms": 9394.273
+      }
+    },
+    {
+      "case_id": "unresolved-18",
+      "mode": "LOCAL_LIVE_MODEL_NO_TARGET_EVIDENCE",
+      "case": {
+        "file_path": "src/requests/adapters.py",
+        "start_byte": 19425,
+        "expression": "self.poolmanager.clear",
+        "line": 519,
+        "context": "src.requests.adapters.HTTPAdapter.close",
+        "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+        "kind": "CALL_CALLEE"
+      },
+      "answer": "The call target is explicitly unresolved and no target evidence is supplied. The expression 'self.poolmanager.clear' is not provided in the given context.",
+      "claims": [],
+      "abstain": true,
+      "uncertainty": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+      "scores": {
+        "correct_abstention": true,
+        "unsupported_target_claim_count": 0,
+        "ambiguity_explicit": true
+      },
+      "usage": {
+        "prompt_eval_count": 147,
+        "eval_count": 64,
+        "total_duration_ns": 6653576682,
+        "wall_latency_ms": 6657.042
+      }
+    },
+    {
+      "case_id": "unresolved-19",
+      "mode": "LOCAL_LIVE_MODEL_NO_TARGET_EVIDENCE",
+      "case": {
+        "file_path": "src/requests/adapters.py",
+        "start_byte": 23912,
+        "expression": "TimeoutSauce",
+        "line": 632,
+        "context": "src.requests.adapters.HTTPAdapter.send",
+        "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+        "kind": "CALL_CALLEE"
+      },
+      "answer": "The call target is explicitly unresolved and no target evidence is supplied. The expression 'TimeoutSauce' is not provided in the given context.",
+      "claims": [],
+      "abstain": true,
+      "uncertainty": "This information is insufficient to establish a specific call target.",
+      "scores": {
+        "correct_abstention": true,
+        "unsupported_target_claim_count": 0,
+        "ambiguity_explicit": true
+      },
+      "usage": {
+        "prompt_eval_count": 146,
+        "eval_count": 66,
+        "total_duration_ns": 6469604979,
+        "wall_latency_ms": 6473.296
+      }
+    },
+    {
+      "case_id": "unresolved-20",
+      "mode": "LOCAL_LIVE_MODEL_NO_TARGET_EVIDENCE",
+      "case": {
+        "file_path": "src/requests/adapters.py",
+        "start_byte": 24307,
+        "expression": "TimeoutSauce",
+        "line": 641,
+        "context": "src.requests.adapters.HTTPAdapter.send",
+        "classification": "UNRESOLVED_EXTERNAL_OR_DYNAMIC",
+        "kind": "CALL_CALLEE"
+      },
+      "answer": "The call target is explicitly unresolved and no target evidence is supplied. The expression 'TimeoutSauce' is not provided in the given context.",
+      "claims": [],
+      "abstain": true,
+      "uncertainty": "This information is insufficient to establish a specific call target.",
+      "scores": {
+        "correct_abstention": true,
+        "unsupported_target_claim_count": 0,
+        "ambiguity_explicit": true
+      },
+      "usage": {
+        "prompt_eval_count": 146,
+        "eval_count": 66,
+        "total_duration_ns": 5879265052,
+        "wall_latency_ms": 5883.924
+      }
+    }
+  ],
+  "scoring_version": "claim-specific-edge-snapshot-v2",
+  "source_report_sha256": "9dcd3cabf21d7eedc06b013042f41d6f11db2c565b7002a8db13ef6028605214",
+  "source_report_scoring": "actual local model generation; deterministic scoring over generated JSON",
+  "rescore_method": "Strict static paths were reconstructed from the local immutable SnapshotAnalysis; each claim citation is checked only against the exact expected edge's binding evidence."
+}

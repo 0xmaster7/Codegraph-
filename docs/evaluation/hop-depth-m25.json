@@ -1,0 +1,76 @@
+{
+  "dataset_id": "requests-v2.32.5-hop-depth-m25-v1",
+  "repository": "psf/requests",
+  "release": "v2.32.5",
+  "commit_sha": "b25c87d7cb8d6a18a37fa12442b5f883f9e41741",
+  "annotation_basis": "Names and paths manually selected from the frozen source and checked against exact source-backed static call bindings. Each multi-hop case uses a prefix of the annotated internal call chain; no runtime dispatch is inferred.",
+  "cases": [
+    {
+      "id": "depth-0-exact-symbol",
+      "depth": 0,
+      "mode": "EXACT_ENTITY",
+      "question": "Resolve src.requests.adapters.HTTPAdapter.send.",
+      "path": ["src.requests.adapters.HTTPAdapter.send"]
+    },
+    {
+      "id": "depth-1-proxy-manager",
+      "depth": 1,
+      "mode": "STRICT_STATIC_BINDING",
+      "question": "What does src.requests.adapters.HTTPAdapter.proxy_manager_for call to create proxy headers?",
+      "path": [
+        "src.requests.adapters.HTTPAdapter.proxy_manager_for",
+        "src.requests.adapters.HTTPAdapter.proxy_headers"
+      ]
+    },
+    {
+      "id": "depth-2-basic-auth",
+      "depth": 2,
+      "mode": "STRICT_STATIC_BINDING",
+      "question": "How does src.requests.adapters.HTTPAdapter.proxy_manager_for reach src.requests.auth._basic_auth_str?",
+      "path": [
+        "src.requests.adapters.HTTPAdapter.proxy_manager_for",
+        "src.requests.adapters.HTTPAdapter.proxy_headers",
+        "src.requests.auth._basic_auth_str"
+      ]
+    },
+    {
+      "id": "depth-3-native-string",
+      "depth": 3,
+      "mode": "STRICT_STATIC_BINDING",
+      "question": "How does src.requests.adapters.HTTPAdapter.proxy_manager_for reach src.requests._internal_utils.to_native_string?",
+      "path": [
+        "src.requests.adapters.HTTPAdapter.proxy_manager_for",
+        "src.requests.adapters.HTTPAdapter.proxy_headers",
+        "src.requests.auth._basic_auth_str",
+        "src.requests._internal_utils.to_native_string"
+      ]
+    },
+    {
+      "id": "depth-4-connection",
+      "depth": 4,
+      "mode": "STRICT_STATIC_BINDING",
+      "question": "How does src.requests.adapters.HTTPAdapter.get_connection_with_tls_context reach src.requests._internal_utils.to_native_string?",
+      "path": [
+        "src.requests.adapters.HTTPAdapter.get_connection_with_tls_context",
+        "src.requests.adapters.HTTPAdapter.proxy_manager_for",
+        "src.requests.adapters.HTTPAdapter.proxy_headers",
+        "src.requests.auth._basic_auth_str",
+        "src.requests._internal_utils.to_native_string"
+      ]
+    },
+    {
+      "id": "depth-5-send",
+      "depth": 5,
+      "mode": "STRICT_STATIC_BINDING",
+      "question": "How does src.requests.adapters.HTTPAdapter.send reach src.requests._internal_utils.to_native_string through proxy setup?",
+      "path": [
+        "src.requests.adapters.HTTPAdapter.send",
+        "src.requests.adapters.HTTPAdapter.get_connection_with_tls_context",
+        "src.requests.adapters.HTTPAdapter.proxy_manager_for",
+        "src.requests.adapters.HTTPAdapter.proxy_headers",
+        "src.requests.auth._basic_auth_str",
+        "src.requests._internal_utils.to_native_string"
+      ]
+    }
+  ]
+}

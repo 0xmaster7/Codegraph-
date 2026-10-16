@@ -1,0 +1,67 @@
+name: CI
+on:
+  push:
+  pull_request:
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npm run install:scip-cli
+      - run: python -m pip install -r requirements-py311.lock
+      - run: python -m pip install --no-deps -e '.[dev,embeddings]'
+      - run: ruff format --check backend
+      - run: ruff check backend
+      - run: mypy backend/app
+      - run: pytest -q
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+  integrations:
+    runs-on: ubuntu-latest
+    env:
+      FALKORDB_INTEGRATION: "1"
+      M15_REAL_ONNX_INTEGRATION: "1"
+      SCIP_PYTHON_BIN: ${{ github.workspace }}/node_modules/.bin/scip-python
+      SCIP_CLI_BIN: ${{ github.workspace }}/.tools/scip/scip
+      ALLOWED_REPOSITORY_ROOTS: ${{ github.workspace }}/requests-m10
+      SNAPSHOT_CACHE_DIR: /tmp/codegraph-m10-evaluation-cache
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npm run install:scip-cli
+      - run: python -m pip install -r requirements-py311.lock
+      - run: python -m pip install --no-deps -e '.[dev,embeddings]'
+      - run: docker compose up -d --wait falkordb
+      - run: pytest -q backend/tests/test_scip_real_integration.py backend/tests/test_falkordb_real_integration.py backend/tests/test_embeddings_real_integration.py
+      - run: git clone --quiet --depth 1 --branch v2.32.5 https://github.com/psf/requests.git requests-m10
+      - run: >-
+          python scripts/evaluate_repository.py requests-m10
+          docs/evaluation/requests-v2.32.5.annotations.json
+          --json-output "${{ runner.temp }}/requests-v2.32.5.json"
+          --markdown-output "${{ runner.temp }}/requests-v2.32.5.md"
+      - if: always()
+        run: docker compose down -v

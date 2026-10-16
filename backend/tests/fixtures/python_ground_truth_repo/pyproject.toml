@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "codegraph-ground-truth-fixture"
+version = "1.0.0"
+requires-python = ">=3.11"
+dependencies = ["requests>=2.31"]
+
+[project.optional-dependencies]
+test = ["pytest>=8; python_version >= '3.11'", "typing-extensions>=4; python_version < '3.11'"]
+images = ["Pillow>=10; python_version >= '3.11'"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--import-mode=importlib"
+markers = ["expected_partial: behavior intentionally outside static certainty"]

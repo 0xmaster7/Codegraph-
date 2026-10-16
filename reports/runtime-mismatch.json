@@ -1,0 +1,13 @@
+{
+  "evaluation": "M25 runtime/static mismatch",
+  "interpretation": "Zero observed mismatches would be misleading for a zero-observation sample; no rate is reported.",
+  "observed_mismatch_count": null,
+  "reason": "The Requests annotation freezes no runtime observations and no dispatch cases; the controlled fixture validates static dispatch only.",
+  "requests_dispatch_cases": {
+    "errors": 0,
+    "expected": 0,
+    "measurement_status": "UNMEASURED"
+  },
+  "runtime_observation_count": 0,
+  "status": "UNMEASURED"
+}
