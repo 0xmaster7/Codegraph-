@@ -12,6 +12,8 @@ if [[ -f "$HOME/.nvm/nvm.sh" ]]; then
   source "$HOME/.nvm/nvm.sh"
   nvm use 22 >/dev/null
 fi
+mkdir -p "$state/tools"
+ln -sfn "$(dirname "$(dirname "$(command -v node)")")" "$state/tools/node"
 [[ "$(git -C "$control" remote get-url origin)" == "https://github.com/0xmaster7/Codegraph-" ]]
 git -C "$control" fetch --quiet origin main
 revision="$(git -C "$control" rev-parse origin/main)"

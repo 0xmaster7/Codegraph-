@@ -7,7 +7,7 @@ Type=simple
 WorkingDirectory=%h/.local/share/codegraph/current
 EnvironmentFile=%h/.config/codegraph/api.env
 EnvironmentFile=%h/.local/share/codegraph/current/deployment.env
-Environment=PATH=%h/.local/share/codegraph/current/.venv/bin:/usr/local/bin:/usr/bin:/bin
+Environment=PATH=%h/.local/share/codegraph/current/.venv/bin:%h/.local/share/codegraph/tools/node/bin:/usr/local/bin:/usr/bin:/bin
 ExecStart=%h/.local/share/codegraph/current/.venv/bin/python -m uvicorn backend.app.main:app --host 127.0.0.1 --port 18091 --proxy-headers --forwarded-allow-ips=127.0.0.1
 Restart=on-failure
 RestartSec=5
