@@ -1,7 +1,9 @@
+import { requestJson, RequestScope } from "./request.js";
 import { API_BASE_URL } from "../apiConfig";
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { ArrowRight, LoaderCircle, MessageSquareText, ShieldCheck } from "lucide-react";
 import { evidenceStateLabel, humanAnswerText, humanClaimType, humanRelationshipLabel, replayStateLabel } from "./evidencePresentation.js";
+import { investigationSymbolMatches, questionForSymbol } from "./symbolMatches.js";
 
 type Selection = { type: "entity" | "site" | "edge"; id: string };
 export type EvidenceItem = {
@@ -42,7 +44,7 @@ export type InvestigationResult = {
   investigation_id: string | null;
   repository_id: string;
   snapshot_id: string;
-  query: { plan: { selected_node_id?: string | null; selected_edge_id?: string | null; selected_site_id?: string | null }; truncated: boolean; diagnostics: string[]; tool_executions: Array<{ result: { tool: string; results: Array<Record<string, unknown>> } }> };
+  query: { plan: { selected_node_id?: string | null; selected_edge_id?: string | null; selected_site_id?: string | null }; truncated: boolean; diagnostics: string[]; tool_executions: Array<{ request?: { query?: string | null } | null; result: { tool: string; results: Array<Record<string, unknown>> } }> };
   answer: { claims: Claim[]; limitations: string[]; rendered_text: string[] };
   evidence_paths: EvidencePath[];
   evidence_paths_truncated: boolean;
@@ -57,16 +59,7 @@ type InvestigationMemory = { investigation_id: string; snapshot_id: string; ques
 const API = API_BASE_URL;
 
 async function request<T>(path: string, init: RequestInit): Promise<T> {
-  const response = await fetch(`${API}${path}`, init);
-  const result = await response.json();
-  if (!response.ok) {
-    const detail = result.detail;
-    const message = detail?.code === "SNAPSHOT_MISMATCH"
-      ? `SNAPSHOT_MISMATCH: this investigation belongs to ${detail.stored_snapshot_id}; requested ${detail.requested_snapshot_id}. Re-run it on the current snapshot.`
-      : typeof detail === "string" ? detail : "Investigation request failed";
-    throw new Error(message);
-  }
-  return result as T;
+  return requestJson<T>(`${API}${path}`, init);
 }
 
 export function InvestigationWorkspace({
@@ -117,6 +110,9 @@ export function InvestigationWorkspace({
   const [notes, setNotes] = useState<Array<{ note_id: string; text: string }>>([]);
   const [noteDraft, setNoteDraft] = useState("");
   const [savingNote, setSavingNote] = useState(false);
+  const operation = useRef(new RequestScope());
+  const flight = useRef(false);
+  useEffect(() => () => operation.current.cancel(), []);
   const lastRequest = useRef<Record<string, string> | null>(null);
   const pendingRefreshRunId = useRef<string | null>(null);
   const currentSnapshotId = useRef(snapshotId);
@@ -147,11 +143,13 @@ export function InvestigationWorkspace({
   }, [snapshotId]);
 
   async function openInvestigation(id: string) {
-    if (!id) return;
-    setBusy(true); setError(""); setStage("Reopening snapshot-bound investigation memory");
+    if (!id || flight.current) return;
+    flight.current = true;
+    const task = operation.current.begin();
+    setBusy(true); setError(""); setStage("Opening your saved question and evidence…");
     try {
-      const memory = await request<InvestigationMemory>(`/api/investigations/${encodeURIComponent(id)}?snapshot_id=${encodeURIComponent(snapshotId)}`, {});
-      if (currentSnapshotId.current === snapshotId) {
+      const memory = await request<InvestigationMemory>(`/api/investigations/${encodeURIComponent(id)}?snapshot_id=${encodeURIComponent(snapshotId)}`, { signal: task.signal });
+      if (task.current() && currentSnapshotId.current === snapshotId) {
         setInvestigationId(memory.investigation_id);
         setResult(memory.latest_result);
         const lastQuestion = memory.questions.at(-1)?.question ?? "";
@@ -169,8 +167,8 @@ export function InvestigationWorkspace({
         setRefreshedRunId(null);
       }
     } catch (reason) {
-      setError(reason instanceof Error ? reason.message : "Could not reopen this investigation");
-    } finally { setBusy(false); setStage(""); }
+      if (task.current()) setError(reason instanceof Error ? reason.message : "Could not reopen this investigation");
+    } finally { flight.current = false; if (task.current()) { setBusy(false); setStage(""); } }
   }
 
   async function saveNote(event: FormEvent) {
@@ -194,7 +192,7 @@ export function InvestigationWorkspace({
     const payload = lastRequest.current;
     if (!runId || !payload || busy) return;
     pendingRefreshRunId.current = null;
-    setBusy(true); setError(""); setStage("Refreshing this investigation with persisted runtime observations");
+    setBusy(true); setError(""); setStage("Updating the answer with the recorded test results…");
     void request<InvestigationResult>("/api/query/investigate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -218,12 +216,14 @@ export function InvestigationWorkspace({
   }
 
   async function ask(questionText: string) {
-    if (!questionText.trim() || busy) return;
+    if (!questionText.trim() || busy || flight.current) return;
+    flight.current = true;
+    const task = operation.current.begin();
     setQuestion(questionText);
     setBusy(true);
     setError("");
     setResult(null);
-    setStage("Running the bounded snapshot query and validating its evidence");
+    setStage("Finding connections and checking the supporting source…");
     try {
       const payload: Record<string, string> = { snapshot_id: snapshotId, question: questionText.trim() };
       if (investigationId) payload.investigation_id = investigationId;
@@ -235,22 +235,22 @@ export function InvestigationWorkspace({
       const updated = await request<InvestigationResult>("/api/query/investigate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(payload), signal: task.signal,
       });
       if (updated.snapshot_id !== payload.snapshot_id) throw new Error("Investigation response crossed snapshot scope");
-      if (currentSnapshotId.current === payload.snapshot_id) {
+      if (task.current() && currentSnapshotId.current === payload.snapshot_id) {
         setResult(updated); setInvestigationId(updated.investigation_id);
         if (updated.investigation_id) lastRequest.current = { ...payload, investigation_id: updated.investigation_id };
         if (updated.investigation_id) {
           const summaries = await request<InvestigationSummary[]>(`/api/investigations?snapshot_id=${encodeURIComponent(snapshotId)}`, {});
-          setSavedInvestigations(summaries);
+          if (task.current()) setSavedInvestigations(summaries);
         }
       }
     } catch (reason) {
-      setError(reason instanceof Error ? reason.message : "Investigation failed");
+      if (task.current()) setError(reason instanceof Error ? reason.message : "Investigation failed");
     } finally {
-      setBusy(false);
-      setStage("");
+      flight.current = false;
+      if (task.current()) { setBusy(false); setStage(""); }
     }
   }
 
@@ -262,13 +262,16 @@ export function InvestigationWorkspace({
   const acceptedClaims = result?.answer.claims.filter((claim) => claim.status === "SUPPORTED" || claim.status === "QUALIFIED") ?? [];
   const pathsByClaim = new Map((result?.evidence_paths ?? []).map((path) => [path.claim_id, path]));
   const passages = acceptedClaims.filter((claim) => claim.claim_type === "PASSAGE_STATEMENT");
+  const symbolMatches = investigationSymbolMatches(result?.query.tool_executions ?? []);
+  const ambiguousMatches = symbolMatches.filter((match) => match.ambiguous);
+  const definitionLookup = /^\s*where\b.*\bdefined\b/i.test(lastRequest.current?.question ?? question);
 
-  return <section className="investigation-workspace" aria-labelledby="investigation-title">
+  return <section aria-busy={busy} className="investigation-workspace" aria-labelledby="investigation-title">
     <div className="investigation-heading">
-      <div><span className="section-label">ASK ABOUT THIS REPOSITORY</span><h2 id="investigation-title">What are you trying to understand?</h2><p>Answers stay tied to this snapshot and show the source path behind each structural claim.</p></div>
+      <div><span className="section-label">ASK YOUR CODE</span><h2 id="investigation-title">What would you like to understand?</h2><p>Find callers, follow a path, or understand a function — with source evidence.</p></div>
     </div>
-    <div className="investigation-memory-controls">
-      <label htmlFor="saved-investigation">Saved investigations</label>
+    <details className="investigation-memory-controls"><summary>Reopen a saved question</summary><div>
+      <label className="sr-only" htmlFor="saved-investigation">Saved investigations</label>
       <select id="saved-investigation" value={investigationId ?? ""} onChange={(event) => {
         const id = event.target.value;
         if (id) void openInvestigation(id);
@@ -277,32 +280,39 @@ export function InvestigationWorkspace({
         <option value="">New investigation</option>
         {savedInvestigations.map((item) => <option key={item.investigation_id} value={item.investigation_id}>{item.last_question} · {new Date(item.updated_at * 1000).toLocaleString()}</option>)}
       </select>
-    </div>
+    </div></details>
     <form className="question-form" onSubmit={(event) => void submit(event)}>
       <label className="sr-only" htmlFor="investigation-question">Investigation question</label>
       <MessageSquareText size={16}/>
-      <input id="investigation-question" maxLength={4096} value={question} onChange={(event) => setQuestion(event.target.value)} placeholder="Ask about callers, paths, runtime observations, or documentation…" />
+      <input id="investigation-question" maxLength={4096} value={question} onChange={(event) => setQuestion(event.target.value)} placeholder="How do these functions connect?" />
       <button type="submit" disabled={busy || !question.trim()}>{busy ? <><LoaderCircle className="spin" size={14}/> Working</> : <>Investigate <ArrowRight size={14}/></>}</button>
     </form>
-    {!result && exampleQuestions.length > 0 && <div className="example-questions" aria-label="Example questions"><span>Try one</span>{exampleQuestions.map((example) => <button key={example} type="button" disabled={busy} onClick={() => void ask(example)}>{example}<ArrowRight size={13}/></button>)}</div>}
+    {!result && exampleQuestions.length > 0 && <div className="example-questions" aria-label="Example questions"><span>Try one</span>{exampleQuestions.map((example) => <button key={example} type="button" disabled={busy} onClick={() => void ask(example)}>{Object.entries(displayNames).filter(([id]) => !id.startsWith("ent_")).sort((a, b) => b[0].length - a[0].length).reduce((text, [id, name]) => text.replaceAll(id, name), example)}<ArrowRight size={13}/></button>)}</div>}
     {selected && <div className="query-context"><span>Follow-up scope:</span><span>{selected.type === "edge" ? "selected relationship" : selected.type === "entity" ? "selected code element" : "selected call site"} from the Inspector</span></div>}
-    {busy && <p className="query-progress" role="status"><LoaderCircle className="spin" size={14}/>{stage}</p>}
-    {error && <div className="investigation-error" role="alert">{error}</div>}
+    {busy && <><p className="query-progress" role="status"><LoaderCircle className="spin" size={14}/>{stage}</p><div className="answer-skeleton" aria-hidden="true"><div/><div/><div/></div></>}
+    {error && <div className="investigation-error" role="alert">{error}<button className="text-button" disabled={busy} onClick={() => void ask(question)}>Try again</button></div>}
     {result && <div className="investigation-results" aria-live="polite">
-      <div className="result-meta"><b>Answer</b><span>{result.query.truncated ? "Results are bounded; see limitations" : "Validated against snapshot evidence"}</span>{refreshedRunId && <span role="status">Answer refreshed after a test run</span>}</div>
+      <div className="result-meta"><b>Answer</b><span>{result.query.truncated ? "Results are bounded; see limitations" : "Based on this saved version of the code"}</span>{refreshedRunId && <span role="status">Answer refreshed after a test run</span>}</div>
       {acceptedClaims.length > 0 ? <div className="claim-list">{acceptedClaims.map((claim) => {
         const path = pathsByClaim.get(claim.claim_id);
         const isPassage = claim.claim_type === "PASSAGE_STATEMENT";
         return <article className={`claim-card ${isPassage ? "passage-claim" : ""}`} key={claim.claim_id}>
-          <div className="claim-card-top"><span className="claim-status">{claim.status === "QUALIFIED" ? "Qualified evidence" : claim.modality === "EXACT" ? "Exact static evidence" : claim.modality === "DERIVED" ? "Derived graph evidence" : claim.modality === "MAY" ? "Conservative possible path" : `${claim.modality} passage`}</span><span className="claim-kind">{humanClaimType(claim.claim_type)}</span></div>
-          <p className="claim-text">{claim.rendered_text ? Object.entries(displayNames).reduce((text, [id, label]) => text.replaceAll(id, label), humanAnswerText(claim.rendered_text)) : null}</p>
+          <div className="claim-card-top"><span className="claim-status">{claim.status === "QUALIFIED" ? "Evidence has limitations" : claim.modality === "EXACT" ? "Identified in code" : claim.modality === "DERIVED" ? "Inferred from code relationships" : claim.modality === "MAY" ? "Possible connection" : `${claim.modality} passage`}</span><span className="claim-kind">{humanClaimType(claim.claim_type)}</span></div>
+          <p className="claim-text">{claim.rendered_text ? Object.entries(displayNames).filter(([id]) => claim.rendered_text!.includes(id)).sort((a,b) => b[0].length - a[0].length).reduce((text, [id, label]) => text.replaceAll(id, label), humanAnswerText(claim.rendered_text)) : null}</p>
           {path && <EvidencePathView path={path} evidence={claim.evidence} displayNames={displayNames} displayContexts={displayContexts} pathEvidenceInfo={pathEvidenceInfo} onInspect={onInspect} onInspectPathEdges={onInspectPathEdges}/> }
-          <details className="claim-evidence"><summary>Supporting evidence · {claim.evidence.length}</summary><div className="claim-evidence-list">{claim.evidence.map((ref) => <article className="evidence-ref" key={`${claim.claim_id}-${ref.item.evidence_id}`}><button className="evidence-link" onClick={() => {
+          <details className="claim-evidence"><summary>More supporting evidence · {claim.evidence.length}</summary><div className="claim-evidence-list">{claim.evidence.map((ref) => <article className="evidence-ref" key={`${claim.claim_id}-${ref.item.evidence_id}`}><button className="evidence-link" onClick={() => {
             if (["STATIC_BINDING", "STATIC_DERIVATION", "STATIC_STRUCTURE"].includes(ref.item.type)) onInspect({ type: "edge", id: ref.item.source_record_id });
             else onFocusEvidence(ref.item);
           }}><b>{ref.item.type.replaceAll("_", " ").toLowerCase()}</b><span>{ref.item.display_label}</span>{ref.item.file_path && <small>{ref.item.file_path}</small>}</button><details><summary>Technical details</summary><code>Evidence {ref.item.evidence_id}</code><code>Source record {ref.item.source_record_id}</code><code>Provenance {ref.item.provenance_pointer}</code></details></article>)}</div></details>
         </article>;
-      })}</div> : <div className="no-claims">No claim passed validation for this question. Review the limitations and evidence below.</div>}
+      })}</div> : <div className="no-claims">{ambiguousMatches.length > 0 ? "This name matches multiple definitions. Choose the function you mean below." : definitionLookup && symbolMatches.length > 0 ? "Found the definition in this saved version. Open its source below." : symbolMatches.length > 0 ? "The symbol was found, but no supported connections were returned. This does not prove there are no callers or callees; see the analysis limits below." : "No supported answer was found for this question. Check that the function exists in the selected repository snapshot; see the analysis limits below."}</div>}
+      {symbolMatches.length > 0 && (ambiguousMatches.length > 0 || acceptedClaims.length === 0) && <section className="symbol-matches" aria-label="Matching definitions">
+        <b>{ambiguousMatches.length > 0 ? "Which definition did you mean?" : "Matching definitions"}</b>
+        {ambiguousMatches.length > 0 && <p>Select a qualified name to rerun your question without guessing.</p>}
+        {symbolMatches.map((match) => <button key={match.id} type="button" disabled={busy} onClick={() => match.ambiguous ? void ask(questionForSymbol(lastRequest.current?.question ?? question, match)) : onInspect({ type: "entity", id: match.id })}>
+          <strong>{match.qualifiedName}</strong><small>{match.filePath} · {match.ambiguous ? "Use this definition" : "Open source"}</small>
+        </button>)}
+      </section>}
       {passages.length > 0 && <section className="passage-panel"><div><h3>Retrieved passages</h3><p>Text evidence is separate from structural graph relationships.</p></div>{passages.flatMap((claim) => claim.evidence.map((ref) => <button className="passage-record" key={ref.item.evidence_id} onClick={() => onFocusEvidence(ref.item)}><span>{ref.item.type.replaceAll("_", " ").toLowerCase()} · {ref.item.file_path}</span><q>{ref.item.text}</q><details><summary>Technical details</summary><code>{ref.item.evidence_id}</code></details></button>))}</section>}
       {result.runtime_observations.length > 0 && <details className="runtime-panel"><summary>Runtime observations · {result.runtime_observations.reduce((count, record) => count + record.call_observations.length, 0)} calls recorded</summary><div><p>These calls were observed during the linked test run; they are not static proof.</p>{result.runtime_observations.map((record) => <article key={`${record.test_definition_id}-${record.test_invocation_id}-${record.run_ids.join(",")}`}><b>Observed test run</b>{record.call_observations.map((call) => <div className="runtime-call-pair" key={call.observation_id}><span>Runtime observation · {displayNames[call.source_entity_id] ?? "Code element"} → {displayNames[call.target_entity_id] ?? "Code element"}</span>{call.site_id && <button onClick={() => onInspect({ type: "site", id: call.site_id! })}>Inspect call site</button>}<details><summary>Technical details</summary><code>Run {call.run_id ?? "unknown"} · invocation {call.test_invocation_id ?? "unknown"} · materialization {call.runtime_materialization_id ?? "unavailable"}</code><code>Observation {call.observation_id} · evidence {call.evidence_id} · snapshot {call.snapshot_id}</code></details></div>)}</article>)}</div></details>}
       {focusedEvidence && <section className="focused-evidence"><div><h3>Source evidence</h3><button onClick={() => onFocusEvidence(null)}>Close</button></div><b>{focusedEvidence.type.replaceAll("_", " ").toLowerCase()}</b><span>{focusedEvidence.display_label}</span>{focusedEvidence.file_path && <span>{focusedEvidence.file_path}</span>}{focusedEvidence.replay_outcome && <span>{replayStateLabel(focusedEvidence.replay_outcome)}</span>}{focusedEvidence.text && <blockquote>{focusedEvidence.text}</blockquote>}<details><summary>Technical details</summary><code>Evidence {focusedEvidence.evidence_id}</code><code>Snapshot {focusedEvidence.snapshot_id}</code><code>Source record {focusedEvidence.source_record_id}</code><code>Provenance {focusedEvidence.provenance_pointer}</code>{focusedEvidence.content_hash && <code>Content hash {focusedEvidence.content_hash}</code>}</details></section>}
@@ -326,18 +336,17 @@ function replayEligibility(outcome: string) {
 function EvidencePathView({ path, evidence, displayNames, displayContexts, pathEvidenceInfo, onInspect, onInspectPathEdges }: { path: EvidencePath; evidence: EvidenceRef[]; displayNames: Record<string, string>; displayContexts: Record<string, string>; pathEvidenceInfo: Record<string, { location: string; state: string }>; onInspect: (selection: Selection) => void; onInspectPathEdges: (edgeIds: string[]) => void }) {
   return <section className="evidence-path" aria-label="Evidence path">
     <div className="path-heading"><b>How the code connects</b><span>{path.hop_count} {path.hop_count === 1 ? "step" : "steps"}</span>{path.truncated && <strong>More paths are available</strong>}</div>
-    <ol className="path-steps">
+    <ol className="path-steps compact-path">
       {path.nodes.map((node, index) => {
         const name = displayNames[node.canonical_id] ?? displayNames[node.label] ?? node.label.split(".").at(-1) ?? "Code element";
         const context = displayContexts[node.canonical_id] ?? node.kind;
         const step = path.steps[index];
-        const edgeInfo = step?.edge_ids.map((id) => pathEvidenceInfo[id]).filter((value): value is { location: string; state: string } => Boolean(value)) ?? [];
-        const claimEvidence = step ? evidence.filter((ref) => step.evidence_ids.includes(ref.item.evidence_id) || step.edge_ids.includes(ref.item.source_record_id)) : [];
         return <li className="path-node-row" key={`${path.claim_id}-${node.canonical_id}-${index}`}>
-          <div className="path-node-wrap"><button className="path-node" onClick={() => onInspect({ type: "entity", id: node.canonical_id })}><b>{name}</b><small>{context}</small></button><details className="path-technical"><summary>Technical details</summary><code>{node.kind} · {node.label}</code><code>Symbol ID · {node.canonical_id}</code></details></div>
-          {step && <div className={`path-relation ${step.modality.toLowerCase()}`}><span>{humanRelationshipLabel(step.relation, step.modality)}</span><b>{edgeInfo.length ? [...new Set(edgeInfo.map((item) => item.state))].join(" · ") : evidenceStateLabel({ modality: step.modality })}</b>{edgeInfo.length > 0 && <small>Source: {[...new Set(edgeInfo.map((item) => item.location))].join(" · ")}</small>}{claimEvidence.length > 0 && claimEvidence.map((ref) => ref.item.file_path && <small key={ref.item.evidence_id}>Evidence: {ref.item.file_path}</small>)}<button onClick={() => onInspectPathEdges(step.edge_ids)}>View source evidence <ArrowRight size={12}/></button><details className="path-technical"><summary>Technical details</summary><code>Relationship · {step.relation}</code><code>Edge IDs · {step.edge_ids.join(", ") || "unavailable"}</code><code>Evidence IDs · {step.evidence_ids.join(", ") || "unavailable"}</code><code>Provenance IDs · {step.provenance_ids.join(", ") || "unavailable"}</code></details></div>}
+          <button className="path-node" title={context} onClick={() => onInspect({ type: "entity", id: node.canonical_id })}><b>{name}</b><small>{context}</small></button>
+          {step && <button className={`path-source-link ${step.modality.toLowerCase()}`} title={evidenceStateLabel({ modality: step.modality })} onClick={() => onInspectPathEdges(step.edge_ids)}><span>{humanRelationshipLabel(step.relation, step.modality)} →</span><small>View source</small></button>}
         </li>;
       })}
     </ol>
+    <details className="path-more"><summary>Connection details</summary>{path.steps.map((step, index) => <div className="path-step-details" key={index}><b>{humanRelationshipLabel(step.relation, step.modality)}</b><p>{evidenceStateLabel({ modality: step.modality })}</p>{step.edge_ids.map((id) => pathEvidenceInfo[id] && <p key={id}>{pathEvidenceInfo[id].location} · {pathEvidenceInfo[id].state}</p>)}<button className="text-button" onClick={() => onInspectPathEdges(step.edge_ids)}>View source evidence <ArrowRight size={12}/></button><details className="path-technical"><summary>Advanced analysis details</summary><code>Relationship · {step.relation} · {step.modality}</code><code>Edge IDs · {step.edge_ids.join(", ") || "unavailable"}</code><code>Evidence IDs · {step.evidence_ids.join(", ") || "unavailable"}</code><code>Provenance IDs · {step.provenance_ids.join(", ") || "unavailable"}</code></details></div>)}<details className="path-technical"><summary>Code identities</summary>{path.nodes.map((node,index) => <code key={index}>{node.label} · {node.canonical_id}</code>)}</details></details>
   </section>;
 }

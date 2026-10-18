@@ -13,3 +13,10 @@ dist/
 build/
 coverage.xml
 .coverage*
+
+.DS_Store
+.env.*
+!.env.example
+.vercel/
+*.egg-info/
+reports/

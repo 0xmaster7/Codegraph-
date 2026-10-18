@@ -636,6 +636,11 @@ class QueryOrchestrator:
             result = invoke(Route.EXACT, ToolName.RESOLVE_SYMBOL, query=mention.text)
             if result is None:
                 break
+            if any(record.get("resolution_status") == "AMBIGUOUS" for record in result.results):
+                diagnostics.append(
+                    f"Symbol '{mention.text}' matches multiple definitions; "
+                    "choose a qualified name before following connections."
+                )
             for record in result.results:
                 # M17's resolver reports an unambiguous symbol match as UNIQUE.
                 # Preserve only that exact canonical identity for later graph calls.

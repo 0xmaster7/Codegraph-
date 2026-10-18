@@ -8,6 +8,7 @@ import re
 import subprocess
 import threading
 from collections.abc import Callable
+from functools import lru_cache
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlsplit, urlunsplit
@@ -872,6 +873,21 @@ def analyze_repository(
     return analysis
 
 
+def _parse_analysis_file(path: str, snapshot_id: str) -> SnapshotAnalysis:
+    analysis = SnapshotAnalysis.model_validate_json(Path(path).read_text(encoding="utf-8"))
+    if analysis.snapshot_id != snapshot_id:
+        raise RepositoryError("Snapshot cache identity mismatch")
+    return analysis
+
+
+@lru_cache(maxsize=2)
+def _cached_analysis(
+    path: str, snapshot_id: str, version: tuple[int, int, int, int, int]
+) -> SnapshotAnalysis:
+    # The version participates in the key; it is intentionally not used to read the file.
+    return _parse_analysis_file(path, snapshot_id)
+
+
 def load_snapshot_analysis(snapshot_id: str, settings: Settings) -> SnapshotAnalysis:
     digest = snapshot_id.removeprefix("snap_")
     if not snapshot_id.startswith("snap_") or len(digest) != 64:
@@ -882,7 +898,23 @@ def load_snapshot_analysis(snapshot_id: str, settings: Settings) -> SnapshotAnal
     analysis_file = root / "analysis.json"
     if not analysis_file.is_file():
         raise FileNotFoundError("Snapshot analysis is not available in the local cache")
-    analysis = SnapshotAnalysis.model_validate_json(analysis_file.read_text(encoding="utf-8"))
-    if analysis.snapshot_id != snapshot_id:
-        raise RepositoryError("Snapshot cache identity mismatch")
-    return analysis
+    # Cache parsed data only for this exact file generation. Atomic replay/materialization
+    # replacements change inode/ctime even when size and mtime happen to match.
+    for _attempt in range(2):
+        stat = analysis_file.stat()
+        version = (stat.st_dev, stat.st_ino, stat.st_size, stat.st_mtime_ns, stat.st_ctime_ns)
+        if stat.st_size > 64 * 1024 * 1024:
+            analysis = _parse_analysis_file(str(analysis_file), snapshot_id)
+        else:
+            analysis = _cached_analysis(str(analysis_file), snapshot_id, version)
+        after = analysis_file.stat()
+        if version == (
+            after.st_dev,
+            after.st_ino,
+            after.st_size,
+            after.st_mtime_ns,
+            after.st_ctime_ns,
+        ):
+            # Models and their nested lists are mutable. Never share cache-owned objects.
+            return analysis.model_copy(deep=True)
+    raise RepositoryError("Snapshot analysis changed while loading; retry the request")

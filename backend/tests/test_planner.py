@@ -37,6 +37,13 @@ def test_what_calls_question_routes_to_callers_only() -> None:
     assert GraphOperation.CALLEES not in plan.graph_operations
 
 
+@pytest.mark.parametrize("noun", ["functions", "methods", "symbols"])
+def test_what_functions_call_routes_to_callers_only(noun: str) -> None:
+    plan = analyze_query(f"What {noun} call parse_args?")
+    assert plan.graph_operations == [GraphOperation.CALLERS]
+    assert [mention.text for mention in plan.entity_mentions] == ["parse_args"]
+
+
 def test_required_waypoint_preserves_endpoint_mention_order() -> None:
     plan = analyze_query("Find paths from `a.caller` to `b.callee` through NoSuchWidget")
     assert [mention.text for mention in plan.entity_mentions] == [

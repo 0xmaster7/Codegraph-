@@ -5,7 +5,7 @@ export function humanRelationshipLabel(relation, modality = "") {
   const value = String(relation ?? "").toUpperCase();
   const mode = String(modality ?? "").toUpperCase();
   if (value.includes("UNRESOLVED") || mode.includes("UNRESOLVED")) return "Target unresolved";
-  if (value.includes("RUNTIME") || mode.includes("RUNTIME")) return "Runtime observed call";
+  if (value.includes("RUNTIME") || mode.includes("RUNTIME")) return "Observed during a run";
   if (value === "DEFINES_METHOD") return "Defines method";
   if (value === "DEFINES") return "Defines";
   if (value === "INHERITS") return "Inherits from";
@@ -23,22 +23,22 @@ export function evidenceStateLabel({ modality = "", replayState = null, reviewSt
   if (mode.includes("UNRESOLVED")) return "Unresolved target";
   if (mode.includes("RUNTIME")) return "Runtime observation";
   if (mode.includes("MAY")) return "Possible call";
-  if (EXACT_REPLAY_FAILURES.has(replay)) return replay === "SOURCE_HASH_MISMATCH" ? "Source changed · excluded from exact paths" : "Replay mismatch · excluded from exact paths";
-  if (REPLAY_INCONCLUSIVE.has(replay)) return "Replay inconclusive";
-  if (replay === "PASS" && reviewState === "NONE") return "Replay verified";
-  if (mode.includes("DERIVED")) return "Derived static relationship";
+  if (EXACT_REPLAY_FAILURES.has(replay)) return replay === "SOURCE_HASH_MISMATCH" ? "Source changed · excluded from exact paths" : "Code recheck mismatch · excluded from exact paths";
+  if (REPLAY_INCONCLUSIVE.has(replay)) return "Code recheck inconclusive";
+  if (mode.includes("DERIVED")) return replay === "PASS" ? "Inferred relationship · code evidence reproduced" : "Inferred from code relationships";
+  if (replay === "PASS" && reviewState === "NONE") return "Code evidence reproduced";
   if (reviewState && reviewState !== "NONE") return "Static evidence flagged for review";
-  if (replay === "NOT_RUN") return "Exact static relationship · replay not run";
-  return "Exact static relationship";
+  if (replay === "NOT_RUN") return "Identified in source · not rechecked";
+  return "Identified in source";
 }
 
 export function replayStateLabel(value) {
   const replay = String(value ?? "").toUpperCase();
-  if (replay === "PASS") return "Replay verified";
-  if (replay === "NOT_RUN") return "Replay not run";
-  if (replay === "EDGE_NOT_REPRODUCED") return "Replay mismatch";
+  if (replay === "PASS") return "Code evidence reproduced";
+  if (replay === "NOT_RUN") return "Code evidence not rechecked";
+  if (replay === "EDGE_NOT_REPRODUCED") return "Code recheck mismatch";
   if (replay === "SOURCE_HASH_MISMATCH") return "Source changed since capture";
-  if (REPLAY_INCONCLUSIVE.has(replay)) return "Replay inconclusive";
+  if (REPLAY_INCONCLUSIVE.has(replay)) return "Code recheck inconclusive";
   return replay ? replay.toLowerCase().replaceAll("_", " ").replace(/^\w/, (letter) => letter.toUpperCase()) : "Replay status unavailable";
 }
 
@@ -72,7 +72,7 @@ export function humanExternalName(semanticSymbol, distributionName = null, modul
 
 export function humanAnswerText(value) {
   return String(value ?? "")
-    .replace(/\bA verified graph path connects\b/gi, "An exact static path connects")
+    .replace(/\bA verified graph path connects\b/gi, "A path identified by code analysis connects")
     .replace(/\bA possible graph path connects\b/gi, "A possible call path connects");
 }
 
@@ -80,4 +80,11 @@ export function humanRepositoryName(root) {
   const segment = String(root ?? "").split("/").filter(Boolean).at(-1) ?? "";
   if (!segment || /^[0-9a-f]{12,}(?:[-_][0-9a-f]{8,})+$/i.test(segment)) return "Python repository";
   return segment;
+}
+
+export function humanBindingLabel(siteKind) {
+  if (siteKind === "CALL_CALLEE") return "Calls";
+  if (siteKind === "IMPORT_REFERENCE") return "Imports";
+  if (siteKind === "CALLBACK_REFERENCE") return "References callback";
+  return "References";
 }

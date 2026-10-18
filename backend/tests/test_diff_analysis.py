@@ -1051,6 +1051,29 @@ def test_impact_paths_preserve_graph_step_evidence_and_semantics(
     assert all(step["edge_ids"] for step in impact.steps)
     assert impact.evidence
     assert all(item.evidence_id for item in impact.evidence)
+    for step in impact.steps:
+        for raw_evidence in step["evidence"]:
+            evidence = next(
+                item for item in impact.evidence if item.evidence_id == raw_evidence["evidence_id"]
+            )
+            provenance = next(
+                (
+                    item
+                    for item in analysis.provenance
+                    if item.provenance_id == raw_evidence["provenance_pointer"]
+                    and item.edge_id == raw_evidence["source_record_id"]
+                    and item.snapshot_id == analysis.snapshot_id
+                ),
+                None,
+            )
+            if provenance is None:
+                assert evidence.file_path is None
+                assert evidence.start_line is None
+                continue
+            assert evidence.file_path == provenance.file_path
+            assert evidence.content_hash == provenance.file_content_hash
+            assert evidence.start_line == provenance.span.start_line
+            assert evidence.end_line == provenance.span.end_line
     assert ImpactPath.model_validate_json(impact.model_dump_json()) == impact
     if expected_semantics == "CONSERVATIVE":
         assert impact.uncertainty_count > 0

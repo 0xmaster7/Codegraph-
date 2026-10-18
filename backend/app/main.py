@@ -6,7 +6,9 @@ from pathlib import Path
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import Response
 from pydantic import BaseModel, ConfigDict, Field
+from starlette.concurrency import run_in_threadpool
 
 from .claims import ClaimValidator, DraftAnswer, ValidatedAnswer
 from .config import get_settings
@@ -53,6 +55,7 @@ from .models import (
 from .orchestrator import LLMQueryAnalyzer, QueryOrchestrator, QueryResponse
 from .planner import QueryPlan, analyze_query
 from .provenance import failed_closed_edge_ids, replay_edge
+from .replay_availability import replay_availability
 from .retrieval import SymbolResolution, get_source_span, resolve_symbol
 from .test_execution import (
     ApprovalError,
@@ -260,15 +263,15 @@ def query_plan(request: QueryRequest) -> QueryPlan:
 async def query_execute(request: QueryExecutionRequest) -> QueryResponse:
     try:
         store = GraphStore(settings)
-        status = store.snapshot_status(request.snapshot_id)
+        status = await run_in_threadpool(store.snapshot_status, request.snapshot_id)
         if status is None:
             raise HTTPException(status_code=404, detail="Snapshot not found")
         if status != "READY":
             raise HTTPException(status_code=409, detail="Queries require a READY snapshot")
-        analysis = load_snapshot_analysis(request.snapshot_id, settings).model_copy(
-            update={"status": SnapshotStatus.READY}
-        )
-        tools = DeterministicGraphTools.from_store(analysis, store)
+        analysis = (
+            await run_in_threadpool(load_snapshot_analysis, request.snapshot_id, settings)
+        ).model_copy(update={"status": SnapshotStatus.READY})
+        tools = await run_in_threadpool(DeterministicGraphTools.from_store, analysis, store)
         orchestrator = _query_orchestrator(tools, tool_limit=request.result_limit)
         return await orchestrator.execute(
             request.question,
@@ -294,7 +297,7 @@ async def query_investigate(request: QueryExecutionRequest) -> InvestigationResp
     """Run M18/M19 and persist the snapshot-bound investigation memory."""
     try:
         store = GraphStore(settings)
-        status = store.snapshot_status(request.snapshot_id)
+        status = await run_in_threadpool(store.snapshot_status, request.snapshot_id)
         if status is None:
             raise HTTPException(status_code=404, detail="Snapshot not found")
         if status != "READY":
@@ -303,10 +306,10 @@ async def query_investigate(request: QueryExecutionRequest) -> InvestigationResp
             InvestigationMemoryService(store).get(
                 request.investigation_id, snapshot_id=request.snapshot_id
             )
-        analysis = load_snapshot_analysis(request.snapshot_id, settings).model_copy(
-            update={"status": SnapshotStatus.READY}
-        )
-        tools = DeterministicGraphTools.from_store(analysis, store)
+        analysis = (
+            await run_in_threadpool(load_snapshot_analysis, request.snapshot_id, settings)
+        ).model_copy(update={"status": SnapshotStatus.READY})
+        tools = await run_in_threadpool(DeterministicGraphTools.from_store, analysis, store)
         query = await _query_orchestrator(tools, tool_limit=request.result_limit).execute(
             request.question,
             snapshot_id=request.snapshot_id,
@@ -314,7 +317,7 @@ async def query_investigate(request: QueryExecutionRequest) -> InvestigationResp
             selected_edge_id=request.selected_edge_id,
             selected_site_id=request.selected_site_id,
         )
-        response = build_investigation_response(query, tools)
+        response = await run_in_threadpool(build_investigation_response, query, tools)
         selected = tuple(
             item
             for item in (
@@ -330,7 +333,8 @@ async def query_investigate(request: QueryExecutionRequest) -> InvestigationResp
             )
             if item is not None
         )
-        memory = InvestigationMemoryService(store).save_result(
+        memory = await run_in_threadpool(
+            InvestigationMemoryService(store).save_result,
             response,
             question=request.question,
             selected_entities=selected,
@@ -446,15 +450,15 @@ async def query_validate(request: QueryValidationRequest) -> ValidatedAnswer:
     """Execute a snapshot query, then validate its untrusted structured answer draft."""
     try:
         store = GraphStore(settings)
-        status = store.snapshot_status(request.snapshot_id)
+        status = await run_in_threadpool(store.snapshot_status, request.snapshot_id)
         if status is None:
             raise HTTPException(status_code=404, detail="Snapshot not found")
         if status != "READY":
             raise HTTPException(status_code=409, detail="Queries require a READY snapshot")
-        analysis = load_snapshot_analysis(request.snapshot_id, settings).model_copy(
-            update={"status": SnapshotStatus.READY}
-        )
-        tools = DeterministicGraphTools.from_store(analysis, store)
+        analysis = (
+            await run_in_threadpool(load_snapshot_analysis, request.snapshot_id, settings)
+        ).model_copy(update={"status": SnapshotStatus.READY})
+        tools = await run_in_threadpool(DeterministicGraphTools.from_store, analysis, store)
         response = await _query_orchestrator(tools, tool_limit=request.result_limit).execute(
             request.question,
             snapshot_id=request.snapshot_id,
@@ -680,6 +684,33 @@ def snapshot_analysis(snapshot_id: str) -> SnapshotAnalysis:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
 
+# Workspace projection omits unused history/retrieval payloads, never graph evidence.
+WORKSPACE_FIELDS = {
+    "repository",
+    "snapshot_id",
+    "status",
+    "counts",
+    "entities",
+    "sites",
+    "provenance",
+    "bindings",
+    "derived_edges",
+    "dispatch",
+    "external_symbols",
+    "diagnostics",
+    "semantic_indexing",
+    "analysis_environment",
+}
+
+
+@app.get("/api/snapshots/{snapshot_id}/workspace")
+def snapshot_workspace(snapshot_id: str) -> Response:
+    analysis = snapshot_analysis(snapshot_id)
+    return Response(
+        analysis.model_dump_json(include=WORKSPACE_FIELDS), media_type="application/json"
+    )
+
+
 @app.post("/api/snapshots/{snapshot_id}/pin")
 def snapshot_pin(snapshot_id: str, request: SnapshotPinRequest) -> dict[str, object]:
     try:
@@ -730,7 +761,10 @@ def source_detail(
     file_path: str,
     start_byte: int,
     end_byte: int,
+    context_lines: int = 0,
 ) -> dict[str, object]:
+    if not 0 <= context_lines <= 5:
+        raise HTTPException(status_code=422, detail="Source context must be between 0 and 5 lines")
     try:
         analysis = load_snapshot_analysis(snapshot_id, settings)
     except FileNotFoundError as exc:
@@ -759,7 +793,28 @@ def source_detail(
         result = get_source_span(analysis, file_path, start_byte, end_byte, content)
     except ValueError as exc:
         raise HTTPException(status_code=416, detail=str(exc)) from exc
-    return result.model_dump(mode="json")
+    payload = result.model_dump(mode="json")
+    if context_lines:
+        lines = content.decode("utf-8", "replace").split("\n")
+        first = max(1, result.start_line - context_lines)
+        last = min(len(lines), result.end_line + context_lines)
+        # Context is presentation only; the exact evidence span above stays unchanged.
+        payload["context"] = {
+            "start_line": first,
+            "lines": lines[first - 1 : last],
+        }
+    return payload
+
+
+@app.get("/api/evidence/{evidence_id}/replay/availability")
+def evidence_replay_availability(evidence_id: str, snapshot_id: str) -> dict[str, object]:
+    try:
+        analysis = load_snapshot_analysis(snapshot_id, settings)
+    except FileNotFoundError as exc:
+        raise HTTPException(status_code=404, detail="Snapshot analysis not found") from exc
+    except RepositoryError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    return replay_availability(analysis, evidence_id, settings)
 
 
 @app.post("/api/evidence/{evidence_id}/replay")

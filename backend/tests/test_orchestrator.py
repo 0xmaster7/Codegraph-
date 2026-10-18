@@ -135,6 +135,14 @@ def test_graph_tool_registry_dispatches_only_allowlisted_typed_tools() -> None:
         )
 
 
+def test_ambiguous_symbol_explains_why_connections_require_a_choice() -> None:
+    result = asyncio.run(
+        QueryOrchestrator(_tools()).execute("Who calls `run`?", snapshot_id=SNAPSHOT)
+    )
+    assert any("matches multiple definitions" in item for item in result.diagnostics)
+    assert not any(execution.result.tool == "find_callers" for execution in result.tool_executions)
+
+
 def test_optional_provider_can_only_add_routes_and_malformed_output_falls_back() -> None:
     question = "Who are the callers of verify_token?"
     provider = FakeProvider({"routes": ["VECTOR"], "graph_operations": []})

@@ -7,3 +7,5 @@ export function humanDispatchState(value: string, candidateCount?: number): stri
 export function humanExternalName(semanticSymbol: string, distributionName?: string | null, moduleName?: string | null): string;
 export function humanAnswerText(value: string | null | undefined): string;
 export function humanRepositoryName(root: string | null | undefined): string;
+
+export function humanBindingLabel(siteKind: string): string;

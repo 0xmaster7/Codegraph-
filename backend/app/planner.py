@@ -190,7 +190,7 @@ def analyze_query(
     caller_intent = (
         contains("callers")
         or re.search(
-            r"\b(?:who|what)\s+calls\b|\bwho\s+called\b|\bwhich\s+(?:functions|methods|symbols)\s+call\b|\bcaller\s+relationships?\b",
+            r"\b(?:who|what)\s+calls\b|\bwho\s+called\b|\b(?:which|what)\s+(?:functions|methods|symbols)\s+call\b|\bcaller\s+relationships?\b",
             text,
         )
         is not None

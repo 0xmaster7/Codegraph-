@@ -1737,6 +1737,11 @@ def _impact_paths(
         for analysis, tools, entity_id in selected:
             if not entity_id:
                 continue
+            provenance_by_id = {
+                record.provenance_id: record
+                for record in analysis.provenance
+                if record.snapshot_id == analysis.snapshot_id
+            }
             for mode in ("STRICT_STATIC_BINDING", "CONSERVATIVE_DISPATCH"):
                 result = tools.find_impact(
                     ImpactToolRequest(
@@ -1773,6 +1778,14 @@ def _impact_paths(
                             ):
                                 continue
                             valid_for_step = True
+                            provenance_pointer = raw_evidence.get("provenance_pointer")
+                            provenance = (
+                                provenance_by_id.get(provenance_pointer)
+                                if isinstance(provenance_pointer, str)
+                                else None
+                            )
+                            if provenance is not None and provenance.edge_id != source_record_id:
+                                provenance = None
                             path_evidence.append(
                                 DiffEvidence(
                                     evidence_type=(
@@ -1783,6 +1796,12 @@ def _impact_paths(
                                     snapshot_id=analysis.snapshot_id,
                                     record_id=source_record_id,
                                     evidence_id=evidence_id,
+                                    file_path=provenance.file_path if provenance else None,
+                                    content_hash=(
+                                        provenance.file_content_hash if provenance else None
+                                    ),
+                                    start_line=(provenance.span.start_line if provenance else None),
+                                    end_line=provenance.span.end_line if provenance else None,
                                     entity_id=str(step.get("source_id") or "") or None,
                                 )
                             )
