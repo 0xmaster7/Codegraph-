@@ -144,8 +144,8 @@
 .diff-planning-heading p { font-size: 13px; max-width: 650px; line-height: 1.6; }
 .diff-form input { height: 42px; border-radius: 9px; }
 .diff-form button { height: 42px; border-radius: 9px; background: var(--accent); }
-.diff-result-section { padding: 20px 0; }
-.diff-result-section h3 { font-size: 17px; }
+.diff-result-section { padding: 20px; }
+.diff-result-section h3 { font-size: 17px; margin-bottom: 14px; }
 .diff-symbol-list > li, .impact-list > li, .test-plan-list > li { border-radius: 10px; padding: 16px; background: #fafcf9; border-color: var(--line); }
 .tier-details { color: var(--muted); font-size: 12px; }
 .ingestion-progress { padding: 20px; border-radius: 12px; border-color: #cfe7d6; background: #f5faf6; }
