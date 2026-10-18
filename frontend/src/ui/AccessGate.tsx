@@ -47,7 +47,6 @@ export default function AccessGate({ children }: { children: ReactNode }) {
   const loginForm = <form onSubmit={login}><label htmlFor="workspace-password">Owner password</label><input id="workspace-password" type="password" autoComplete="current-password" value={password} onChange={event => setPassword(event.target.value)} required maxLength={256}/><button type="submit" disabled={busy}>{busy ? "Signing in…" : "Sign in"}</button></form>;
   if (session && (session.authenticated || session.public_browsing)) return <>
     {session.enabled && <div className="access-toolbar">
-      {!session.authenticated && <span>Explore CodeGraph · no sign-in needed</span>}
       <button type="button" onClick={() => session.authenticated ? void logout() : setShowLogin(value => !value)}>{session.authenticated ? "Sign out" : showLogin ? "Close sign-in" : "Owner sign-in"}</button>
       {error && <span role="alert">{error}</span>}
     </div>}
