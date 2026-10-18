@@ -41,7 +41,7 @@ curl -fsS http://127.0.0.1:18091/health
 
 The health response includes the deployed Git revision and database connectivity. User services persist across SSH disconnects and start after boot because user lingering is enabled. Caddy renews the HTTPS certificate automatically.
 
-The service PATH includes the shared Node installation as well as its Python environment; SCIP requires both Node and pip. The update timer checks every minute. Dependency installation or health-check failures leave the previous release active. Before deployment, each release runs the authentication tests. General tests still belong in development/CI; successful deployment is not a substitute for the full suite. The deployment script and unit files are in `deploy/azure`; if changing those, install the revised bootstrap files on the VM and reload systemd as well as pushing code.
+The service PATH includes the shared Node installation as well as its Python environment; SCIP requires both Node and pip. Commit comparisons run as bounded background jobs, so browsers poll short requests rather than holding a proxy connection open. Jobs are scoped to the API process; after a restart or expiry the page asks you to retry. The update timer defers deployment while a comparison is active and checks every minute. Dependency installation or health-check failures leave the previous release active. Before deployment, each release runs the authentication and comparison-job tests. General tests still belong in development/CI; successful deployment is not a substitute for the full suite. The deployment script and unit files are in `deploy/azure`; if changing those, install the revised bootstrap files on the VM and reload systemd as well as pushing code.
 
 To pause automatic backend updates:
 

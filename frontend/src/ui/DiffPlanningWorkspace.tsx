@@ -1,5 +1,6 @@
 import { EvidenceSource } from "./SourceEvidence";
 import { RequestScope } from "./request.js";
+import { compareCommits } from "./compareCommits.js";
 import { API_BASE_URL } from "../apiConfig";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { ArrowRight, GitCompareArrows, LoaderCircle } from "lucide-react";
@@ -122,6 +123,7 @@ export function DiffPlanningWorkspace({ repositoryPath, targetSha, workingTreeDi
   const [target, setTarget] = useState(targetSha ?? "");
   const [result, setResult] = useState<DiffResult | null>(null);
   const [busy, setBusy] = useState(false);
+  const [comparisonStage, setComparisonStage] = useState("QUEUED");
   const [error, setError] = useState("");
   const [selectedTestIds, setSelectedTestIds] = useState<string[]>([]);
   const [approval, setApproval] = useState<ActionApproval | null>(null);
@@ -154,17 +156,14 @@ export function DiffPlanningWorkspace({ repositoryPath, targetSha, workingTreeDi
     comparing.current = true;
     const task = comparison.current.begin();
     setBusy(true);
+    setComparisonStage("QUEUED");
     setError("");
     setResult(null);
     try {
-      const response = await fetch(`${API}/api/diff/analyze`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ repository_path: repositoryPath, base_sha: baseSha.trim(), target_sha: target.trim() }),
-        signal: AbortSignal.any([task.signal, AbortSignal.timeout(180000)]),
-      });
-      const payload = await response.json();
-      if (!response.ok) throw new Error(payload.detail ?? "Commit diff analysis failed");
+      const payload = await compareCommits<DiffResult>(API,
+        { repository_path: repositoryPath, base_sha: baseSha.trim(), target_sha: target.trim() },
+        { signal: task.signal, onStatus: (stage) => { if (task.current()) setComparisonStage(stage); } },
+      );
       if (!task.current()) return;
       setResult(payload as DiffResult);
       setSelectedTestIds([]); setApproval(null); setExecution(null); setActionError("");
@@ -272,7 +271,7 @@ export function DiffPlanningWorkspace({ repositoryPath, targetSha, workingTreeDi
       <button type="submit" disabled={busy || !repositoryPath || !baseSha.trim() || !target.trim()}>{busy ? <><LoaderCircle className="spin" size={14}/> Analyzing</> : <>Compare commits <ArrowRight size={14}/></>}</button>
     </form>
     {!repositoryPath && <p className="diff-note">Select a repository snapshot to bind this analysis to its repository.</p>}
-    {busy && <p className="diff-progress" role="status"><LoaderCircle className="spin" size={13}/> Comparing the saved source and tracing affected code. This can take a little while; keep this page open.</p>}
+    {busy && <p className="diff-progress" role="status"><LoaderCircle className="spin" size={13}/> {comparisonStage === "QUEUED" ? "Waiting for the analysis worker…" : "Comparing the saved source and tracing affected code. This can take a few minutes; keep this page open."}</p>}
     {error && <p className="diff-error" role="alert">{error}</p>}
     {result && <div className="diff-results" aria-live="polite">
       <div className="diff-snapshot-pair"><span>Base commit <code>{result.base_commit_sha.slice(0, 12)}</code></span><ArrowRight size={13} aria-hidden="true"/><span>Target commit <code>{result.target_commit_sha.slice(0, 12)}</code></span></div><details className="diff-technical"><summary>Snapshot details</summary><code>Base snapshot {result.base_snapshot_id}</code><code>Target snapshot {result.target_snapshot_id}</code></details>

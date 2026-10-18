@@ -14,6 +14,16 @@ if [[ -f "$HOME/.nvm/nvm.sh" ]]; then
 fi
 mkdir -p "$state/tools"
 ln -sfn "$(dirname "$(dirname "$(command -v node)")")" "$state/tools/node"
+comparison_active() {
+  curl -fsS --max-time 3 http://127.0.0.1:18091/health 2>/dev/null | python3 -c '
+import json,sys
+try: sys.exit(0 if int(json.load(sys.stdin).get("active_comparisons", "0")) > 0 else 1)
+except (ValueError, TypeError): sys.exit(1)'
+}
+if comparison_active; then
+  printf 'Deferring deployment until active comparisons finish.\n'
+  exit 0
+fi
 [[ "$(git -C "$control" remote get-url origin)" == "https://github.com/0xmaster7/Codegraph-" ]]
 git -C "$control" fetch --quiet origin main
 revision="$(git -C "$control" rev-parse origin/main)"
@@ -41,9 +51,13 @@ if [[ ! -f "$release/.prepared" ]]; then
     cp .tools/scip/scip "$state/tools/scip"
   fi
   export PATH="$release/.venv/bin:$PATH"
-  .venv/bin/pytest -q backend/tests/test_auth.py
+  .venv/bin/pytest -q backend/tests/test_auth.py backend/tests/test_diff_jobs.py
   printf 'CODEGRAPH_REVISION=%s\n' "$revision" > deployment.env
   touch .prepared
+fi
+if comparison_active; then
+  printf 'Prepared release; waiting for active comparisons.\n'
+  exit 0
 fi
 ln -sfn "$release" "$state/next"
 mv -Tf "$state/next" "$state/current"

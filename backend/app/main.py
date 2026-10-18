@@ -19,6 +19,7 @@ from .diff_analysis import (
     DiffAnalysisResponse,
     M21DiffError,
 )
+from .diff_jobs import ComparisonBusy, DiffJobManager
 from .graph import GraphStore
 from .graph_tools import DeterministicGraphTools, GraphToolRequest
 from .ingestion import (
@@ -156,6 +157,9 @@ commit_diff_service = CommitDiffService(
 )
 
 
+diff_jobs = DiffJobManager(lambda request: commit_diff_service.analyze(request))
+
+
 class RepositoryRequest(BaseModel):
     path: str
 
@@ -220,6 +224,7 @@ def health() -> dict[str, str]:
             "status": "ok",
             "falkordb": "connected",
             "revision": os.getenv("CODEGRAPH_REVISION", "local"),
+            "active_comparisons": str(diff_jobs.active_count()),
         }
     except Exception:
         return {"status": "ok", "falkordb": "unavailable"}
@@ -498,6 +503,25 @@ def snapshot_inspect(request: SnapshotRequest) -> SnapshotAnalysis:
         raise HTTPException(status_code=503, detail=str(exc)) from exc
     except (RepositoryError, OSError) as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@app.post("/api/diff/jobs", status_code=202)
+def submit_diff_job(request: DiffAnalysisRequest) -> dict[str, object]:
+    try:
+        return diff_jobs.submit(request)
+    except ComparisonBusy as exc:
+        raise HTTPException(status_code=429, detail=str(exc), headers={"Retry-After": "5"}) from exc
+
+
+@app.get("/api/diff/jobs/{job_id}")
+def diff_job_status(job_id: str) -> dict[str, object]:
+    try:
+        return diff_jobs.get(job_id)
+    except KeyError as exc:
+        raise HTTPException(
+            status_code=404,
+            detail="Comparison expired or the server restarted. Please retry.",
+        ) from exc
 
 
 @app.post("/api/diff/analyze", response_model=DiffAnalysisResponse)
