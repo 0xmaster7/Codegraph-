@@ -50,17 +50,24 @@ def install_auth(app: FastAPI, settings: Settings) -> None:
     def authenticated(request: Request) -> bool:
         return not enabled or valid_session(request.cookies.get(COOKIE, ""), key)
 
+    def denied(detail: str, status_code: int) -> JSONResponse:
+        return JSONResponse(
+            {"detail": detail},
+            status_code=status_code,
+            headers={"Cache-Control": "private, no-store", "X-Content-Type-Options": "nosniff"},
+        )
+
     @app.middleware("http")
     async def guard(request: Request, call_next):  # type: ignore[no-untyped-def]
         if enabled:
             if request.method not in {"GET", "HEAD", "OPTIONS"} and (
                 request.headers.get("origin") != settings.public_app_origin
             ):
-                return JSONResponse({"detail": "Request origin is not allowed."}, status_code=403)
+                return denied("Request origin is not allowed.", 403)
             if request.url.path not in {"/health", "/api/auth/session"} and not authenticated(
                 request
             ):
-                return JSONResponse({"detail": "Sign in to continue."}, status_code=401)
+                return denied("Sign in to continue.", 401)
         response = await call_next(request)
         if enabled:
             response.headers["Cache-Control"] = "private, no-store"

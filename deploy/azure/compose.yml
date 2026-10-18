@@ -2,6 +2,8 @@ services:
   falkordb:
     image: falkordb/falkordb@sha256:e2765e207e5ba4ee90e47ed31eb7491ad6dd3d42241c326e429375c02ad9882f
     restart: unless-stopped
+    environment:
+      REDIS_ARGS: "--appendonly yes --appendfsync everysec"
     ports:
       - "127.0.0.1:6391:6379"
     volumes:

@@ -62,7 +62,9 @@ def test_session_expiry_tampering_and_rotation():
 
 def test_protected_routes_and_login_cookie():
     c = client()
-    assert c.get("/api/private").status_code == 401
+    blocked = c.get("/api/private")
+    assert blocked.status_code == 401
+    assert blocked.headers["cache-control"] == "private, no-store"
     assert c.get("/docs").status_code == 401
     assert c.get("/health").status_code == 200
     assert c.get("/api/auth/session").json() == {"enabled": True, "authenticated": False}
