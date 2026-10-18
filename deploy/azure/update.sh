@@ -40,7 +40,10 @@ if [[ ! -f "$release/.prepared" ]]; then
   uv venv --python 3.11 --clear .venv
   .venv/bin/python -m ensurepip
   uv pip install --python .venv/bin/python -r requirements-py311.lock
-  uv pip install --python .venv/bin/python --no-deps -e '.[dev,embeddings]'
+  # Reuse cached build tools before contacting the package index on each release.
+  if ! uv pip install --offline --python .venv/bin/python --no-deps -e '.[dev,embeddings]'; then
+    uv pip install --python .venv/bin/python --no-deps -e '.[dev,embeddings]'
+  fi
   npm ci --no-audit --no-fund
   mkdir -p .tools/scip
   if [[ -x "$state/tools/scip" ]]; then
