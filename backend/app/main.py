@@ -10,6 +10,7 @@ from fastapi.responses import Response
 from pydantic import BaseModel, ConfigDict, Field
 from starlette.concurrency import run_in_threadpool
 
+from .auth import install_auth
 from .claims import ClaimValidator, DraftAnswer, ValidatedAnswer
 from .config import get_settings
 from .diff_analysis import (
@@ -95,6 +96,7 @@ app.add_middleware(
     allow_headers=["Content-Type"],
 )
 settings = get_settings()
+install_auth(app, settings)
 
 
 def _query_orchestrator(tools: DeterministicGraphTools, *, tool_limit: int) -> QueryOrchestrator:
@@ -214,7 +216,11 @@ class RuntimeActionRequest(BaseModel):
 def health() -> dict[str, str]:
     try:
         GraphStore(settings).ping()
-        return {"status": "ok", "falkordb": "connected"}
+        return {
+            "status": "ok",
+            "falkordb": "connected",
+            "revision": os.getenv("CODEGRAPH_REVISION", "local"),
+        }
     except Exception:
         return {"status": "ok", "falkordb": "unavailable"}
 

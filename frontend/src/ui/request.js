@@ -9,6 +9,7 @@ export async function requestJson(url, init = {}) {
     const signal = init.signal ? AbortSignal.any([init.signal, timeout]) : timeout;
     try {
       const response = await fetch(url, { ...init, signal });
+      if (response.status === 401 && typeof window !== 'undefined') window.dispatchEvent(new Event('codegraph:unauthorized'));
       const data = await response.json().catch(() => null);
       if (!response.ok) {
         const detail = data?.detail;

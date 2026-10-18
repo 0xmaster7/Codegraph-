@@ -1,0 +1,9 @@
+[Unit]
+Description=Deploy the latest CodeGraph main commit
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/share/codegraph/update.sh
+TimeoutStartSec=900
+UMask=0077

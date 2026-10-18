@@ -1,0 +1,10 @@
+codegraph-pancakes-0xmaster7.indiasouthcentral.cloudapp.azure.com {
+    request_body {
+        max_size 4MB
+    }
+    reverse_proxy 127.0.0.1:18091
+    header {
+        X-Content-Type-Options nosniff
+        Strict-Transport-Security "max-age=31536000"
+    }
+}

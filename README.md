@@ -46,13 +46,15 @@ Open <http://127.0.0.1:5173>, add an allowlisted repository, and wait for analys
 
 Optional settings are documented in `.env.example`. The Ollama query analyzer falls back to deterministic planning when unavailable. Test execution additionally needs a prebuilt Docker image specified by immutable image ID or digest in `RUNTIME_CONTAINER_IMAGE`; repository code only runs after explicit approval.
 
-## Vercel frontend
+## Hosted workspace
 
-Import this repository into Vercel with the repository root as the project root. `vercel.json` selects Vite, `npm ci`, `npm run build`, and the `dist` output directory, following [Vercel's build configuration](https://vercel.com/docs/builds/configure-a-build).
+The production frontend is [codegraph-rho.vercel.app](https://codegraph-rho.vercel.app). GitHub pushes to `main` trigger a Vercel deployment. Production API calls use same-origin rewrites to the HTTPS API on Azure; no API credentials are bundled into the frontend.
 
-Before building, set `VITE_CODEGRAPH_API_BASE_URL` to the HTTPS URL of your separately hosted API. Optionally set `VITE_CODEGRAPH_DEMO_SNAPSHOT_ID` to an existing snapshot on that API. These are public frontend settings; never put credentials in a `VITE_` variable.
+The workspace requires a password. The API stores a salted scrypt password hash and signs one-day, Secure, HttpOnly, SameSite cookies. Protected API routes require a valid session; mutating requests must match the configured production origin. Authentication is disabled by default for local development and fails closed if enabled without valid secrets. Secrets are provisioned outside Git.
 
-**This config builds the frontend only.** The backend needs persistent storage, FalkorDB, repository access, and optionally Docker/SCIP. It is not configured as a Vercel function. The current API allows browser requests only from the local development origins. Before public deployment, configure the production origin in the backend or provide a same-origin reverse proxy, add authentication and access controls, and provision the database and snapshots. Do not expose the current unauthenticated repository API directly to the internet. Public deployment has not been validated.
+Azure runs the API as a supervised service and FalkorDB in a separate container with a persistent volume and a loopback-only port. A one-minute deployment timer fetches this repository's `main`, prepares a separate release, runs authentication checks, restarts the API, and restores the previous release if health checks fail. Snapshots and configuration live outside the release folders.
+
+See [hosting operations](deploy/README.md) for service names, updates, recovery, and configuration. The Vercel project uses the [documented build configuration](https://vercel.com/docs/builds/configure-a-build) in `vercel.json`. Preview builds do not grant access to the production API: state-changing requests are restricted to the production origin.
 
 ## Verify
 

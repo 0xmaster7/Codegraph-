@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Annotated
 from urllib.parse import urlsplit
 
-from pydantic import Field, SecretStr, field_validator
+from pydantic import Field, SecretStr, field_validator, model_validator
 from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
 
 
@@ -13,6 +13,10 @@ class Settings(BaseSettings):
 
     app_host: str = "127.0.0.1"
     app_port: int = Field(default=8000, ge=1, le=65535)
+    hosted_auth_enabled: bool = False
+    hosted_password_hash: SecretStr = SecretStr("")
+    hosted_session_secret: SecretStr = SecretStr("")
+    public_app_origin: str = ""
     falkordb_host: str = "127.0.0.1"
     falkordb_port: int = Field(default=6379, ge=1, le=65535)
     falkordb_username: str | None = None
@@ -45,6 +49,36 @@ class Settings(BaseSettings):
     m21_max_commit_blob_bytes: int = Field(default=33_554_432, ge=1, le=536_870_912)
     m21_max_commit_materialized_bytes: int = Field(default=268_435_456, ge=1, le=2_147_483_648)
     m21_commit_materialization_timeout_seconds: int = Field(default=120, ge=1, le=900)
+
+    @model_validator(mode="after")
+    def require_hosted_auth_settings(self) -> "Settings":
+        if self.hosted_auth_enabled:
+            password_hash = self.hosted_password_hash.get_secret_value()
+            parts = password_hash.split(":")
+            try:
+                valid_hash = (
+                    len(parts) == 2
+                    and len(bytes.fromhex(parts[0])) == 16
+                    and len(bytes.fromhex(parts[1])) == 64
+                )
+            except ValueError:
+                valid_hash = False
+            parsed = urlsplit(self.public_app_origin)
+            if (
+                not valid_hash
+                or len(self.hosted_session_secret.get_secret_value()) < 32
+                or parsed.scheme != "https"
+                or not parsed.hostname
+                or parsed.username
+                or parsed.password
+                or parsed.path
+                or parsed.query
+                or parsed.fragment
+            ):
+                raise ValueError(
+                    "Hosted authentication needs a password hash, secret and HTTPS origin"
+                )
+        return self
 
     @field_validator("app_host")
     @classmethod

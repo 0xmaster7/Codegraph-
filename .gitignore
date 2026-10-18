@@ -20,3 +20,4 @@ coverage.xml
 .vercel/
 *.egg-info/
 reports/
+.vercel
