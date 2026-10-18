@@ -9,7 +9,7 @@
 
 Vercel deploys the frontend on pushes. Rewrites send `/api/*` and `/health` to Azure. API requests retain the browser's same-origin session cookie; credentials are not exposed in frontend environment variables.
 
-The workspace is a private, single-owner deployment. Share its password only with trusted users: authenticated users can inspect the allowlisted repositories, start analyses and, if a runtime image is configured, explicitly approve sandboxed tests. This is not a multi-user tenant isolation system. Test execution remains unavailable until an immutable runtime image is provisioned.
+The hosted demo sets `PUBLIC_BROWSING_ENABLED=true`: visitors can open existing snapshots, inspect source and graphs, ask questions (saved in shared investigation history), and compare commits without signing in. All stored snapshots and investigations are public in this mode; host only repositories intended for public sharing. Owner sign-in remains available without leaving the workspace for repository ingestion, snapshot management, notes, evidence replay, and sandboxed test approvals. New API routes remain owner-only unless explicitly allowed. This is not a multi-user tenant isolation system. Test execution remains unavailable until an immutable runtime image is provisioned. Set `PUBLIC_BROWSING_ENABLED=false` to require sign-in for the entire workspace.
 
 ## Azure layout
 

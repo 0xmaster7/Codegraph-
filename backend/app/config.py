@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     app_host: str = "127.0.0.1"
     app_port: int = Field(default=8000, ge=1, le=65535)
     hosted_auth_enabled: bool = False
+    public_browsing_enabled: bool = False
     hosted_password_hash: SecretStr = SecretStr("")
     hosted_session_secret: SecretStr = SecretStr("")
     public_app_origin: str = ""

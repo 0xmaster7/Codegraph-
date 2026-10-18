@@ -1,7 +1,8 @@
-"""Single-owner hosted access. Local development remains disabled by default."""
+"""Owner authentication with optional public exploration of the hosted workspace."""
 
 import hashlib
 import hmac
+import re
 import secrets
 import time
 from collections import defaultdict, deque
@@ -42,6 +43,33 @@ def valid_session(value: str, key: str, *, now: int | None = None) -> bool:
         return False
 
 
+def public_exploration(request: Request) -> bool:
+    """Explicit route allowlist: new API operations remain owner-only by default."""
+    path = request.url.path
+    if request.method == "GET":
+        return bool(
+            path == "/api/snapshots"
+            or path == "/api/investigations"
+            or re.fullmatch(r"/api/investigations/[^/]+", path)
+            or re.fullmatch(r"/api/diff/jobs/[^/]+", path)
+            or re.fullmatch(
+                r"/api/snapshots/[^/]+(?:/(?:analysis|workspace|symbols/resolve|"
+                r"sites/[^/]+|source|graph/(?:symbols/resolve|callers|references|callees)))?",
+                path,
+            )
+            or re.fullmatch(r"/api/evidence/[^/]+/replay/availability", path)
+            or re.fullmatch(r"/api/runtime/runs/[^/]+(?:/validation)?", path)
+        )
+    return request.method == "POST" and path in {
+        "/api/query/plan",
+        "/api/query",
+        "/api/query/investigate",
+        "/api/query/validate",
+        "/api/diff/jobs",
+        "/api/diff/analyze",
+    }
+
+
 def install_auth(app: FastAPI, settings: Settings) -> None:
     enabled = settings.hosted_auth_enabled
     key = settings.hosted_session_secret.get_secret_value() if enabled else ""
@@ -64,10 +92,12 @@ def install_auth(app: FastAPI, settings: Settings) -> None:
                 request.headers.get("origin") != settings.public_app_origin
             ):
                 return denied("Request origin is not allowed.", 403)
-            if request.url.path not in {"/health", "/api/auth/session"} and not authenticated(
-                request
+            if (
+                request.url.path not in {"/health", "/api/auth/session"}
+                and not authenticated(request)
+                and not (settings.public_browsing_enabled and public_exploration(request))
             ):
-                return denied("Sign in to continue.", 401)
+                return denied("Owner sign-in is required for this action.", 401)
         response = await call_next(request)
         if enabled:
             response.headers["Cache-Control"] = "private, no-store"
@@ -76,12 +106,22 @@ def install_auth(app: FastAPI, settings: Settings) -> None:
 
     @app.get("/api/auth/session")
     def session(request: Request) -> dict[str, bool]:
-        return {"enabled": enabled, "authenticated": authenticated(request)}
+        return {
+            "enabled": enabled,
+            "authenticated": authenticated(request),
+            "public_browsing": settings.public_browsing_enabled,
+        }
 
     @app.post("/api/auth/session")
     async def login(request: Request) -> JSONResponse:
         if not enabled:
-            return JSONResponse({"enabled": False, "authenticated": True})
+            return JSONResponse(
+                {
+                    "enabled": False,
+                    "authenticated": True,
+                    "public_browsing": settings.public_browsing_enabled,
+                }
+            )
         # One worker owns this bounded window. Authentication is never cached by the CDN.
         current = time.monotonic()
         for address in list(failures):
@@ -113,7 +153,13 @@ def install_auth(app: FastAPI, settings: Settings) -> None:
             failures[client].append(current)
             return JSONResponse({"detail": "Incorrect password."}, status_code=401)
         failures.pop(client, None)
-        response = JSONResponse({"enabled": True, "authenticated": True})
+        response = JSONResponse(
+            {
+                "enabled": True,
+                "authenticated": True,
+                "public_browsing": settings.public_browsing_enabled,
+            }
+        )
         response.set_cookie(
             COOKIE,
             issue_session(key),

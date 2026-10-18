@@ -377,13 +377,13 @@ export default function App() {
         <div className="header-page"><span>CODEGRAPH</span><h1>{workspaceTitle(page)}</h1></div>
         <div className="header-context">
           {analysis ? <>
-            <label className="sr-only" htmlFor="active-snapshot">Repository and snapshot</label>
+            <label htmlFor="active-snapshot">Open snapshot</label>
             <select id="active-snapshot" value={snapshotId} onChange={(event) => void openSnapshot(event.target.value)} aria-label="Switch repository snapshot">
               {snapshots.some((item) => item.snapshot_id === analysis.snapshot_id) ? null : <option value={analysis.snapshot_id}>{repositoryName} · {analysis.repository.head_commit?.slice(0, 7) ?? "uncommitted"}</option>}
               {snapshots.map((item) => <option key={item.snapshot_id} value={item.snapshot_id}>{snapshotOptionLabel(item)}</option>)}
             </select>
             <button className="header-secondary-action" onClick={startNewRepository}>Add repository</button>
-          </> : <><span className="context-placeholder">{HOSTED ? "Private Python workspace" : "Local Python workspace"}</span>{snapshots.length > 0 && <select value={snapshotId} onChange={(event) => void openSnapshot(event.target.value)} aria-label="Open repository snapshot"><option value="">Choose a recent snapshot</option>{snapshots.map((item) => <option key={item.snapshot_id} value={item.snapshot_id}>{snapshotOptionLabel(item)}</option>)}</select>}</>}
+          </> : <><span className="context-placeholder">{HOSTED ? "Python workspace" : "Local Python workspace"}</span>{snapshots.length > 0 && <select value={snapshotId} onChange={(event) => void openSnapshot(event.target.value)} aria-label="Open repository snapshot"><option value="">Choose a recent snapshot</option>{snapshots.map((item) => <option key={item.snapshot_id} value={item.snapshot_id}>{snapshotOptionLabel(item)}</option>)}</select>}</>}
         </div>
       </header>
       <div className={`product-content ${analysis && selection && (page === "investigate" || page === "graph") ? "has-inspector" : ""}`}>
@@ -394,7 +394,7 @@ export default function App() {
           <section className="history-section"><div className="history-section-heading"><h3>Saved investigations</h3><span>0</span></div><p className="history-empty">Saved questions appear here after you open a repository and run an investigation.</p></section>
         </div> : <section className="repository-start">
           <div className="start-intro"><span className="section-label">START WITH YOUR CODE</span><h2>Get to know your code. Follow the evidence.</h2><p>Ask questions about a Python repository, see how its functions connect, and open the source behind each answer.</p>
-            {snapshots.some((item) => item.status === "READY") && <button className="demo-entry" onClick={() => { const demo = snapshots.find((item) => item.snapshot_id === import.meta.env.VITE_CODEGRAPH_DEMO_SNAPSHOT_ID && item.status === "READY") ?? snapshots.find((item) => item.status === "READY"); if (demo) void openSnapshot(demo.snapshot_id); }}><Waypoints size={18}/><span><b>Explore the ready-to-use demo</b><small>Ask a question and inspect real source. No setup needed.</small></span><ArrowUpRight size={16}/></button>}<ol className="workflow-summary"><li><span>1</span><div><b>Analyze a repository</b><small>{HOSTED ? "Analyze a checkout in your private workspace." : "Create a source-bound snapshot on this machine."}</small></div></li><li><span>2</span><div><b>Investigate a question</b><small>Get an answer with a traceable path through code.</small></div></li><li><span>3</span><div><b>Review changes and tests</b><small>See impact and approve any sandboxed execution.</small></div></li></ol>
+            {snapshots.some((item) => item.status === "READY") && <button className="demo-entry" onClick={() => { const demo = snapshots.find((item) => item.snapshot_id === import.meta.env.VITE_CODEGRAPH_DEMO_SNAPSHOT_ID && item.status === "READY") ?? snapshots.find((item) => item.status === "READY"); if (demo) void openSnapshot(demo.snapshot_id); }}><Waypoints size={18}/><span><b>Explore the ready-to-use demo</b><small>Ask a question and inspect real source. No setup needed.</small></span><ArrowUpRight size={16}/></button>}<ol className="workflow-summary"><li><span>1</span><div><b>Analyze a repository</b><small>{HOSTED ? "Analyze a server checkout with owner sign-in." : "Create a source-bound snapshot on this machine."}</small></div></li><li><span>2</span><div><b>Investigate a question</b><small>Get an answer with a traceable path through code.</small></div></li><li><span>3</span><div><b>Review changes and tests</b><small>See impact and approve any sandboxed execution.</small></div></li></ol>
           </div>
           <section className="repository-form-panel" aria-labelledby="repository-form-title">
             <div><span className="section-label">{HOSTED ? "SERVER REPOSITORY" : "LOCAL REPOSITORY"}</span><h3 id="repository-form-title">Analyze a Python repository</h3><p>{HOSTED ? "Enter the path to an allowlisted Git checkout on the analysis server." : "Enter the absolute path to a Git checkout available to this machine."}</p></div>
@@ -402,7 +402,7 @@ export default function App() {
               <label htmlFor="repository-path">Repository path</label><div className="repository-path-input"><Search size={16}/><input id="repository-path" value={path} onChange={(event) => setPath(event.target.value)} placeholder="/path/to/python-project" autoComplete="off" spellCheck={false}/></div>
               <button type="submit" disabled={!path.trim() || busy}>{busy ? <><LoaderCircle className="spin" size={15}/>{job?.status?.replaceAll("_", " ") ?? "Starting analysis"}</> : <>Analyze repository <ArrowUpRight size={16}/></>}</button>
             </form>
-            <div className="repository-form-foot"><span><ShieldCheck size={14}/> {HOSTED ? "Source stays in your private workspace" : "Source stays on this machine"}</span><span>Python · Git history · manifests</span></div>
+            <div className="repository-form-foot"><span><ShieldCheck size={14}/> {HOSTED ? "Hosted snapshots are shared for exploration" : "Source stays on this machine"}</span><span>Python · Git history · manifests</span></div>
             {job && <IngestionProgress status={job.status} cancelling={job.cancel_requested} onCancel={() => void cancelIngestion()}/>}
             {snapshots.length > 0 && <div className="available-snapshots"><b>Or open a recent snapshot</b><SnapshotList snapshots={snapshots.slice(0, 4)} selectedId={snapshotId} onSelect={(id) => void openSnapshot(id)} onRefresh={() => void refreshSnapshots()} compact/> </div>}
           </section>

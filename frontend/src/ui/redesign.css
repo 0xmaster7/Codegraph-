@@ -221,3 +221,6 @@ button:disabled { cursor: not-allowed; opacity: .65; }
 .access-card .access-error { color: #a73232; font-size: 13px; }
 .access-toolbar { display: flex; justify-content: flex-end; gap: 16px; padding: 4px 24px; border-bottom: 1px solid #e4e8eb; background: #fff; font-size: 12px; }
 .access-toolbar button { border: 0; background: transparent; padding: 4px; color: #5b6772; cursor: pointer; }
+
+.access-owner-panel { margin: 16px auto; }
+.access-toolbar { align-items: center; }
